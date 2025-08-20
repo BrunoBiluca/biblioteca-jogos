@@ -25,3 +25,4 @@ Isso abre um leque de possibilidades muito grande sem impactar no catálogo dos 
 	- Um aplicativo para catálogo de games, tem vários recursos para filtragem, porém também apresenta o problema de categorizar os jogos por tag.
 
 - [Playnite](https://playnite.link/)
+	- Um aplicativo para Windows que cataloga jogos a partir da integração com serviços.
