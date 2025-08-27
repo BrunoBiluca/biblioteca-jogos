@@ -1,7 +1,7 @@
-# DRP - <ID - título>
+# DRP - Coleções de jogos
 
 > [!important] Resumo
-> Visão geral sobre o requisito e por que está será desenvolvido
+> Jogos podem ser relacionados por vários conceitos, como Franquia, Sequências, Mecânica principal, Estúdio desenvolvedor. O jogador pode criar coleções para relacionar esses jogos e acompanhar seu progresso dos desafios dessas coleções.
 
 Objetivos:
 
@@ -17,7 +17,7 @@ Métricas para monitorar:
 
 ### Hipóteses
 
-- __Hipótese 1__
+- A partir das coleções os jogadores poderão ter mais recomendações de jogos
 
 ### Restrições
 

@@ -4,3 +4,4 @@
 ### Práticas
 
 - [[Versionamento]]
+- [[Monitoramento]]

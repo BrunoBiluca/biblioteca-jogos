@@ -87,7 +87,4 @@ Essa plataforma já disponibiliza vários provedores de autenticação sendo uma
 
 > [!warning] 🔬 Esboço e protótipo
 
-- Tela: nome da tela
-- Imagem da tela
-- Explicação de cada elemento da tela
-- Explicação dos comportamentos da tela
+![[UI]]

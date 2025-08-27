@@ -7,7 +7,7 @@
 - [[DRP 02 - Catálogo de jogos]]
 - [[DRP 03 - Registro de desafios]]
 - [[DRP 04 - Página inicial do Jogador]]
-- [[DRP 05 - Categorias de jogos]]
+- [[DRP 05 - Coleções de jogos]]
 
 ### Principais personas
 

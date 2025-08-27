@@ -1,15 +1,15 @@
 # DRP 04 - Página inicial do Jogador
 
 > [!important] Resumo
-> A página inicial do Jogador deve
+> A página inicial do Jogador deve exibir as principais informações da biblioteca e dos registros de desafios.
 
 Objetivos:
 
-- __- Objetivo 1 com a realização do projeto -__
+- 
 
 Métricas para monitorar:
 
-- __- demais métricas que podem influenciar em outros aspectos do produto, como performance, satisfação do usuários -__
+- 
 
 # Contexto
 
@@ -40,19 +40,7 @@ Métricas para monitorar:
 
 # Requisitos
 
-### RF 04.01 Informações do usuário
-
-__Descrição__
-
-Como jogador quero ter informações sobre o meu usuário, como meu nome cadastrado.
-
-__Impacto__
-
-A partir do momento que o jogador está logado, ele deve partir da sua página personalizada.
-
-__Critérios de aceite__
-
-- Quando o jogador acessa a sua página principal deve ser exibido o nome dele
+[[RF 04.01 Informações do usuário]]
 
 # Especificação de arquitetura
 

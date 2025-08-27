@@ -32,11 +32,10 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 
 ### Dúvidas
 
-- Nenhum
+- Integrar com API externa para auxiliar no processo de catálogo
 
 ### Fora do escopo
 
-- Integrar com API externa para auxiliar no processo de catálogo
 - Garantir integridade do catálogo, como duplicatas. Vamos confiar nos usuários (por enquanto).
 
 ### Referências

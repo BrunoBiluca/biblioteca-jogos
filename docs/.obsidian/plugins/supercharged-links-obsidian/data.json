@@ -1,0 +1,62 @@
+{
+  "targetAttributes": [],
+  "targetTags": true,
+  "getFromInlineField": true,
+  "enableTabHeader": true,
+  "activateSnippet": false,
+  "enableEditor": true,
+  "enableFileList": true,
+  "enableBacklinks": true,
+  "enableQuickSwitcher": true,
+  "enableSuggestor": true,
+  "selectors": [
+    {
+      "type": "path",
+      "name": "",
+      "value": "DRP",
+      "matchCaseSensitive": false,
+      "match": "contains",
+      "uid": "726c-a3c0",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "path",
+      "name": "",
+      "value": "RF",
+      "matchCaseSensitive": false,
+      "match": "contains",
+      "uid": "3dce-12ae",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "path",
+      "name": "",
+      "value": "RNF",
+      "matchCaseSensitive": false,
+      "match": "contains",
+      "uid": "ec14-c821",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    },
+    {
+      "type": "tag",
+      "name": "",
+      "value": "excalidraw",
+      "matchCaseSensitive": false,
+      "match": "exact",
+      "uid": "2326-1408",
+      "selectText": true,
+      "selectAppend": true,
+      "selectPrepend": true,
+      "selectBackground": true
+    }
+  ]
+}
