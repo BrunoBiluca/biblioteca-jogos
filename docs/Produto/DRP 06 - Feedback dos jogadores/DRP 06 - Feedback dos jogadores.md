@@ -1,19 +1,18 @@
-# DRP 04 - Página inicial do Jogador
+# DRP 06 - Feedback dos jogadores
 
 > [!important] Resumo
-> A página inicial do Jogador deve exibir as principais informações da biblioteca e dos registros de desafios.
+> Jogadores devem ter a possibilidade de enviar sugestões, reclamações, elogios aos desenvolvedores da plataforma. Dessa forma podemos pensar em outros requisitos na plataforma.
 
 Objetivos:
 
-- 
+- __- Objetivo 1 com a realização do projeto -__
 
 Métricas para monitorar:
 
-- 
+- __- demais métricas que podem influenciar em outros aspectos do produto, como performance, satisfação do usuários -__
 
 # Contexto
 
-<Breve descrição dos motivos que levaram a pensar no produto> 
 
 ### Hipóteses
 
@@ -38,22 +37,31 @@ Métricas para monitorar:
 
 - __Referências de concorrentes ou inspirações__
 
+# Usuários
+
+- 
+
 # Requisitos
 
-- [[RF 04.01 Informações do usuário]]
+### RF {ID - título}
+
+__Descrição__
+
+__Impacto__
+
+#### Critérios de aceite
+
+- __CA 1__
 
 # Especificação de arquitetura
 
-### Descrição de estratégias e soluções técnicas
-
-
-### Diagramas arquiteturais, modelagem, relacionamentos...
-
-
-## Requisitos técnicos
+## Modelagem
 
 
 ## Requisitos não funcionais
+
+
+## Descrição de estratégias e soluções técnicas
 
 
 # Qualidade

@@ -15,13 +15,13 @@ As mensagem de commits deve seguir o seguinte formato:
 - justificativa: parte destinada a definir uma justificativa para para a alteração
 	- A justificativa é opcional já que muitas vezes a própria descrição do conteúdo já explana a justificativa da alteração.
 
-|Emoji|Descrição|
-|---|---|
-|✨|Criação ou alteração de funcionalidades|
-|💄|Criação ou alteração de formatos da interface visual do usuário|
-|🔥|Remoção de elementos dos Versionamento|
-|🐛|Correção de funcionalidades|
-|♻️|Refatoração do projeto para melhorar legibilidade, organização|
-|📖|Adição ou alteração de documentação do projeto|
-|🔧|Adição ou alteração comandos, scripts ou ferramentas que auxiliam ao desenvolvimento|
-|✅|Adição de teste a fim de aumentar a cobertura e a efetividade dos testes|
+| Emoji | Descrição                                                                            | Exemplos                                                       |
+| ----- | ------------------------------------------------------------------------------------ | -------------------------------------------------------------- |
+| ✨     | Criação ou alteração de funcionalidades                                              |                                                                |
+| 💄    | Criação ou alteração de formatos da interface visual do usuário                      |                                                                |
+| 🔥    | Remoção de elementos dos Versionamento                                               |                                                                |
+| 🐛    | Correção de funcionalidades                                                          |                                                                |
+| ♻️    | Refatoração do projeto para melhorar legibilidade, organização                       | - Sistema de integração externa a fim de facilitar as chamadas |
+| 📖    | Adição ou alteração de documentação do projeto                                       | - Refinamento do DRP ??<br>- Modelagem utilizada para métricas |
+| 🔧    | Adição ou alteração comandos, scripts ou ferramentas que auxiliam ao desenvolvimento | - Atualização de plugins do Obsidian                           |
+| ✅     | Adição de teste a fim de aumentar a cobertura e a efetividade dos testes             |                                                                |

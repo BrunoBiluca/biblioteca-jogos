@@ -1,5 +1,6 @@
 # Produto
 
+- [[Personas]]
 
 # Requisitos
 
@@ -8,12 +9,6 @@
 - [[DRP 03 - Registro de desafios]]
 - [[DRP 04 - Página inicial do Jogador]]
 - [[DRP 05 - Coleções de jogos]]
-
-### Principais personas
-
-- **Visitantes** - qualquer pessoa com acesso ao site
-- **Jogadores** - são pessoas registradas que estão rastreando o progresso em seus jogos
-- **Moderadores** - são avaliadores de conteúdo
 
 # 🔬 Descobertas
 
@@ -26,9 +21,17 @@
 	- Arquitetura
 		- Autenticação gratuita
 	- Esboço e protótipo
+
 - [[DRP 02 - Catálogo de jogos]]
 	- API de catálogo de jogos
 	- Esboço e protótipo
+
+- [[DRP 03 - Registro de desafios]]
+
+- [[DRP 04 - Página inicial do Jogador]]
+
+- [[DRP 05 - Coleções de jogos]]
+
 
 # ⬛ Requisitos abertos
 

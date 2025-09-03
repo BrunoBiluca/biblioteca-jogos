@@ -1,4 +1,0 @@
-**Cenário:** 
-- **Dado** 
-- **Quando** 
-- **Então** 
