@@ -111,7 +111,7 @@ function displayText(link, settings) {
         if (!link.value) {
             return "<b>Please choose an attribute value.</b>";
         }
-        return `<span class="data-link-icon data-link-text data-link-icon-after" data-link-${link.name}="${link.value}">Note</span> has attribute <b>${link.name}</b> ${matchPreview[link.match]} <b>${link.value}</b>.`;
+        return `<span class="data-link-icon data-link-text data-link-icon-after" data-link-${link.name}="${link.value}">Note</span> has attribute <b>${link.name.replace(/-/g, ' ')}</b> ${matchPreview[link.match]} <b>${link.value}</b>.`;
     }
     if (!link.value) {
         return "<b>Please choose a path.</b>";
@@ -191,9 +191,10 @@ class CSSBuilderModal extends obsidian.Modal {
             .setDesc("What attribute to target? Make sure to first add target attributes to the settings at the top!")
             .addDropdown(dc => {
             plugin.settings.targetAttributes.forEach((attribute) => {
-                dc.addOption(attribute, attribute);
-                if (attribute === cssLink.name) {
-                    dc.setValue(attribute);
+                const dom_attribute = attribute.replace(/ /g, '-');
+                dc.addOption(dom_attribute, attribute);
+                if (dom_attribute === cssLink.name) {
+                    dc.setValue(dom_attribute);
                 }
             });
             dc.onChange(name => {
@@ -612,6 +613,13 @@ function fetchTargetAttributesSync(app, settings, dest, addDataHref) {
         else
             this.plugin.registerEvent(this.app.metadataCache.on("dataview:api-ready", (api) => getResults(api)));
     }
+    // Replace spaces with hyphens in the keys of new_props
+    const hyphenated_props = {};
+    for (const key in new_props) {
+        const hyphenatedKey = key.replace(/ /g, '-');
+        hyphenated_props[hyphenatedKey] = new_props[key];
+    }
+    new_props = hyphenated_props;
     return new_props;
 }
 function setLinkNewProps(link, new_props) {
@@ -622,18 +630,19 @@ function setLinkNewProps(link, new_props) {
         }
     }
     Object.keys(new_props).forEach(key => {
-        var _a;
-        const name = "data-link-" + key;
+        // Replace spaces with hyphens (v0.13.4+)
+        const dom_key = key.replace(/ /g, '-');
+        const name = "data-link-" + dom_key;
         const newValue = new_props[key];
         const curValue = link.getAttribute(name);
         // Only update if value is different
         if (!newValue || curValue != newValue) {
-            link.setAttribute("data-link-" + key, new_props[key]);
-            if (((_a = new_props[key]) === null || _a === void 0 ? void 0 : _a.startsWith) && (new_props[key].startsWith('http') || new_props[key].startsWith('data:'))) {
-                link.style.setProperty(`--data-link-${key}`, `url(${new_props[key]})`);
+            link.setAttribute(name, newValue);
+            if ((newValue === null || newValue === void 0 ? void 0 : newValue.startsWith) && (newValue.startsWith('http') || newValue.startsWith('data:'))) {
+                link.style.setProperty(`--data-link-${dom_key}`, `url(${newValue})`);
             }
             else {
-                link.style.setProperty(`--data-link-${key}`, new_props[key]);
+                link.style.setProperty(`--data-link-${dom_key}`, newValue);
             }
         }
     });
@@ -658,8 +667,8 @@ function updateLinkExtraAttributes(app, settings, link, destName) {
         }
     }
 }
-function updateDivExtraAttributes(app, settings, link, destName, linkName) {
-    if (link.parentElement.getAttribute("class").contains('mod-collapsible'))
+function updateDivExtraAttributes(app, settings, link, destName, linkName, filter_collapsible = false) {
+    if (filter_collapsible && link.parentElement.getAttribute("class").contains('mod-collapsible'))
         return; // Bookmarks Folder
     if (!linkName) {
         linkName = link.textContent;
@@ -804,7 +813,7 @@ class SuperchargedLinksSettingTab extends obsidian.PluginSettingTab {
                 .setPlaceholder('Enter attributes as string, comma separated')
                 .setValue(this.plugin.settings.targetAttributes.join(', '))
                 .onChange((value) => __awaiter(this, void 0, void 0, function* () {
-                this.plugin.settings.targetAttributes = value.replace(/\s/g, '').split(',');
+                this.plugin.settings.targetAttributes = value.split(',').map(attr => attr.trim());
                 if (this.plugin.settings.targetAttributes.length === 1 && !this.plugin.settings.targetAttributes[0]) {
                     this.plugin.settings.targetAttributes = [];
                 }
@@ -1254,35 +1263,54 @@ class SuperchargedLinks extends obsidian.Plugin {
             // TODO: This is an expensive operation that seems like it is called fairly frequently. Maybe we can do this more efficiently?
             this.registerEvent(this.app.workspace.on("layout-change", () => this.initViewObservers(this)));
             // DEBUG: When adding a new view, to get the proper id of that view, uncomment this and reload the plugin
-            this.app.workspace.iterateAllLeaves(leaf => {
-                console.log(leaf.view.getViewType());
-            });
+            // this.app.workspace.iterateAllLeaves(leaf => {
+            // 	console.log(leaf.view.getViewType());
+            // });
         });
     }
     initViewObservers(plugin) {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y;
         // Reset observers
         plugin.observers.forEach(([observer, type]) => {
             observer.disconnect();
         });
         plugin.observers = [];
-        // Register new observers
+        // Register new observers for particular file panes
         plugin.registerViewType('backlink', plugin, ".tree-item-inner", true);
         plugin.registerViewType('outgoing-link', plugin, ".tree-item-inner", true);
         plugin.registerViewType('search', plugin, ".tree-item-inner");
-        plugin.registerViewType('bc-matrix-view', plugin, 'span.internal-link');
-        plugin.registerViewType('BC-ducks', plugin, '.internal-link');
-        plugin.registerViewType('bc-tree-view', plugin, 'span.internal-link');
+        if ((_c = (_b = (_a = plugin.app) === null || _a === void 0 ? void 0 : _a.plugins) === null || _b === void 0 ? void 0 : _b.plugins) === null || _c === void 0 ? void 0 : _c.breadcrumbs) {
+            // console.log('Supercharged links: Enabling breadcrumbs support');
+            plugin.registerViewType('bc-matrix-view', plugin, 'span.internal-link');
+            plugin.registerViewType('BC-ducks', plugin, '.internal-link');
+            plugin.registerViewType('bc-tree-view', plugin, 'span.internal-link');
+            // Breadcrumbs codeblock support as suggested by https://github.com/mdelobelle/obsidian_supercharged_links/issues/248#issuecomment-3231706063
+            plugin.registerViewType('markdown', plugin, '.BC-page-views span.internal-link, .BC-codeblock-tree span.internal-link, .nodes a.internal-link');
+        }
         plugin.registerViewType('graph-analysis', plugin, '.internal-link');
         plugin.registerViewType('starred', plugin, '.nav-file-title-content');
         plugin.registerViewType('file-explorer', plugin, '.nav-file-title-content');
+        if ((_f = (_e = (_d = plugin.app) === null || _d === void 0 ? void 0 : _d.plugins) === null || _e === void 0 ? void 0 : _e.plugins) === null || _f === void 0 ? void 0 : _f['folder-notes']) {
+            // console.log('Supercharged links: Enabling folder notes support');
+            plugin.registerViewType('file-explorer', plugin, '.has-folder-note .tree-item-inner');
+        }
         plugin.registerViewType('recent-files', plugin, '.nav-file-title-content');
-        plugin.registerViewType('bookmarks', plugin, '.tree-item-inner');
-        plugin.registerViewType('bases', plugin, '.internal-link');
+        plugin.registerViewType('bookmarks', plugin, '.tree-item-inner', false, true);
+        // @ts-ignore
+        if ((_k = (_j = (_h = (_g = plugin.app) === null || _g === void 0 ? void 0 : _g.internalPlugins) === null || _h === void 0 ? void 0 : _h.plugins) === null || _j === void 0 ? void 0 : _j.bases) === null || _k === void 0 ? void 0 : _k.enabled) {
+            // console.log('Supercharged links: Enabling bases support');
+            plugin.registerViewType('bases', plugin, '.internal-link');
+            // For embedded bases
+            plugin.registerViewType('markdown', plugin, 'div.bases-table-cell  .internal-link');
+        }
+        if ((_o = (_m = (_l = plugin.app) === null || _l === void 0 ? void 0 : _l.plugins) === null || _m === void 0 ? void 0 : _m.plugins) === null || _o === void 0 ? void 0 : _o['similar-notes']) {
+            plugin.registerViewType('markdown', plugin, '.similar-notes-pane .tree-item-inner', true);
+        }
         // If backlinks in editor is on
         // @ts-ignore
-        if ((_f = (_e = (_d = (_c = (_b = (_a = plugin.app) === null || _a === void 0 ? void 0 : _a.internalPlugins) === null || _b === void 0 ? void 0 : _b.plugins) === null || _c === void 0 ? void 0 : _c.backlink) === null || _d === void 0 ? void 0 : _d.instance) === null || _e === void 0 ? void 0 : _e.options) === null || _f === void 0 ? void 0 : _f.backlinkInDocument) {
-            plugin.registerViewType('markdown', plugin, '.tree-item-inner', true);
+        if (((_s = (_r = (_q = (_p = plugin.app) === null || _p === void 0 ? void 0 : _p.internalPlugins) === null || _q === void 0 ? void 0 : _q.plugins) === null || _r === void 0 ? void 0 : _r.backlink) === null || _s === void 0 ? void 0 : _s.enabled) && ((_y = (_x = (_w = (_v = (_u = (_t = plugin.app) === null || _t === void 0 ? void 0 : _t.internalPlugins) === null || _u === void 0 ? void 0 : _u.plugins) === null || _v === void 0 ? void 0 : _v.backlink) === null || _w === void 0 ? void 0 : _w.instance) === null || _x === void 0 ? void 0 : _x.options) === null || _y === void 0 ? void 0 : _y.backlinkInDocument)) {
+            // console.log("Supercharged links: Enabling backlinks in document support");
+            plugin.registerViewType('markdown', plugin, '.embedded-backlinks .tree-item-inner', true);
         }
         const propertyLeaves = this.app.workspace.getLeavesOfType("file-properties");
         for (let i = 0; i < propertyLeaves.length; i++) {
@@ -1314,7 +1342,7 @@ class SuperchargedLinks extends obsidian.Plugin {
                             (n.className.includes('modal-container') && plugin.settings.enableQuickSwitcher
                                 // @ts-ignore
                                 || n.className.includes('suggestion-container') && plugin.settings.enableSuggestor)) {
-                            let selector = ".suggestion-title, .suggestion-note, .another-quick-switcher__item__title, .omnisearch-result__title";
+                            let selector = ".suggestion-title, .suggestion-note, .another-quick-switcher__item__title, .omnisearch-result__title > span";
                             // @ts-ignore
                             if (n.className.includes('suggestion-container')) {
                                 selector = ".suggestion-title, .suggestion-note";
@@ -1328,7 +1356,7 @@ class SuperchargedLinks extends obsidian.Plugin {
         }));
         this.modalObservers.last().observe(doc.body, config);
     }
-    registerViewType(viewTypeName, plugin, selector, updateDynamic = false) {
+    registerViewType(viewTypeName, plugin, selector, updateDynamic = false, filter_collapsible = false) {
         const leaves = this.app.workspace.getLeavesOfType(viewTypeName);
         // if (leaves.length > 1) {
         for (let i = 0; i < leaves.length; i++) {
@@ -1337,7 +1365,7 @@ class SuperchargedLinks extends obsidian.Plugin {
                 plugin._watchContainerDynamic(viewTypeName + i, container, plugin, selector);
             }
             else {
-                plugin._watchContainer(viewTypeName + i, container, plugin, selector);
+                plugin._watchContainer(viewTypeName + i, container, plugin, selector, filter_collapsible);
             }
         }
         // }
@@ -1353,7 +1381,7 @@ class SuperchargedLinks extends obsidian.Plugin {
         // 	}
         // }
     }
-    updateContainer(container, plugin, selector) {
+    updateContainer(container, plugin, selector, filter_collapsible = false) {
         if (!plugin.settings.enableBacklinks && container.getAttribute("data-type") !== "file-explorer")
             return;
         if (!plugin.settings.enableFileList && container.getAttribute("data-type") === "file-explorer")
@@ -1361,7 +1389,7 @@ class SuperchargedLinks extends obsidian.Plugin {
         const nodes = container.findAll(selector);
         for (let i = 0; i < nodes.length; ++i) {
             const el = nodes[i];
-            updateDivExtraAttributes(plugin.app, plugin.settings, el, "");
+            updateDivExtraAttributes(plugin.app, plugin.settings, el, "", undefined, filter_collapsible);
         }
     }
     removeFromContainer(container, selector) {
@@ -1371,16 +1399,16 @@ class SuperchargedLinks extends obsidian.Plugin {
             clearExtraAttributes(el);
         }
     }
-    _watchContainer(viewType, container, plugin, selector) {
+    _watchContainer(viewType, container, plugin, selector, filter_collapsible = false) {
         let observer = new MutationObserver((records, _) => {
-            plugin.updateContainer(container, plugin, selector);
+            plugin.updateContainer(container, plugin, selector, filter_collapsible);
         });
         observer.observe(container, { subtree: true, childList: true, attributes: false });
         if (viewType) {
             plugin.observers.push([observer, viewType, selector]);
         }
     }
-    _watchContainerDynamic(viewType, container, plugin, selector, own_class = 'tree-item-inner', parent_class = 'tree-item') {
+    _watchContainerDynamic(viewType, container, plugin, selector, parent_class = 'tree-item') {
         // Used for efficient updating of the backlinks panel
         // Only loops through newly added DOM nodes instead of changing all of them
         if (!plugin.settings.enableBacklinks)
@@ -1392,7 +1420,7 @@ class SuperchargedLinks extends obsidian.Plugin {
                         if ('className' in n) {
                             // @ts-ignore
                             if (n.className.includes && typeof n.className.includes === 'function' && n.className.includes(parent_class)) {
-                                const fileDivs = n.getElementsByClassName(own_class);
+                                const fileDivs = n.findAll(selector);
                                 for (let i = 0; i < fileDivs.length; ++i) {
                                     const link = fileDivs[i];
                                     updateDivExtraAttributes(plugin.app, plugin.settings, link, "");
