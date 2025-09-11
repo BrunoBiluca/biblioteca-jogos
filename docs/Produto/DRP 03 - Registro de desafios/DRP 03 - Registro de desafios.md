@@ -59,6 +59,8 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 
 ### Diagramas arquiteturais, modelagem, relacionamentos...
 
+- /games/123/challenge/456
+	- Header: Authentication: Token
 
 ## Requisitos técnicos
 

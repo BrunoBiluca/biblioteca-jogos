@@ -1,7 +1,7 @@
-# DRP - <ID - título>
+# DRP 07 - Página pública do jogador
 
 > [!important] Resumo
-> Visão geral sobre o requisito e por que está será desenvolvido
+> Jogador pode ter uma página pública para compartilhar com outros jogadores dentro da plataforma.
 
 Objetivos:
 
