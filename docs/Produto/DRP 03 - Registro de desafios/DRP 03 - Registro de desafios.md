@@ -47,10 +47,13 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 - [[RF 03.01 - Apropriação de jogos]]
 - [[RF 03.02 - Biblioteca do Jogador]]
 - [[RF 03.03 - Registro de um desafio]]
+- [[RF 03.03.01 - Tipos de Desafios]]
+- [[RF 03.03.02 - Plataforma de jogatina]]
 - [[RF 03.04 - Desafios abertos]]
 - [[RF 03.05 - Jogando no momento]]
 - [[RF 03.06 - Concluindo um desafio]]
 - [[RF 03.07 - Abandonando de um desafio]]
+- [[RF 03.08 - Remover desafios]]
 
 # Especificação de arquitetura
 
@@ -79,3 +82,4 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 - Imagem da tela
 - Explicação de cada elemento da tela
 - Explicação dos comportamentos da tela
+

@@ -5,11 +5,11 @@
 
 Objetivos:
 
-- 
+- Tela para centralizar as principais informações e ações que o jogador pode fazer na plataforma.
 
 Métricas para monitorar:
 
-- 
+- Acessos periódicos a página
 
 # Contexto
 
@@ -63,7 +63,6 @@ Métricas para monitorar:
 
 # Esboços ou protótipos de UX
 
-- Tela: nome da tela
-- Imagem da tela
-- Explicação de cada elemento da tela
-- Explicação dos comportamentos da tela
+## Página inicial do jogador
+
+![[UI - Página inicial do jogador]]
