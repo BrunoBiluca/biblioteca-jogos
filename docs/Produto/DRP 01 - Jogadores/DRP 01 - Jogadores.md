@@ -54,7 +54,7 @@ Para alterar qualquer informação dentro do ambiente da biblioteca de games é 
 - [[RF 01.01 - Registro]]
 - [[RF 01.02 - Esqueceu a senha?]]
 - [[RF 01.03 - Autenticação]]
-
+- [[RF 01.03.01 - Persistência da sessão do usuário]]
 
 # Especificação de arquitetura
 
@@ -85,6 +85,12 @@ Essa plataforma já disponibiliza vários provedores de autenticação sendo uma
 
 # Esboços ou protótipos de UX
 
-> [!warning] 🔬 Esboço e protótipo
+- [[Guia visual]]
 
-![[UI]]
+## Tela de cadastro
+
+![[UI - Tela de cadastro]]
+
+## Tela de Login
+
+![[UI - Login]]

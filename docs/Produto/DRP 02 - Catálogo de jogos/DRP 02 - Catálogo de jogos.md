@@ -64,9 +64,8 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 
 # Esboços ou protótipos de UX
 
-> [!warning] 🔬 Esboço e protótipo
+- [[Guia visual]]
 
-- Tela: nome da tela
-- Imagem da tela
-- Explicação de cada elemento da tela
-- Explicação dos comportamentos da tela
+## Tela de cadastro de jogos
+
+![[UI - Formulário de cadastro de jogo]]
