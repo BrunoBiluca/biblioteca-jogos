@@ -21,11 +21,13 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 
 ### Hipóteses
 
-- 
+- Jogadores irão organizar os principais desafios de cada jogo que estão jogando
+- Jogadores não irão organizar cada desafio proposto pelo jogo, apenas os principais
 
 ### Restrições
 
-- 
+- Cada desafio é associado a um jogo apropriado pelo jogador e pelo próprio jogador
+
 ### Dependências
 
 - [[DRP 02 - Catálogo de jogos]]
@@ -37,10 +39,11 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 ### Fora do escopo
 
 - Ver os desafios de outros jogadores
+- Ter desafios públicos para os jogos disponíveis no catálogo, por exemplo, não deve existir nenhum tipo de sugestão de desafios para os jogadores, eles tem que criar seus próprios desafios
 
 ### Referências
 
-- Troféus/Conquistas em plataformas de jogos
+- Troféus/Conquistas em plataformas de jogos são desafios propostos pelos próprios desenvolvedores de cada jogo. Agora é a vez dos próprios jogadores criarem seus próprios desafios.
 
 # Requisitos
 
@@ -78,8 +81,11 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 
 # Esboços ou protótipos de UX
 
-- Tela: nome da tela
-- Imagem da tela
-- Explicação de cada elemento da tela
-- Explicação dos comportamentos da tela
+## Página de jogos do jogador
+
+![[UI - Página de jogos do jogador]]
+
+## Página de jogos do jogador (pesquisa e apropriação)
+
+![[UI - Página de jogos do jogador (pesquisa)]]
 

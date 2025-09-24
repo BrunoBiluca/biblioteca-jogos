@@ -69,3 +69,16 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 ## Tela de cadastro de jogos
 
 ![[UI - Formulário de cadastro de jogo]]
+
+
+## Página de todos os jogos
+
+![[UI - Página de todos os jogos]]
+
+## Página do jogo
+
+![[UI - Página do jogo]]
+
+#### Observações
+
+- Modo de edição é permitido apenas para jogadores.

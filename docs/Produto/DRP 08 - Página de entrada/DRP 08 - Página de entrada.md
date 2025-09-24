@@ -1,11 +1,11 @@
-# DRP 08 - Página inicial da plataforma
+# DRP 08 - Página de entrada
 
 > [!important] Resumo
 > A página inicial é a apresentação da plataforma para interessados a virarem jogadores. Nessa página precisamos chamar a atenção de pessoas que querem catalogar e registrar desafios.
 
 Objetivos:
 
-- __- Objetivo 1 com a realização do projeto -__
+- Demonstrar os principais recursos da plataforma
 
 Métricas para monitorar:
 
@@ -22,6 +22,7 @@ Métricas para monitorar:
 ### Restrições
 
 - __Restrição 1__
+
 ### Dependências
 
 - __Dependência 1__
