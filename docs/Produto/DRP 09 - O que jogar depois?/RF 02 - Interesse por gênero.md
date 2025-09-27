@@ -1,0 +1,10 @@
+# RF 02 - Interesse por gênero
+
+__Descrição__
+Como jogador que registrar o meu interesse por gêneros específicos para quando quiser recomendação do que jogar levar em consideração.
+
+__Impacto__
+
+#### Critérios de aceite
+
+- __CA 1__

@@ -1,0 +1,10 @@
+# RF 01 - Interesse por jogo
+
+__Descrição__
+Como jogador que registrar o meu interesse por um jogo específico, para quando quiser uma sugestão de o que jogar tenha recomendações relacionadas.
+
+__Impacto__
+
+#### Critérios de aceite
+
+- __CA 1__
