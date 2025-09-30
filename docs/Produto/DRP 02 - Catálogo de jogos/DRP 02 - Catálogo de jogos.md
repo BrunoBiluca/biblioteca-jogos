@@ -45,6 +45,7 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 # Requisitos
 
 - [[RF 02.01 - Cadastro de jogos]]
+	- [[RF 02.01.01 - Preenchimento automático]]
 - [[RF 02.02 - Cadastro de DLCs e conteúdos extras]]
 - [[RF 02.03 - Visualização dos jogos]]
 - [[RF 02.04 - Edição de jogos]]

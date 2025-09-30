@@ -8,4 +8,8 @@ Linha do tempo do projeto:
 	- Práticas iniciais de desenvolvimento
 
 - Setembro
-	- Definir:  Arquitetura, modelagem e tecnologias
+	- Estudamos alternativas sobre arquitetura, modelagem e tecnologias
+	- Começamos a trabalhar nos esboços das telas das funcionalidades do MVP
+
+- Outubro
+	- 

@@ -6,8 +6,8 @@
 
 - [[DRP 01 - Jogadores]]
 - [[DRP 02 - Catálogo de jogos]]
-- [[DRP 03 - Registro de desafios]]
-- [[DRP 04 - Página inicial do Jogador]]
+- [[DRP 04 - Registro de desafios]]
+- [[DRP 05- Página inicial do Jogador]]
 - [[DRP 05 - Coleções de jogos]]
 
 # 🔬 Descobertas
@@ -26,9 +26,12 @@
 	- API de catálogo de jogos
 	- Esboço e protótipo
 
-- [[DRP 03 - Registro de desafios]]
 
-- [[DRP 04 - Página inicial do Jogador]]
+
+- [[DRP 04 - Registro de desafios]]
+	- 
+
+- [[DRP 05- Página inicial do Jogador]]
 
 - [[DRP 05 - Coleções de jogos]]
 

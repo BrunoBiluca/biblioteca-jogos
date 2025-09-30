@@ -1,4 +1,4 @@
-# DRP 04 - Página inicial do Jogador
+# DRP 05 - Página inicial do Jogador
 
 > [!important] Resumo
 > A página inicial do Jogador deve exibir as principais informações da biblioteca e dos registros de desafios.
@@ -40,7 +40,7 @@ Métricas para monitorar:
 
 # Requisitos
 
-- [[RF 04.01 Informações do usuário]]
+- [[RF 05.01 Informações do usuário]]
 
 # Especificação de arquitetura
 

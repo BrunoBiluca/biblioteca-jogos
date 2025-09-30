@@ -8,11 +8,11 @@ Requisitos
 
 - [[DRP 01 - Jogadores]]
 - [[DRP 02 - Catálogo de jogos]]
-- [[DRP 03 - Registro de desafios]]
+- [[DRP 04 - Registro de desafios]]
 	- Fora do Escopo
-		- [[RF 03.03.01 - Tipos de Desafios]]
-		- [[RF 03.03.02 - Plataforma de jogatina]]
-- [[DRP 04 - Página inicial do Jogador]]
+		- [[RF 04.01.01 - Tipos de Desafios]]
+		- [[RF 04.01.02 - Plataforma de jogatina]]
+- [[DRP 05- Página inicial do Jogador]]
 
 #### Hipóteses
 
