@@ -50,12 +50,12 @@ Cada jogo tem vários desafios que o jogador pode fazer. Seja zerar o jogo ou at
 - [[RF 04.01 - Registro de um desafio]]
 - [[RF 04.01.01 - Tipos de Desafios]]
 - [[RF 04.01.02 - Plataforma de jogatina]]
-- [[RF 04.04 - Desafios abertos]]
-- [[RF 04.04.01 - Desafios pausados]]
-- [[RF 04.05 - Jogando no momento]]
-- [[RF 04.06 - Concluindo um desafio]]
-- [[RF 04.07 - Abandonando de um desafio]]
-- [[RF 04.08 - Remover desafios]]
+- [[RF 04.02 - Desafios abertos]]
+- [[RF 04.02.01 - Desafios pausados]]
+- [[RF 04.03 - Jogando no momento]]
+- [[RF 04.04 - Concluindo um desafio]]
+- [[RF 04.05 - Abandonando de um desafio]]
+- [[RF 04.06 - Remover desafios]]
 
 # Especificação de arquitetura
 

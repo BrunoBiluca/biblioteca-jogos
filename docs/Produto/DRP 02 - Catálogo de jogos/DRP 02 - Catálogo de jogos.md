@@ -28,7 +28,7 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 
 ### Dependências
 
-- [[DRP 01 - Jogadores]] para a maioria dos requisitos é necessário um persona jogador.
+- [[DRP 18 - Jogadores]] para a maioria dos requisitos é necessário um persona jogador.
 
 ### Dúvidas
 

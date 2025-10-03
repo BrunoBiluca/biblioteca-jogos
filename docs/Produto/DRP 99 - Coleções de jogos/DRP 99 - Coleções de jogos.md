@@ -1,7 +1,7 @@
-# DRP 07 - Página pública do jogador
+# DRP 99 - Coleções de jogos
 
 > [!important] Resumo
-> Jogador pode ter uma página pública para compartilhar com outros jogadores dentro da plataforma.
+> Jogos podem ser relacionados por vários conceitos, como Franquia, Sequências, Mecânica principal, Estúdio desenvolvedor. O jogador pode criar coleções para relacionar esses jogos e acompanhar seu progresso dos desafios dessas coleções.
 
 Objetivos:
 
@@ -17,7 +17,7 @@ Métricas para monitorar:
 
 ### Hipóteses
 
-- __Hipótese 1__
+- A partir das coleções os jogadores poderão ter mais recomendações de jogos
 
 ### Restrições
 
@@ -38,22 +38,30 @@ Métricas para monitorar:
 
 - __Referências de concorrentes ou inspirações__
 
-# Usuários
-
-- 
-
 # Requisitos
 
+### RF {ID - título}
+
+__Descrição__
+
+__Impacto__
+
+__Critérios de aceite__
+
+- __CA 1__
 
 # Especificação de arquitetura
 
-## Modelagem
+### Descrição de estratégias e soluções técnicas
+
+
+### Diagramas arquiteturais, modelagem, relacionamentos...
+
+
+## Requisitos técnicos
 
 
 ## Requisitos não funcionais
-
-
-## Descrição de estratégias e soluções técnicas
 
 
 # Qualidade

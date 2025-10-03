@@ -6,7 +6,7 @@ O MVP da [[Biblioteca de games]] deve seguir as principais funcionalidades que e
 
 Requisitos
 
-- [[DRP 01 - Jogadores]]
+- [[DRP 18 - Jogadores]]
 - [[DRP 02 - Catálogo de jogos]]
 - [[DRP 04 - Registro de desafios]]
 	- Fora do Escopo

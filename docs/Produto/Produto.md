@@ -8,7 +8,7 @@
 - [[DRP 02 - Catálogo de jogos]]
 - [[DRP 04 - Registro de desafios]]
 - [[DRP 05- Página inicial do Jogador]]
-- [[DRP 05 - Coleções de jogos]]
+- [[DRP 99 - Coleções de jogos]]
 
 # 🔬 Descobertas
 
@@ -33,7 +33,7 @@
 
 - [[DRP 05- Página inicial do Jogador]]
 
-- [[DRP 05 - Coleções de jogos]]
+- [[DRP 99 - Coleções de jogos]]
 
 
 # ⬛ Requisitos abertos

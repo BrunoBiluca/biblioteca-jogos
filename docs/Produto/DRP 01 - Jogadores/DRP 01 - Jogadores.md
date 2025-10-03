@@ -51,10 +51,10 @@ Para alterar qualquer informação dentro do ambiente da biblioteca de games é 
 
 # Requisitos
 
-- [[RF 01.01 - Registro]]
-- [[RF 01.02 - Esqueceu a senha?]]
-- [[RF 01.03 - Autenticação]]
-- [[RF 01.03.01 - Persistência da sessão do usuário]]
+- [[RF 01.02 - Registro]]
+- [[RF 01.03 - Esqueceu a senha?]]
+- [[RF 01.04 - Autenticação]]
+- [[RF 01.04.01 - Persistência da sessão do usuário]]
 
 # Especificação de arquitetura
 
@@ -89,8 +89,8 @@ Essa plataforma já disponibiliza vários provedores de autenticação sendo uma
 
 ## Tela de cadastro
 
-![[UI - Tela de cadastro]]
+![[Produto/DRP 01 - Jogadores/UI - Tela de cadastro]]
 
 ## Tela de Login
 
-![[UI - Login]]
+![[Produto/DRP 01 - Jogadores/UI - Login]]

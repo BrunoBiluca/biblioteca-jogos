@@ -1,7 +1,7 @@
-# DRP 06 - Feedback dos jogadores
+# DRP 99 - Página pública do jogador
 
 > [!important] Resumo
-> Jogadores devem ter a possibilidade de enviar sugestões, reclamações, elogios aos desenvolvedores da plataforma. Dessa forma podemos pensar em outros requisitos na plataforma.
+> Jogador pode ter uma página pública para compartilhar com outros jogadores dentro da plataforma.
 
 Objetivos:
 
@@ -13,6 +13,7 @@ Métricas para monitorar:
 
 # Contexto
 
+<Breve descrição dos motivos que levaram a pensar no produto> 
 
 ### Hipóteses
 
@@ -43,15 +44,6 @@ Métricas para monitorar:
 
 # Requisitos
 
-### RF {ID - título}
-
-__Descrição__
-
-__Impacto__
-
-#### Critérios de aceite
-
-- __CA 1__
 
 # Especificação de arquitetura
 

@@ -1,11 +1,11 @@
-# DRP 08 - Página de entrada
+# DRP 99 - Feedback dos jogadores
 
 > [!important] Resumo
-> A página inicial é a apresentação da plataforma para interessados a virarem jogadores. Nessa página precisamos chamar a atenção de pessoas que querem catalogar e registrar desafios.
+> Jogadores devem ter a possibilidade de enviar sugestões, reclamações, elogios aos desenvolvedores da plataforma. Dessa forma podemos pensar em outros requisitos na plataforma.
 
 Objetivos:
 
-- Demonstrar os principais recursos da plataforma
+- __- Objetivo 1 com a realização do projeto -__
 
 Métricas para monitorar:
 
@@ -13,7 +13,6 @@ Métricas para monitorar:
 
 # Contexto
 
-<Breve descrição dos motivos que levaram a pensar no produto> 
 
 ### Hipóteses
 
@@ -22,7 +21,6 @@ Métricas para monitorar:
 ### Restrições
 
 - __Restrição 1__
-
 ### Dependências
 
 - __Dependência 1__
@@ -45,6 +43,15 @@ Métricas para monitorar:
 
 # Requisitos
 
+### RF {ID - título}
+
+__Descrição__
+
+__Impacto__
+
+#### Critérios de aceite
+
+- __CA 1__
 
 # Especificação de arquitetura
 

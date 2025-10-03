@@ -1,4 +1,4 @@
-# DRP 09 - O que jogar depois?
+# DRP 99 - O que jogar depois?
 
 > [!important] Resumo
 > Jogadores também podem querer organizar sua coleção de jogos para saber qual jogo jogar. Para isso a plataforma pode sugerir opções a partir dos jogos previamente jogados pelo jogador ou também a partir da própria organização do jogador em relação aos seus interesses.
