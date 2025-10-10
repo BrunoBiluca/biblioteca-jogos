@@ -1,11 +1,14 @@
 # Produto
 
+A documentação de produto é um aglomerado de documentações relacionadas ao produto, suas funcionalidades, seus limites técnicos, plataformas e qualquer outro assunto relacionado com o que é entregue diretamente para as entidades diretamente impactadas pelo projeto (stakeholders e usuários).
+
 - [[Personas]]
 
 # Requisitos
 
 - [[DRP 01 - Jogadores]]
 - [[DRP 02 - Catálogo de jogos]]
+- [[DRP 03 - Catálogo do jogador]]
 - [[DRP 04 - Registro de desafios]]
 - [[DRP 05- Página inicial do Jogador]]
 - [[DRP 99 - Coleções de jogos]]
@@ -25,8 +28,6 @@
 - [[DRP 02 - Catálogo de jogos]]
 	- API de catálogo de jogos
 	- Esboço e protótipo
-
-
 
 - [[DRP 04 - Registro de desafios]]
 	- 
