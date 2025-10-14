@@ -11,7 +11,7 @@ A documentação de sistema inclui os documentos de requisitos, decisões de pro
 		- ⬛ Avaliar https://vercel.com/
 	- [[Teste de stack]]
 		- ✅ Levantamentos dos conceitos verificados no Teste de Stack
-		- ⬛ Levantar os requisitos da ([[Teste de Stack - Agenda da Breja]])
+		- ⬛ Levantar os requisitos da ([[Agenda da Breja]])
 		- ⬛ Implementar teste de Stack
 			- ⬛ Compartilhamento de código
 

@@ -33,11 +33,20 @@ Mesmo que o processo seja bem simples ele aborda os seguintes conceitos focados 
 
 - Relacionamento de dados
 
+### Serviço de autenticação
+
+- Autenticação do usuário
+- Registro de usuários
+- Persistência de sessão do usuário
+- Logout de usuário
+
 ### Hospedagem
 
 - Configuração da aplicação a partir de variáveis de ambiente para conexão ao banco de dados
 
 - Disponibilidade de serviço.
+
+- Conteinerização
 
 ### Gerais de projeto
 
