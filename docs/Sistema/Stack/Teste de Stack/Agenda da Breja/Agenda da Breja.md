@@ -155,6 +155,21 @@ __Impacto__
 __Descrição__
 Usuário pode querer se registrar para utilizar a plataforma.
 
+Campos obrigatórios
+
+- Nome do usuário
+- Email
+- Senha
+
+Regras
+
+- Email
+	- Formato válido
+	- Email único, apenas um cadastro por email
+- Senha
+	- Mínimo de 8 caracteres
+	- Validação de força da senha a partir do uso de diferentes caracteres
+
 __Impacto__
 
 - Roteamento de páginas
