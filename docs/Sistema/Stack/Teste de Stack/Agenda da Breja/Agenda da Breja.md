@@ -180,6 +180,8 @@ __Impacto__
 __Descrição__
 Usuário que já tem registro no site pode querer voltar a plataforma.
 
+Um usuário logado sempre inicia sua navegação pela página onde se encontra a listagem de cervejarias.
+
 __Impacto__
 
 - Roteamento de páginas
@@ -189,6 +191,8 @@ __Impacto__
 
 __Descrição__
 Usuário deve ter a possibilidade de sair da plataforma a qualquer momento.
+
+Quando o usuário escolhe por deslogar ele é então redirecionado para o formulário de login.
 
 __Impacto__
 
