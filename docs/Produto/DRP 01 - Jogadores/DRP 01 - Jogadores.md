@@ -52,7 +52,7 @@ Para alterar qualquer informação dentro do ambiente da biblioteca de games é 
 # Requisitos
 
 - [[RF 01.02 - Registro]]
-- [[RF 01.03 - Esqueceu a senha?]]
+- [[RF 01.03 - Esqueceu a senha]]
 - [[RF 01.04 - Autenticação]]
 - [[RF 01.04.01 - Persistência da sessão do usuário]]
 
