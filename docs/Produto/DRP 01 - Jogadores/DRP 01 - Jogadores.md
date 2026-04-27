@@ -3,7 +3,7 @@
 > [!important] Resumo
 > Jogadores são o principal usuário da biblioteca de games. 
 > 
-> Os jogadores querem principalmente rastrear o progresso em seus jogos favoritos e a plataforma deve ajudar os jogadores a conseguir fazer isso. Eles são responsáveis pela maioria das informações da plataforma como cadastro de novos jogos, registro de atividades nos jogos, e etc.
+> Os jogadores querem principalmente rastrear o progresso em seus jogos favoritos e a plataforma os deve ajudar a conseguir fazer isso. Eles são responsáveis pela maioria das informações da plataforma como cadastro de novos jogos, registro de atividades nos jogos, e etc.
 > 
 > A plataforma serve como uma comunidade entre os jogadores, onde eles podem compartilhar suas conquistas e outras informações.
 
@@ -51,37 +51,48 @@ Para alterar qualquer informação dentro do ambiente da biblioteca de games é 
 
 # Requisitos
 
-- [[RF 01.02 - Registro]]
-- [[RF 01.03 - Esqueceu a senha]]
-- [[RF 01.04 - Autenticação]]
-- [[RF 01.04.01 - Persistência da sessão do usuário]]
+- [[RF 01.01 - Registro]]
+- [[RF 01.02 - Esqueceu a senha]]
+- [[RF 01.03 - Autenticação]]
+- [[RF 01.03.01 - Persistência da sessão do usuário]]
 
 # Especificação de arquitetura
 
-> [!warning] 🔬 Autenticação gratuita
-> - [https://turso.tech/](https://turso.tech/)
-> - [supabase](https://supabase.com/auth)
-> - Desenvolvimento próprio
+### Sistema de autenticação
 
-#### supabase
-
-Para a autenticação um forma gratuita de implementação é utilizar a plataforma da [supabase](https://supabase.com/auth).
-
-Essa plataforma já disponibiliza vários provedores de autenticação sendo uma boa pedida para poucos usuários.
+Para a autenticação um forma gratuita de implementação é utilizar a plataforma da [supabase](https://supabase.com/auth). Essa plataforma já disponibiliza vários provedores de autenticação sendo uma boa pedida para poucos usuários.
 
 [Documentação](https://supabase.com/docs/guides/auth)
 
 
-## Requisitos técnicos
-
-
-## Requisitos não funcionais
-
-
 # Qualidade
 
-- __Definição de Pronto__
-- __Planos de testes__
+### Definição de Pronto
+
+- [ ] Interface desenvolvida conforme o [[Guia visual]] e protótipos de UX anexados.
+- [ ] Integração com o serviço de autenticação do Supabase testada e funcional.
+- [ ] Critérios de aceite definidos nos RFs atendidos sem bugs críticos.
+- [ ] Documentação revisada e atualizada.
+
+### Planos de testes
+
+1. **Fluxo de Registro**:
+    - Validar criação de conta com dados válidos.
+    - Validar restrições de campos (nome < 6 chars, senha < 8 chars, email inválido).
+    - Validar comportamento para email já cadastrado.
+
+2. **Fluxo de Autenticação**:
+    - Validar login bem-sucedido e redirecionamento.
+    - Validar erro para credenciais inválidas.
+    - Testar persistência de sessão após recarregamento da página.
+
+3. **Recuperação de Acesso**:
+    - Validar envio de email para redefinição de senha.
+    - Validar fluxo completo de troca de senha.
+
+4. **Segurança e Persistência**:
+    - Confirmar que senhas são criptografadas (via Supabase).
+    - Verificar se o token de sessão é armazenado e recuperado corretamente.
 
 # Esboços ou protótipos de UX
 

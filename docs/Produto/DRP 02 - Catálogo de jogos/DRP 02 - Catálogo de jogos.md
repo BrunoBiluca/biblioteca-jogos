@@ -1,7 +1,7 @@
 # DRP 02 - Catálogo de jogos
 
 > [!important] Resumo
-> O usuário deve poder catalogar seus jogos, quais as plataformas que ele possui o jogo, quais as principais características dos jogos e outras informações iniciais do jogo
+> O usuário deve poder catalogar seus jogos, quais as plataformas que ele possui o jogo, quais as principais características dos jogos e outras informações iniciais do jogo.
 
 Objetivos:
 
@@ -52,11 +52,23 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 
 # Especificação de arquitetura
 
-> [!warning] 🔬 API de catálogo de jogos
-> - Buscar API de informações de jogos para facilitar o cadastro de jogos
-> 	- API deve ser grátis, pública
-> 	- IGDB para jogos
-> - [https://www.igdb.com/api](https://www.igdb.com/api)
+### Pesquisa por jogos
+
+Antes de registrar qualquer jogo o usuário deve buscar pela lista de jogos.
+
+Essa lista é recuperada primeiramente pelo nosso próprio banco de dados e após pelo serviço [https://www.igdb.com/api](https://www.igdb.com/api). Caso não o jogo não foi encontrado o usuário pode entrar com um novo registro de um jogo.
+
+### Armazenamento do cadastro de Jogos
+
+Todos os jogos registrados passam a fazer parte da nossa base de dados.
+
+Tabela: `Games`
+
+Campos:
+ - Nome
+ - Desenvolvedora
+ - Ano de publicação
+
 
 # Qualidade
 
@@ -69,16 +81,16 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 
 ## Tela de cadastro de jogos
 
-![[UI - Formulário de cadastro de jogo]]
+![[UI - Formulário de cadastro de jogo|%cheio]]
 
 
 ## Página de todos os jogos
 
-![[UI - Página de todos os jogos]]
+![[UI - Página de todos os jogos|%cheio]]
 
 ## Página do jogo
 
-![[UI - Página do jogo]]
+![[UI - Página do jogo|%cheio]]
 
 #### Observações
 

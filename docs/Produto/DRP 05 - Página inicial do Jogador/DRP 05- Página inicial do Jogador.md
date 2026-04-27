@@ -65,4 +65,4 @@ Métricas para monitorar:
 
 ## Página inicial do jogador
 
-![[UI - Página inicial do jogador]]
+![[UI - Página inicial do jogador|Página inicial do jogador]]

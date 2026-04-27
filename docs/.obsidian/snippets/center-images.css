@@ -1,10 +1,13 @@
 /******************** Centralização de imagens **********************/
 
 /* PLUGIN: Image Captions */
+.image-embed {
+  width: 100%!important;
+}
+
 .image-captions-figure {
 	display: table;
-	max-width: 50% !important;
-	width: 50%;
+	width: 50%!important;
 	margin: 0 auto;
 }
 
@@ -24,8 +27,8 @@
 /* PLUGIN: Excalidraw */
 .excalidraw-embedded-img {
 	display: block;
-	max-width: 50% !important;
-	width: 50%;
+	max-width: 100% !important;
+	width: 100%;
 	margin: 0 auto;
 }
 
@@ -44,7 +47,7 @@
 /* Geral */
 .internal-embed>img:not([width]) {
 	display: block;
-	max-width: 50% !important;
+	max-width: 100% !important;
 	width: 50% !important;
 	margin: 0 auto;
 }

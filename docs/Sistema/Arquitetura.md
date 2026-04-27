@@ -20,3 +20,4 @@ Módulos externos
 - Referência de jogos
 - Persistência
 
+![[Diagrama de arquitetura da plataforma|Diagrama de arquitetura da plataforma]]

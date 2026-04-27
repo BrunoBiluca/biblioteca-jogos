@@ -5,11 +5,11 @@
 
 Objetivos:
 
-- __- Objetivo 1 com a realização do projeto -__
+- Permitir que o jogador possa registrar os jogos que ele possui
 
 Métricas para monitorar:
 
-- __- demais métricas que podem influenciar em outros aspectos do produto, como performance, satisfação do usuários -__
+- 
 
 # Contexto
 
@@ -48,13 +48,7 @@ Métricas para monitorar:
 
 # Especificação de arquitetura
 
-## Modelagem
 
-
-## Requisitos não funcionais
-
-
-## Descrição de estratégias e soluções técnicas
 
 
 # Qualidade
@@ -66,6 +60,6 @@ Métricas para monitorar:
 
 ## Página de jogos do jogador
 
-![[UI - Página de jogos do jogador]]
+![[UI - Página de jogos do jogador|Página de jogos do jogador]]
 
-![[UI - Página de jogos do jogador (pesquisa)]]
+![[UI - Página de jogos do jogador (pesquisa)|Página de jogos do jogador (Pesquisa)]]
