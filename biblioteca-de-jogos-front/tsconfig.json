@@ -1,5 +1,3 @@
-/* To learn more about Typescript configuration file: https://www.typescriptlang.org/docs/handbook/tsconfig-json.html. */
-/* To learn more about Angular compiler options: https://angular.dev/reference/configs/angular-compiler-options. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -13,14 +11,18 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
-    "module": "preserve",
-    "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "module": "esnext",
+    "forceConsistentCasingInFileNames": true,
     "paths": {
+      "@/*": [
+        "./src/*"
+      ],
       "@core/*": [
-        "src/core/*"
+        "./src/core/*"
       ],
       "@ui/*": [
-        "src/common/ui/*"
+        "./src/common/ui/*"
       ],
       "@lib/*": [
         "./src/common/lib/*"
@@ -33,6 +35,27 @@
       ],
       "@common/*": [
         "./src/common/*"
+      ],
+      "@ui/icon": [
+        "./src/common/ui/icon/src/index.ts"
+      ],
+      "@ui/field": [
+        "./src/common/ui/field/src/index.ts"
+      ],
+      "@ui/utils": [
+        "./src/common/ui/utils/src/index.ts"
+      ],
+      "@ui/label": [
+        "./src/common/ui/label/src/index.ts"
+      ],
+      "@ui/separator": [
+        "./src/common/ui/separator/src/index.ts"
+      ],
+      "@ui/input": [
+        "./src/common/ui/input/src/index.ts"
+      ],
+      "@ui/button": [
+        "./src/common/ui/button/src/index.ts"
       ]
     }
   },

@@ -1,0 +1,75 @@
+<form [formGroup]="form" (ngSubmit)="signup()">
+  <hlm-field-group>
+    <div class="flex flex-col items-center gap-1 text-center">
+      <h1 class="text-2xl font-bold">Create your account</h1>
+      <p class="text-muted-foreground text-sm text-balance">
+        Fill in the form below to create your account
+      </p>
+    </div>
+    <hlm-field>
+      <label hlmFieldLabel for="name">Full Name</label>
+      <input hlmInput type="text" id="name" placeholder="John Doe" formControlName="name" />
+      <hlm-field-error validator="required">Name is required.</hlm-field-error>
+    </hlm-field>
+    <hlm-field>
+      <label hlmFieldLabel for="email">Email</label>
+      <input
+        hlmInput
+        type="email"
+        id="email"
+        placeholder="you@example.com"
+        formControlName="email"
+      />
+      @if (!(form.controls.email.touched && form.controls.email.invalid)) {
+        <hlm-field-description>
+          We'll use this to contact you. We will not share your email with anyone else.
+        </hlm-field-description>
+      }
+      <hlm-field-error validator="required">Email is required.</hlm-field-error>
+      <hlm-field-error validator="email">Enter a valid email address.</hlm-field-error>
+    </hlm-field>
+    <hlm-field>
+      <label hlmFieldLabel for="password">Password</label>
+      <input hlmInput type="password" id="password" formControlName="password" />
+      @if (!(form.controls.password.touched && form.controls.password.invalid)) {
+        <hlm-field-description>Must be at least 8 characters long.</hlm-field-description>
+      }
+      <hlm-field-error validator="required">Password is required.</hlm-field-error>
+      <hlm-field-error validator="minlength"
+        >Password must be at least 8 characters long.</hlm-field-error
+      >
+    </hlm-field>
+    <hlm-field>
+      <label hlmFieldLabel for="confirmPassword">Confirm Password</label>
+      <input hlmInput type="password" id="confirmPassword" formControlName="confirmPassword" />
+      @if (
+        !(
+          form.controls.confirmPassword.touched &&
+          (form.controls.confirmPassword.invalid || form.errors?.['passwordMismatch'])
+        )
+      ) {
+        <hlm-field-description>Please confirm your password.</hlm-field-description>
+      }
+      <hlm-field-error validator="required">Confirming your password is required.</hlm-field-error>
+      @if (
+        form.errors?.['passwordMismatch'] && !form.controls.confirmPassword.errors?.['required']
+      ) {
+        <hlm-field-error forceShow>Passwords must match.</hlm-field-error>
+      }
+    </hlm-field>
+    <hlm-field>
+      <button hlmBtn type="submit" [disabled]="form.invalid">Create Account</button>
+    </hlm-field>
+    <hlm-field-separator>Or continue with</hlm-field-separator>
+    <hlm-field>
+      <button hlmBtn variant="outline" type="button">
+        <ng-icon class="text-xl" />
+        Login with Google
+      </button>
+      <p hlmFieldDescription class="text-center">
+        Already have an account?
+        <a routerLink=".">Sign in</a>
+      </p>
+    </hlm-field>
+  </hlm-field-group>
+</form>
