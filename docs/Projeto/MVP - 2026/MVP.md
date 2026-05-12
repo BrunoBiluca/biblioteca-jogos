@@ -24,3 +24,8 @@ Requisitos
 #### Hipóteses
 
 Com o MVP criado será possível analisar várias informações principalmente relacionado a outros usuários.
+
+
+#### Proposta visual
+
+![[Visual - Página inicial do Jogador.png|Página inicial do jogador]]

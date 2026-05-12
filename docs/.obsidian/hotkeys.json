@@ -6,5 +6,11 @@
       ],
       "key": "Insert"
     }
+  ],
+  "editor:rename-heading": [
+    {
+      "modifiers": [],
+      "key": "F2"
+    }
   ]
 }
