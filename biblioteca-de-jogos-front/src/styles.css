@@ -47,8 +47,9 @@
   color-scheme: dark;
 
   /* Cores */
+  --foreground: #dbfcff;
+  --primary: #00f0ff;
   --secondary: #ebb2ff;
-  --primary-container: #00f0ff;
   --on-tertiary: #67001d;
   --background: #131316;
   --on-error: #690005;
@@ -91,7 +92,6 @@
   --outline-variant: #3b494b;
   --on-primary-fixed: #002022;
   --on-tertiary-fixed: #40000f;
-  --primary: #dbfcff;
   --on-tertiary-container: #be003d;
   --primary-fixed-dim: #00dbe9;
 
@@ -119,13 +119,32 @@
   --font-label-sm: 'Inter', sans-serif;
   --font-stats-md: 'Space Grotesk', sans-serif;
   --font-body-md: 'Inter', sans-serif;
+
+  /* Font Sizes */
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+
+  /* Shadows */
+  --shadow-primary: 0px 0px 8px 2px color-mix(in srgb, var(--primary), transparent 70%);
+  --shadow-primary-hover: 0px 0px 8px 2px color-mix(in srgb, var(--primary), transparent 20%);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
+  h2 {
+    @apply bg-background text-foreground text-2xl;
+  }
+
+  .neon-border {
+    @apply shadow-(--shadow-primary) border border-white/10 transition-all duration-300 hover:shadow-(--shadow-primary-hover);
+  }
 }
+
+@theme inline {}
