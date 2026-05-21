@@ -29,3 +29,7 @@ Com o MVP criado será possível analisar várias informações principalmente r
 #### Proposta visual
 
 ![[Visual - Página inicial do Jogador.png|Página inicial do jogador]]
+
+![[Formulário de cadastro de jogo.png|Formulário de cadastro de jogo]]
+
+![[Catálogo de jogos do jogador.png|Catálogo de jogos do jogador]]
