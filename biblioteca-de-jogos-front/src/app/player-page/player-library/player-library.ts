@@ -1,15 +1,15 @@
 import { Component } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { lucidePlusCircle } from '@ng-icons/lucide';
+import { lucideSearch } from '@ng-icons/lucide';
 
 @Component({
-  selector: 'playing-next',
+  selector: 'app-player-library',
   imports: [NgIconComponent],
   providers: [
     provideIcons({
-      lucidePlusCircle,
+      lucideSearch,
     }),
   ],
-  templateUrl: './playing-next-section.html',
+  templateUrl: './player-library.html',
 })
-export class PlayingNextSection {}
+export class PlayerLibrary {}

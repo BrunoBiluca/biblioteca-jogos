@@ -1,0 +1,49 @@
+<aside
+  class="fixed left-0 top-0 h-full w-64 border-r border-zinc-800 bg-[#16161A] flex flex-col py-8 z-40 lg:flex"
+>
+  <div class="mt-16 mb-8">
+    <div class="px-6">
+      <div class="flex items-center gap-3 p-3 bg-zinc-900 rounded-lg border border-zinc-800 mb-6">
+        <div class="w-12 h-12 rounded-lg bg-primary overflow-hidden">
+          <img
+            alt="Player Profile"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhPYSZkGwJ1gbu55W_7TChXxexTstZVNlWB2t-O6S12Lob2MNwA9YQuqHxodFUINTj40AqDkOnlMItIzhIx6CjrNxLMXLvVFj71hXPDQjhSNe5l22H1eCONUeazu5WFcEPgAKocXmt6xf1FIAGIpje2D78Ipsb6tWW57GzxYI72OtfVmgvVtjUetqwQHgU7iNDzMeBUXX6vfypAfAh-QQVaNfrZnWKkCzkXuxPznZqt9O-O_Ndg5xyVIsJFLITCXuRWShqXu2Z4R8B"
+          />
+        </div>
+        <div>
+          <p class="font-headline-md text-stats-md text-primary">#BrunoBiluca</p>
+        </div>
+      </div>
+    </div>
+    <nav class="space-y-2">
+      <app-nav-item [href]="'/player'" [icon]="'lucideHouse'" [label]="'Página do Jogador'" />
+      <app-nav-item [href]="'/player/games'" [icon]="'lucideGamepad2'" [label]="'Biblioteca'" />
+      <app-nav-item [href]="'/player/challenges'" [icon]="'lucideSwords'" [label]="'Desafios'" />
+      <app-nav-item [href]="'/player/history'" [icon]="'lucideHistory'" [label]="'Histórico'" />
+    </nav>
+  </div>
+  <div class="px-6 mt-auto">
+    <button
+      class="w-full py-3 bg-primary text-black font-black uppercase text-xs tracking-tighter mb-8 active:scale-95 duration-200 flex items-center justify-center gap-2"
+    >
+      <ng-icon name="lucidePlusCircle" class="text-xl" />
+      NOVO DESAFIO
+    </button>
+    <div class="space-y-2">
+      <a
+        class="flex items-center gap-3 p-3 text-zinc-500 hover:text-zinc-200 transition-all font-headline-md"
+        href="#"
+      >
+        <ng-icon name="lucideHelpCircle" class="text-xl" />
+        Support
+      </a>
+      <a
+        class="flex items-center gap-3 p-3 text-zinc-500 hover:text-zinc-200 transition-all font-headline-md"
+        href="#"
+      >
+        <ng-icon name="lucideLogOut" class="text-xl" />
+        Sign Out
+      </a>
+    </div>
+  </div>
+</aside>
