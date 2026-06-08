@@ -1,17 +1,17 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HomePage } from './home.page';
+import { SelectorGrid } from './selector-grid';
 
-describe('HomePage', () => {
-  let component: HomePage;
-  let fixture: ComponentFixture<HomePage>;
+describe('SelectorGrid', () => {
+  let component: SelectorGrid;
+  let fixture: ComponentFixture<SelectorGrid>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HomePage],
+      imports: [SelectorGrid],
     }).compileComponents();
 
-    fixture = TestBed.createComponent(HomePage);
+    fixture = TestBed.createComponent(SelectorGrid);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });

@@ -9,7 +9,7 @@ import {
   lucideLogOut,
   lucideHelpCircle,
 } from '@ng-icons/lucide';
-import { NavItemComponent } from './nav-item';
+import { NavItemComponent } from './components/nav-item';
 
 @Component({
   selector: 'side-nav-bar',

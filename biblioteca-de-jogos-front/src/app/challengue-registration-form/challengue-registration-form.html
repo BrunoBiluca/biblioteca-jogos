@@ -1,0 +1,72 @@
+<header class="mb-8">
+  <h2 class="font-headline-lg flex items-center gap-4">
+    <span class="w-2 h-8 bg-primary"></span>
+    Novo desafio
+  </h2>
+</header>
+<form class="grid gap-8">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+    <div class="group">
+      <label class="font-label-sm text-on-surface-variant uppercase tracking-widest block"
+        >Selecionar Jogo</label
+      >
+      <div
+        class="relative glass-panel rounded-xl glow-border group-focus-within:border-primary-container transition-all"
+      >
+        <ng-icon
+          name="lucideGamepad2"
+          class="text-xl position-absolute translate-y-9 translate-x-3 color-primary"
+        />
+        <select
+          class="w-full bg-transparent border-none focus:ring-0 py-md pl-13 pr-md text-on-surface appearance-none font-body-md"
+        >
+          <option disabled="" selected="" value="">Escolha um jogo da sua biblioteca</option>
+          <option value="cyberpunk">Cyberpunk 2077</option>
+          <option value="elden">Elden Ring</option>
+          <option value="horizon">Horizon Forbidden West</option>
+          <option value="valorant">Valorant</option>
+        </select>
+      </div>
+    </div>
+    <div class="space-y-base group">
+      <label class="font-label-sm text-on-surface-variant uppercase tracking-widest block"
+        >Nome do Desafio</label
+      >
+      <div
+        class="relative rounded-xl glow-border group-focus-within:border-primary-container transition-all"
+      >
+        <ng-icon
+          name="lucideSwords"
+          class="text-xl position-absolute translate-y-9 translate-x-3 text-slate-400"
+        />
+        <input
+          class="w-full bg-transparent border-none focus:ring-0 py-md pl-13 pr-md text-on-surface font-body-md"
+          placeholder="Ex: Corrida Contra o Tempo"
+          type="text"
+        />
+      </div>
+    </div>
+  </div>
+  <app-selector-grid title="Tipo de Desafio" name="type" [options]="challengueTypes" />
+  <app-selector-grid-simple title="Plataforma" name="platform" [options]="platforms" />
+  <div class="group">
+    <h3 class="font-label-sm text-on-surface-variant uppercase tracking-widest block mb-2">
+      Notas
+    </h3>
+    <textarea
+      class="w-full bg-transparent p-4 resize-none border-2 outline-none border-gray-700 rounded-md hover:border-gray-400 focus:neon-border"
+      name="notes"
+      placeholder="Descreva os detalhes do seu desafio aqui... Metas, prazos ou regras personalizadas."
+      rows="6"
+    ></textarea>
+  </div>
+  <div class="pt-lg flex items-center justify-end">
+    <button
+      class="py-3 px-6 bg-primary text-black font-black uppercase text-xs tracking-tighter mb-8 active:scale-95 duration-200 flex items-center justify-center gap-2 cursor-pointer"
+      type="submit"
+    >
+      <span class="">LANÇAR DESAFIO</span>
+      <ng-icon name="lucideRocket" class="text-xl" />
+    </button>
+  </div>
+</form>

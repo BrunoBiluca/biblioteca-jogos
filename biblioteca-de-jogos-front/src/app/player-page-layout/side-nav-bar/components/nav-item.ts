@@ -1,5 +1,4 @@
-import { Component, input, Input } from '@angular/core';
-import { HlmIcon } from '@/common/ui/icon/src';
+import { Component, input } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 
