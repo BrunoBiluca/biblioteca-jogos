@@ -25,11 +25,15 @@ Requisitos
 
 Com o MVP criado será possível analisar várias informações principalmente relacionado a outros usuários.
 
-
 #### Proposta visual
 
-![[Visual - Página inicial do Jogador.png|Página inicial do jogador]]
+![[Página inicial do Jogador.png|Página inicial do jogador]]
 
 ![[Formulário de cadastro de jogo.png|Formulário de cadastro de jogo]]
 
 ![[Catálogo de jogos do jogador.png|Catálogo de jogos do jogador]]
+
+![[Página do jogo.png|Página do jogo]]
+
+![[Formulário de cadastro de desafio.png|Formulário de cadastro de desafio]]
+
