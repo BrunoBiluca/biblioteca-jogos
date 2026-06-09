@@ -15,48 +15,24 @@
     "module": "esnext",
     "forceConsistentCasingInFileNames": true,
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "@core/*": [
-        "./src/core/*"
-      ],
-      "@ui/*": [
-        "./src/common/ui/*"
-      ],
-      "@lib/*": [
-        "./src/common/lib/*"
-      ],
-      "@app/*": [
-        "./src/app/*"
-      ],
-      "@testing/*": [
-        "./src/testing/*"
-      ],
-      "@common/*": [
-        "./src/common/*"
-      ],
-      "@ui/icon": [
-        "./src/common/ui/icon/src/index.ts"
-      ],
-      "@ui/field": [
-        "./src/common/ui/field/src/index.ts"
-      ],
-      "@ui/utils": [
-        "./src/common/ui/utils/src/index.ts"
-      ],
-      "@ui/label": [
-        "./src/common/ui/label/src/index.ts"
-      ],
-      "@ui/separator": [
-        "./src/common/ui/separator/src/index.ts"
-      ],
-      "@ui/input": [
-        "./src/common/ui/input/src/index.ts"
-      ],
-      "@ui/button": [
-        "./src/common/ui/button/src/index.ts"
-      ]
+      "@/*": ["./src/*"],
+      "@core/*": ["./src/core/*"],
+      "@ui/*": ["./src/common/ui/*"],
+      "@lib/*": ["./src/common/lib/*"],
+      "@app/*": ["./src/app/*"],
+      "@testing/*": ["./src/testing/*"],
+      "@common/*": ["./src/common/*"],
+      "@ui/icon": ["./src/common/ui/icon/src/index.ts"],
+      "@ui/field": ["./src/common/ui/field/src/index.ts"],
+      "@ui/utils": ["./src/common/ui/utils/src/index.ts"],
+      "@ui/label": ["./src/common/ui/label/src/index.ts"],
+      "@ui/separator": ["./src/common/ui/separator/src/index.ts"],
+      "@ui/input": ["./src/common/ui/input/src/index.ts"],
+      "@ui/button": ["./src/common/ui/button/src/index.ts"],
+      "@ui/autocomplete": ["./src/common/ui/autocomplete/src/index.ts"],
+      "@ui/popover": ["./src/common/ui/popover/src/index.ts"],
+      "@ui/input-group": ["./src/common/ui/input-group/src/index.ts"],
+      "@ui/textarea": ["./src/common/ui/textarea/src/index.ts"]
     }
   },
   "angularCompilerOptions": {

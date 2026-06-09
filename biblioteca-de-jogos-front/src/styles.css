@@ -147,8 +147,13 @@
   }
 }
 
-@theme inline {}
+@theme inline {
+}
 
 @utility neon-border {
   @apply shadow-(--shadow-primary) border border-white/10 transition-all duration-300 hover:shadow-(--shadow-primary-hover);
+}
+
+.parent-neon-border-focus:has(input:focus) {
+  @apply neon-border;
 }

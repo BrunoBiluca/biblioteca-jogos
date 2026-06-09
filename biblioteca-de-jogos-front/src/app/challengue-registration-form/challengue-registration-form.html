@@ -5,42 +5,51 @@
   </h2>
 </header>
 <form class="grid gap-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-    <div class="group">
-      <label class="font-label-sm text-on-surface-variant uppercase tracking-widest block"
-        >Selecionar Jogo</label
-      >
-      <div
-        class="relative glass-panel rounded-xl glow-border group-focus-within:border-primary-container transition-all"
-      >
-        <ng-icon
-          name="lucideGamepad2"
-          class="text-xl position-absolute translate-y-9 translate-x-3 color-primary"
-        />
-        <select
-          class="w-full bg-transparent border-none focus:ring-0 py-md pl-13 pr-md text-on-surface appearance-none font-body-md"
-        >
-          <option disabled="" selected="" value="">Escolha um jogo da sua biblioteca</option>
-          <option value="cyberpunk">Cyberpunk 2077</option>
-          <option value="elden">Elden Ring</option>
-          <option value="horizon">Horizon Forbidden West</option>
-          <option value="valorant">Valorant</option>
-        </select>
-      </div>
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div class="group flex flex-col justify-between">
+      <label class="uppercase tracking-widest block">Selecionar Jogo</label>
+      <hlm-autocomplete [(search)]="search" [itemToString]="itemToString">
+        <hlm-autocomplete-input placeholder="Pesquise games" />
+        <hlm-autocomplete-content *hlmAutocompletePortal>
+          <hlm-autocomplete-status class="justify-start bg-background text-foreground">
+            @if (options.error(); as error) {
+              {{ error }}
+            } @else if (options.isLoading()) {
+              <ng-icon name="lucideLoader" />
+              Loading...
+            } @else if (search().length === 0) {
+              Digite para pesquisar por games.
+            } @else if (options.hasValue() && options.value().length === 0) {
+              Game "{{ search() }}" não existe
+            } @else if (options.hasValue()) {
+              {{ options.value().length }} jogos encontrados
+            }
+          </hlm-autocomplete-status>
+
+          <div hlmAutocompleteList class="bg-background text-foreground">
+            @if (options.hasValue()) {
+              @for (option of options.value(); track $index) {
+                <hlm-autocomplete-item [value]="option">
+                  <div class="flex flex-col gap-1">
+                    <p>{{ option.title }}</p>
+                    <p class="text-muted-foreground text-xs">{{ option.year }}</p>
+                  </div>
+                </hlm-autocomplete-item>
+              }
+            }
+          </div>
+        </hlm-autocomplete-content>
+      </hlm-autocomplete>
     </div>
-    <div class="space-y-base group">
-      <label class="font-label-sm text-on-surface-variant uppercase tracking-widest block"
-        >Nome do Desafio</label
-      >
-      <div
-        class="relative rounded-xl glow-border group-focus-within:border-primary-container transition-all"
-      >
+    <div>
+      <label class="uppercase tracking-widest block"> Nome do Desafio </label>
+      <div class="relative">
         <ng-icon
           name="lucideSwords"
-          class="text-xl position-absolute translate-y-9 translate-x-3 text-slate-400"
+          class="text-xl position-absolute translate-y-10 translate-x-4 text-primary"
         />
         <input
-          class="w-full bg-transparent border-none focus:ring-0 py-md pl-13 pr-md text-on-surface font-body-md"
+          class="w-full bg-transparent border border-gray-700 rounded-md py-3 px-6 pl-13 text-on-surface hover:border-gray-400 focus:neon-border outline-none"
           placeholder="Ex: Corrida Contra o Tempo"
           type="text"
         />
@@ -54,7 +63,7 @@
       Notas
     </h3>
     <textarea
-      class="w-full bg-transparent p-4 resize-none border-2 outline-none border-gray-700 rounded-md hover:border-gray-400 focus:neon-border"
+      class="w-full bg-transparent p-4 resize-none border-2 outline-none border-gray-700 rounded-md hover:border-gray-500 focus:neon-border"
       name="notes"
       placeholder="Descreva os detalhes do seu desafio aqui... Metas, prazos ou regras personalizadas."
       rows="6"
