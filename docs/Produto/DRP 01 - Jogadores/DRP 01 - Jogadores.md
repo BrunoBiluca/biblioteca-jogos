@@ -100,8 +100,8 @@ Para a autenticação um forma gratuita de implementação é utilizar a platafo
 
 ## Tela de cadastro
 
-![[Produto/DRP 01 - Jogadores/UI - Tela de cadastro]]
+![[UI - Tela de cadastro]]
 
 ## Tela de Login
 
-![[Produto/DRP 01 - Jogadores/UI - Login]]
+![[UI - Login]]
