@@ -3,10 +3,13 @@
 </h3>
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
   @for (op of options(); track op.value) {
-    <label class="relative group cursor-pointer">
-      <input class="sr-only" [name]="name()" type="radio" [value]="op.value" />
+    <label class="relative group cursor-pointer" (click)="updateOption(op.value)">
       <div
         class="h-full glass-panel p-md rounded-md border-2 border-gray-700 border-outline-variant/30 text-center transition-all hover:border-gray-500 flex flex-col items-center justify-around gap-4 p-4"
+        [ngClass]="{
+          'border-primary text-primary bg-primary/10': op.value == selectedOption(),
+          'border-gray-700 hover:border-gray-500': op.value != selectedOption(),
+        }"
       >
         <ng-icon [name]="op.icon" class="text-xl text-primary" />
         <h4 class="font-headline-md text-[18px]">{{ op.label }}</h4>
