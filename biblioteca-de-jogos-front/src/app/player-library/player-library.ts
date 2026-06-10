@@ -1,10 +1,11 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideSearch } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-player-library',
-  imports: [NgIconComponent],
+  imports: [NgIconComponent, RouterLink],
   providers: [
     provideIcons({
       lucideSearch,
