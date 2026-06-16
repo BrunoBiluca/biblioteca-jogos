@@ -10,10 +10,11 @@ import {
   lucideHelpCircle,
 } from '@ng-icons/lucide';
 import { NavItemComponent } from './components/nav-item';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'side-nav-bar',
-  imports: [NgIconComponent, NavItemComponent],
+  imports: [NgIconComponent, NavItemComponent, RouterLink],
   providers: [
     provideIcons({
       lucideHouse,

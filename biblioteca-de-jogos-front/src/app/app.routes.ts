@@ -7,6 +7,7 @@ import { PlayerSummary } from './player-summary/player-summary';
 import { PlayerLibrary } from './player-library/player-library';
 import { ChallengueRegistrationForm } from './challengue-registration-form/challengue-registration-form';
 import { GameDetail } from './game-detail/game-detail';
+import { GameRegistrationForm } from './game-registration-form/game-registration-form';
 
 export const routes: Routes = [
   {
@@ -33,6 +34,10 @@ export const routes: Routes = [
     component: PlayerPageLayout,
     children: [
       { path: '', component: PlayerSummary },
+      {
+        path: 'games/new',
+        component: GameRegistrationForm,
+      },
       {
         path: 'games',
         component: PlayerLibrary,
