@@ -8,6 +8,7 @@ import { PlayerLibrary } from './player-library/player-library';
 import { ChallengueRegistrationForm } from './challengue-registration-form/challengue-registration-form';
 import { GameDetail } from './game-detail/game-detail';
 import { GameRegistrationForm } from './game-registration-form/game-registration-form';
+import { GameCatalog } from './game-catalog/game-catalog';
 
 export const routes: Routes = [
   {
@@ -49,6 +50,10 @@ export const routes: Routes = [
       {
         path: 'challenges/new',
         component: ChallengueRegistrationForm,
+      },
+      {
+        path: 'catalog',
+        component: GameCatalog,
       },
     ], // Assuming PlayerSummary is the component for the child route
   },

@@ -1,15 +1,15 @@
 import { Component, input } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 
 @Component({
   selector: 'app-nav-item',
-  imports: [NgIconComponent],
+  imports: [NgIconComponent, RouterLink],
   template: `
     <a
       class="flex items-center gap-3 py-3 px-6 text-zinc-500 hover:text-zinc-200 hover:bg-zinc-900/50 hover:pl-10 transition-all duration-300"
       [class.active]="isActive(href())"
-      [href]="href()"
+      [routerLink]="href()"
     >
       <ng-icon name="{{ icon() }}" class="text-xl" />
       {{ label() }}
