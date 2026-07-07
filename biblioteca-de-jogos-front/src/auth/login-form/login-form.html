@@ -18,7 +18,7 @@
         <a
           hlmFieldDescription
           class="ml-auto text-sm underline-offset-4 hover:underline"
-          routerLink="."
+          [routerLink]="authRoutes.forgotPassword"
         >
           Forgot password?
         </a>
@@ -40,7 +40,7 @@
       </button>
       <p hlmFieldDescription class="text-center">
         Don't have an account?
-        <a routerLink=".">Sign up</a>
+        <a [routerLink]="authRoutes.signup">Sign up</a>
       </p>
     </hlm-field>
   </hlm-field-group>

@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
 import { PlayerPageLayout } from './player-page-layout/player-page-layout';
-import { AuthPage } from '@/auth/auth.page';
-import { SignupForm } from '@/auth/signup-form';
-import { LoginForm } from '@/auth/login-form';
+import { AuthPage } from '@/auth/auth-page-layout/auth.page';
+import { SignupForm } from '@/auth/signup-form/signup-form';
+import { LoginForm } from '@/auth/login-form/login-form';
 import { PlayerSummary } from './player-summary/player-summary';
 import { PlayerLibrary } from './player-library/player-library';
 import { ChallengueRegistrationForm } from './challengue-registration-form/challengue-registration-form';

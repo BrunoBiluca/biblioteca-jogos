@@ -1,3 +1,4 @@
+import { AuthRoutes } from '@/core/auth/auth-routes';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -25,6 +26,7 @@ import { HlmInputImports } from '@ui/input';
 })
 export class LoginForm {
   private readonly _fb = inject(FormBuilder);
+  authRoutes = inject(AuthRoutes);
 
   public form = this._fb.group({
     email: ['', [Validators.required, Validators.email]],
