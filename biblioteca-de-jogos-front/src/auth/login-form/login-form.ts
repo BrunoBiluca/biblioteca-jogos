@@ -1,4 +1,4 @@
-import { AuthRoutes } from '@/core/auth/auth-routes';
+import { AuthRoutes } from '@core/auth/auth-routes';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';

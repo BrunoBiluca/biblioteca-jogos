@@ -1,5 +1,3 @@
-import { Injectable } from '@angular/core';
-
 export class AuthRoutes {
   readonly login: string;
   readonly signup: string;

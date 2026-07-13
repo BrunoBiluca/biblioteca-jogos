@@ -12,6 +12,9 @@ describe('SelectorGridSimple', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(SelectorGridSimple);
+    fixture.componentRef.setInput('title', 'title');
+    fixture.componentRef.setInput('name', 'name');
+    fixture.componentRef.setInput('options', [{ value: 'op1' }, { value: 'op2' }]);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
