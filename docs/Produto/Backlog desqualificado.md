@@ -7,3 +7,8 @@
 - Colocar um símbolo para quando um jogo já foi platinado
 - Na página inicial do jogador, adicionar um resumo considerando os desafios cadastrados, próximos desafios, desafios pausados. Trazendo essas informações em linguagem natural, para ajudar ele a entender como vai o andamento dos desafios.
 	- Por exemplo, Faz X dias desde que vc terminou o desafio Y que durou Z dias. No momento vc está jogando o jogo N que tem um tempo de conclusão de M horas, talvez falta pouco para vc terminar.
+- Permitir que o jogador que utilize algum tipo de assinatura saiba quais jogos estão saindo do catálogo em breve.
+- Sistema de check-in
+- Pensar em configurações do Jogador para como ele interage com o sistema
+- Mascote da plataforma
+- 
