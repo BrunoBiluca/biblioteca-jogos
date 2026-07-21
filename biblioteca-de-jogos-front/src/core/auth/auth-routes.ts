@@ -4,6 +4,7 @@ export class AuthRoutes {
   readonly confirm: string;
   readonly logout: string;
   readonly forgotPassword: string;
+  readonly afterLogin: string;
 
   constructor(
     login: string,
@@ -11,11 +12,13 @@ export class AuthRoutes {
     confirm: string,
     logout: string,
     forgotPassword: string,
+    afterLogin: string,
   ) {
     this.login = login;
     this.signup = signup;
     this.confirm = confirm;
     this.logout = logout;
     this.forgotPassword = forgotPassword;
+    this.afterLogin = afterLogin;
   }
 }

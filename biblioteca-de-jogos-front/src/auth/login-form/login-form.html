@@ -30,6 +30,9 @@
       >
     </hlm-field>
     <hlm-field>
+      @if (form.hasError('loginError')) {
+        <hlm-field-error forceShow>{{ form.errors?.['loginError'] }}</hlm-field-error>
+      }
       <button hlmBtn type="submit" [disabled]="form.invalid">Login</button>
     </hlm-field>
     <hlm-field-separator>Or continue with</hlm-field-separator>

@@ -13,7 +13,14 @@ export const appConfig: ApplicationConfig = {
     { provide: AuthService, useClass: StandaloneAuthService },
     {
       provide: AuthRoutes,
-      useValue: new AuthRoutes('/login', '/signup', '/confirm', '/logout', '/forgot-password'),
+      useValue: new AuthRoutes(
+        '/login',
+        '/signup',
+        '/confirm',
+        '/logout',
+        '/forgot-password',
+        '/player',
+      ),
     },
   ],
 };

@@ -1,3 +1,8 @@
+import {
+  InvalidCredentialsException,
+  UserNotConfirmedException,
+  UserNotFoundException,
+} from '@/core/auth/auth-exceptions';
 import { AuthService } from '@/core/auth/auth.service';
 import { LoggedUser } from '@/core/auth/logged-user.model';
 import { Injectable } from '@angular/core';
@@ -14,18 +19,24 @@ export class StandaloneAuthService implements AuthService {
   login(email: string, password: string): Promise<void> {
     let registeredUser = localStorage.getItem('registered_user');
     if (!registeredUser) {
-      return Promise.reject('User not registered');
+      throw new Error('User not registered');
     }
 
     let [registeredEmail, registeredPassword, registeredName, registeredConfirm] =
       registeredUser.split(':');
-    if (
-      registeredEmail === email &&
-      registeredPassword === password &&
-      registeredConfirm === 'true'
-    ) {
-      return Promise.resolve();
+
+    if (registeredEmail !== email) {
+      throw new UserNotFoundException();
     }
+
+    if (registeredPassword !== password) {
+      throw new InvalidCredentialsException();
+    }
+
+    if (registeredConfirm === 'false') {
+      throw new UserNotConfirmedException();
+    }
+
     localStorage.setItem('token', 'exists');
     return Promise.resolve();
   }

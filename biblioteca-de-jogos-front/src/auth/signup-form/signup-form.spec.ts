@@ -20,7 +20,14 @@ describe('Login form', () => {
       getLoggedUser: vi.fn(),
     };
 
-    authRoutes = new AuthRoutes('/login', '/signup', '/confirm', '/logout', '/forgot-password');
+    authRoutes = new AuthRoutes(
+      '/login',
+      '/signup',
+      '/confirm',
+      '/logout',
+      '/forgot-password',
+      '/home',
+    );
 
     await TestBed.configureTestingModule({
       imports: [SignupForm],
