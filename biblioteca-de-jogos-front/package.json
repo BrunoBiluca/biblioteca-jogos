@@ -4,6 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "standalone": "ng serve --configuration standalone",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
@@ -20,7 +21,9 @@
     "@angular/router": "^21.2.0",
     "@ng-icons/core": ">=32.0.0 <34.0.0",
     "@ng-icons/lucide": ">=32.0.0 <34.0.0",
+    "@ngx-env/builder": "^21.0.1",
     "@spartan-ng/brain": "^0.0.1-alpha.678",
+    "@supabase/supabase-js": "^2.112.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "rxjs": "~7.8.0",
