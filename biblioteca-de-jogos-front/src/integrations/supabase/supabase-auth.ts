@@ -30,6 +30,7 @@ export class SupabaseAuth implements AuthService {
       throw error;
     }
   }
+
   async login(email: string, password: string): Promise<void> {
     try {
       const { error } = await this.supabase.auth.signInWithPassword({
@@ -43,11 +44,7 @@ export class SupabaseAuth implements AuthService {
     }
   }
   async logout(): Promise<void> {
-    this.supabase.auth.signOut();
-  }
-
-  async confirm(email: string, code: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    await this.supabase.auth.signOut();
   }
 
   async getLoggedUser(): Promise<LoggedUser | null> {
