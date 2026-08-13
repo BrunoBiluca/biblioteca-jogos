@@ -14,7 +14,6 @@ export class AppHeader {
   constructor(private router: Router) {}
 
   isActive(route: string): boolean {
-    console.log(this.router.url);
     return this.router.url.includes(route);
   }
 }

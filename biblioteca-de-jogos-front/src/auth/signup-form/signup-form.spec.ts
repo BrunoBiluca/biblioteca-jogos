@@ -2,47 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AuthRoutes } from '@core/auth/auth-routes';
 import { provideRouter, Router } from '@angular/router';
 import { SignupForm } from './signup-form';
-import { AuthService } from '@/core/auth/auth.service';
-import { StandaloneAuthService } from '@/testing/services/standalone-auth-service';
+import { provideAuthMock } from '@/testing/mocks/auth.mock';
 
 describe('Login form', () => {
   let fixture: ComponentFixture<SignupForm>;
   let component: SignupForm;
-  let authService: AuthService;
   let authRoutes: AuthRoutes;
 
   beforeEach(async () => {
-    authService = {
-      signup: vi.fn(),
-      confirm: vi.fn(),
-      logout: vi.fn(),
-      login: vi.fn(),
-      getLoggedUser: vi.fn(),
-    };
-
-    authRoutes = new AuthRoutes(
-      '/login',
-      '/signup',
-      '/confirm',
-      '/logout',
-      '/forgot-password',
-      '/home',
-    );
-
     await TestBed.configureTestingModule({
       imports: [SignupForm],
-      providers: [
-        provideRouter([]),
-        {
-          provide: AuthRoutes,
-          useValue: authRoutes,
-        },
-        {
-          provide: AuthService,
-          useValue: authService,
-        },
-      ],
+      providers: [provideRouter([]), provideAuthMock()],
     }).compileComponents();
+
+    authRoutes = TestBed.inject(AuthRoutes);
 
     fixture = TestBed.createComponent(SignupForm);
     component = fixture.componentInstance;

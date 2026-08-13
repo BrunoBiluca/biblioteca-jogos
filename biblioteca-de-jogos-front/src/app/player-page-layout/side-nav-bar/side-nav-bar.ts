@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideHouse,
@@ -10,7 +10,9 @@ import {
   lucideHelpCircle,
 } from '@ng-icons/lucide';
 import { NavItemComponent } from './components/nav-item';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '@/core/auth/auth.service';
+import { AuthRoutes } from '@/core/auth/auth-routes';
 
 @Component({
   selector: 'side-nav-bar',
@@ -28,4 +30,13 @@ import { RouterLink } from '@angular/router';
   ],
   templateUrl: './side-nav-bar.html',
 })
-export class SideNavBar {}
+export class SideNavBar {
+  auth = inject(AuthService);
+  authRoutes = inject(AuthRoutes);
+  router = inject(Router);
+
+  async logout() {
+    await this.auth.logout();
+    this.router.navigate([this.authRoutes.login]);
+  }
+}
