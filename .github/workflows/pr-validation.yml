@@ -4,10 +4,16 @@ on:
   pull_request:
     branches: [main]
     types: [opened, synchronize, reopened]
+    paths:
+      - "biblioteca-de-jogos-front/**"
 
 jobs:
   validate:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./biblioteca-de-jogos-front
 
     steps:
       - name: Checkout do código
@@ -18,8 +24,9 @@ jobs:
       - name: Configurar Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'npm'
+          node-version: "24"
+          cache: "npm"
+          cache-dependency-path: biblioteca-de-jogos-front/package-lock.json
 
       - name: Instalar dependências
         run: npm ci
