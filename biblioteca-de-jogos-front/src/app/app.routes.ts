@@ -10,6 +10,7 @@ import { GameDetail } from './game-detail/game-detail';
 import { GameRegistrationForm } from './game-registration-form/game-registration-form';
 import { GameCatalog } from './game-catalog/game-catalog';
 import { bypassAuth, protectedRoute as protectedRoute } from '@/core/auth/auth.guard';
+import { ForgotPasswordForm } from '@/auth/forgot-password-form/forgot-password-form';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,17 @@ export const routes: Routes = [
       {
         path: 'signup',
         component: SignupForm,
+      },
+    ],
+  },
+  {
+    path: 'forgot-password',
+    canActivate: [protectedRoute],
+    component: AuthPage,
+    children: [
+      {
+        path: '',
+        component: ForgotPasswordForm,
       },
     ],
   },

@@ -64,6 +64,37 @@ export class StandaloneAuthService implements AuthService {
     return Promise.resolve();
   }
 
+  resetPassword(email: string): Promise<void> {
+    let registeredUser = localStorage.getItem('registered_user');
+    if (!registeredUser) {
+      throw new Error('User not registered');
+    }
+
+    let [registeredEmail, registeredPassword, registeredName, registeredConfirm] =
+      registeredUser.split(':');
+
+    localStorage.setItem(
+      'registered_user',
+      `${registeredEmail}:${registeredPassword}:${registeredName}:${registeredConfirm}`,
+    );
+    return Promise.resolve();
+  }
+
+  changePassword(newPassword: string): Promise<void> {
+    let registeredUser = localStorage.getItem('registered_user');
+    if (!registeredUser) {
+      throw new Error('User not registered');
+    }
+
+    let [registeredEmail, _, registeredName, registeredConfirm] = registeredUser.split(':');
+
+    localStorage.setItem(
+      'registered_user',
+      `${registeredEmail}:${newPassword}:${registeredName}:${registeredConfirm}`,
+    );
+    return Promise.resolve();
+  }
+
   getLoggedUser(): Promise<LoggedUser | null> {
     let token = localStorage.getItem('token');
     if (!token) return Promise.resolve(null);

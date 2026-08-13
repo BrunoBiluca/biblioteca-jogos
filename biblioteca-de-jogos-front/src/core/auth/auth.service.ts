@@ -7,4 +7,6 @@ export abstract class AuthService {
   abstract login(email: string, password: string): Promise<void>;
   abstract logout(): Promise<void>;
   abstract getLoggedUser(): Promise<LoggedUser | null>;
+  abstract resetPassword(email: string): Promise<void>;
+  abstract changePassword(newPassword: string): Promise<void>;
 }
