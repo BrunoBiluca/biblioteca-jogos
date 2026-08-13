@@ -4,7 +4,7 @@ Foco: Web.
 Desejável: Mobile.
 Fora de escopo: Desktop.
 
-[[Levantamento da Stack]]
+[[Fase 0 - Levantamento da Stack]]
 
 Módulos internos
 

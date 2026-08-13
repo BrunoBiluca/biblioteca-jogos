@@ -1,5 +1,22 @@
 # Teste de stack
 
+#### Resultados
+
+- [Agenda da Breja - Angular](https://github.com/BrunoBiluca/biluca-agenda-breja-angularc)
+- [Agenda da Breja - React](https://github.com/BrunoBiluca/biluca-agenda-breja-react)
+
+Após ponderação o Angular foi definido como framework principal do projeto, por disponibilizar mais recursos, além de alinhar com a filosofia de desenvolvimento.
+
+## Metodologia
+
+Aplicar as tecnologias disponíveis e relacionadas ao tipo de desenvolvimento que estamos propondo as nossas necessidades específicas do projeto.
+
+Para isso será utilizado como base o projeto [[Agenda da Breja]].
+
+## Necessidades
+
+A fim de desenvolver as ideias propostas pelo produto precisamos avaliar algumas tecnologias em relação aos seus recursos.
+
 ### Front
 
 Mesmo que o processo seja bem simples ele aborda os seguintes conceitos focados no Frontend:
