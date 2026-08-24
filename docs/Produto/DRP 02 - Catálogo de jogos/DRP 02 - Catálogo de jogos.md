@@ -1,7 +1,7 @@
 # DRP 02 - Catálogo de jogos
 
 > [!important] Resumo
-> O usuário deve poder catalogar seus jogos, quais as plataformas que ele possui o jogo, quais as principais características dos jogos e outras informações iniciais do jogo.
+> O jogador deve poder catalogar seus jogos, quais as plataformas que ele possui o jogo, quais as principais características dos jogos e outras informações iniciais do jogo.
 
 Objetivos:
 
@@ -28,11 +28,12 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 
 ### Dependências
 
-- [[DRP 01 - Jogadores]] para a maioria dos requisitos é necessário um persona jogador.
+- [[DRP 01 - Jogadores]] para a maioria dos requisitos é necessário uma persona jogador.
 
 ### Dúvidas
 
-- Integrar com API externa para auxiliar no processo de catálogo
+- É possível integrar com API externa para auxiliar no processo de catálogo?
+	- Existem algumas APIs como o [IGDB][https://www.igdb.com/api].
 
 ### Fora do escopo
 
@@ -49,6 +50,8 @@ Para controlar quais jogos estão sendo jogados é necessário criar um catálog
 - [[RF 02.02 - Cadastro de DLCs e conteúdos extras]]
 - [[RF 02.03 - Visualização dos jogos]]
 - [[RF 02.04 - Edição de jogos]]
+- [[RF 02.05 - Explicação dos gêneros]]
+- [[RF 02.06 - Informação de Tempo para finalizar]]
 
 # Especificação de arquitetura
 
