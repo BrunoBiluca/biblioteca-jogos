@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideSearch } from '@ng-icons/lucide';
@@ -11,6 +11,7 @@ import { lucideSearch } from '@ng-icons/lucide';
       lucideSearch,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './game-catalog.html',
 })
 export class GameCatalog {}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideCirclePlus, lucideEdit } from '@ng-icons/lucide';
 
@@ -11,6 +11,7 @@ import { lucideCirclePlus, lucideEdit } from '@ng-icons/lucide';
       lucideCirclePlus,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './game-detail.html',
 })
 export class GameDetail {}

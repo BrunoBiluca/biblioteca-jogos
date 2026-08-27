@@ -1,13 +1,7 @@
 import { AuthRoutes } from '@/core/auth/auth-routes';
 import { AuthService } from '@/core/auth/auth.service';
-import { Component, inject } from '@angular/core';
-import {
-  AbstractControl,
-  FormBuilder,
-  ReactiveFormsModule,
-  ValidationErrors,
-  Validators,
-} from '@angular/forms';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
+import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HlmFieldImports } from '@/common/ui/field/src';
 import { HlmInputImports } from '@/common/ui/input/src';
@@ -16,13 +10,8 @@ import { HlmIconImports } from '@/common/ui/icon/src';
 
 @Component({
   selector: 'app-forgot-password-form',
-  imports: [
-    ReactiveFormsModule,
-    HlmFieldImports,
-    HlmInputImports,
-    HlmButtonImports,
-    HlmIconImports,
-  ],
+  imports: [ReactiveFormsModule, HlmFieldImports, HlmInputImports, HlmButtonImports, HlmIconImports],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './forgot-password-form.html',
 })
 export class ForgotPasswordForm {
