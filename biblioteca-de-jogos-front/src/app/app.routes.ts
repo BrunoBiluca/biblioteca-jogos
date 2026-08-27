@@ -51,10 +51,6 @@ export const routes: Routes = [
     children: [
       { path: '', component: PlayerSummary },
       {
-        path: 'games/new',
-        component: GameRegistrationForm,
-      },
-      {
         path: 'games',
         component: PlayerLibrary,
       },
@@ -69,6 +65,10 @@ export const routes: Routes = [
       {
         path: 'catalog',
         component: GameCatalog,
+      },
+      {
+        path: 'catalog/new',
+        component: GameRegistrationForm,
       },
     ], // Assuming PlayerSummary is the component for the child route
   },

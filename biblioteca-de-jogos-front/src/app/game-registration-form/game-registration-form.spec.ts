@@ -16,7 +16,19 @@ describe('GameRegistrationForm', () => {
     await fixture.whenStable();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should render form fields', () => {
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const nameInput = compiled.querySelector('input#name') as HTMLInputElement;
+    const devInput = compiled.querySelector('#developer') as HTMLInputElement;
+    const yearInput = compiled.querySelector('input#releaseYear') as HTMLInputElement;
+    const genreInput = compiled.querySelector('#genres') as HTMLInputElement;
+    const coverInput = compiled.querySelector('input#cover') as HTMLInputElement;
+
+    expect(nameInput).toBeTruthy();
+    expect(devInput).toBeTruthy();
+    expect(yearInput).toBeTruthy();
+    expect(genreInput).toBeTruthy();
+    expect(coverInput).toBeTruthy();
   });
 });

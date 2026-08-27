@@ -1,23 +1,46 @@
+import { validateImageRatio } from '@/common/forms/validators/image-validator';
 import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
 import { CommonModule } from '@angular/common';
-import { Component, resource, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, effect, inject, resource, signal } from '@angular/core';
+import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideImage, lucidePlusCircle, lucideText } from '@ng-icons/lucide';
+import { lucideCheck, lucideImage, lucideLoader, lucidePlusCircle, lucideText } from '@ng-icons/lucide';
+import { HlmFieldImports } from '@/common/ui/field/src';
 
 @Component({
   selector: 'app-game-registration-form',
-  imports: [NgIconComponent, HlmAutocompleteImports, CommonModule],
-  providers: [provideIcons({ lucideText, lucidePlusCircle, lucideImage, lucideCheck })],
+  imports: [ReactiveFormsModule, NgIconComponent, HlmAutocompleteImports, CommonModule, HlmFieldImports],
+  providers: [provideIcons({ lucideText, lucidePlusCircle, lucideImage, lucideCheck, lucideLoader })],
   templateUrl: './game-registration-form.html',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
 })
 export class GameRegistrationForm {
-  readonly search = signal('');
+  private readonly _fb = inject(FormBuilder);
 
-  itemToString = (item: any) => item.title;
+  form = this._fb.group({
+    name: ['', [Validators.required]],
+    developer: ['', [Validators.required]],
+    genres: new FormControl<string[]>([], [Validators.required]),
+    releaseYear: ['', [Validators.required, Validators.min(1954), Validators.max(new Date().getFullYear())]],
+  });
 
-  options = resource({
+  cover = signal<File | null>(null);
+  coverPreview = computed(() => (this.cover() ? URL.createObjectURL(this.cover()!) : 'assets/generic-racing-game.png'));
+  coverError = signal<string | null>(null);
+
+  readonly developerSearch = signal('');
+  readonly selectedDeveloper = signal('');
+
+  constructor() {
+    effect(() => this.form.get('developer')?.setValue(this.selectedDeveloper()));
+  }
+
+  itemToString = (item: any) => item.name;
+
+  developerOptions = resource({
     defaultValue: [],
-    params: () => ({ search: this.search() }),
+    params: () => ({ search: this.developerSearch() }),
     loader: async ({ params }) => {
       const search = params.search;
 
@@ -31,9 +54,7 @@ export class GameRegistrationForm {
 
   searchDevelopers(search: string): Promise<any[]> {
     return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(this.developers.filter((d) => d.name.toLowerCase().includes(search)));
-      }, 1000);
+      resolve(this.developers.filter((d) => d.name.toLowerCase().includes(search)));
     });
   }
 
@@ -114,5 +135,43 @@ export class GameRegistrationForm {
     } else {
       this.selectedGenres.update((genres) => [...genres, genre]);
     }
+    this.form.get('genres')!.setValue(this.selectedGenres());
+  }
+
+  async onCoverChange($event: Event) {
+    const file = ($event.target as HTMLInputElement).files?.[0];
+
+    if (!file) return;
+
+    if (!(await validateImageRatio(file, ['3:4']))) {
+      this.coverError.set('Arte da capa deve ter uma proporção de 3:4 (ex. 300x400 pixels)');
+      return;
+    }
+
+    this.coverError.set(null);
+    this.cover.set(file);
+  }
+
+  submit() {
+    if (this.form.invalid) {
+      this.form.markAllAsTouched();
+      return;
+    }
+
+    if (this.cover() === null) {
+      this.coverError.set('Arte da capa é obrigatória');
+    }
+
+    if (this.coverError()) {
+      return;
+    }
+
+    const name = this.form.get('name')!.value;
+    const developer = this.form.get('developer')!.value;
+    const genres = this.form.get('genres')!.value;
+    const releaseYear = this.form.get('releaseYear')!.value;
+    const cover = this.cover()!;
+
+    console.log(name, developer, genres, releaseYear, cover);
   }
 }
