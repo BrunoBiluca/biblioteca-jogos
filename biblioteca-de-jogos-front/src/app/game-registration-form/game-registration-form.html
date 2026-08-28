@@ -10,7 +10,11 @@
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
       <div class="lg:col-span-8 space-y-md">
         <div class="space-y-xs">
-          <label class="font-label-sm text-label-sm uppercase tracking-widest block mb-2" for="name">Game Name</label>
+          <label
+            class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+            for="name"
+            >Game Name</label
+          >
           <div class="relative group">
             <input
               id="name"
@@ -26,12 +30,16 @@
           </div>
           @if (form.get('name')?.touched) {
             @if (form.get('name')?.hasError('required')) {
-              <span class="text-sm text-red-500">Nome do jogo é obrigatório.</span>
+              <span class="text-sm text-red-500"
+                >Nome do jogo é obrigatório.</span
+              >
             }
           }
         </div>
         <div class="flex flex-col justify-between space-y-xs">
-          <label class="uppercase tracking-widest block mb-2">Desenvolvedor</label>
+          <label class="uppercase tracking-widest block mb-2"
+            >Desenvolvedor</label
+          >
           <hlm-autocomplete-search
             id="developer"
             [(search)]="developerSearch"
@@ -40,7 +48,9 @@
           >
             <hlm-autocomplete-input placeholder="Pesquise desenvolvedores" />
             <hlm-autocomplete-content *hlmAutocompletePortal>
-              <hlm-autocomplete-status class="justify-start bg-background text-foreground">
+              <hlm-autocomplete-status
+                class="justify-start bg-background text-foreground"
+              >
                 @if (developerOptions.error(); as error) {
                   {{ error }}
                 } @else if (developerOptions.isLoading()) {
@@ -48,10 +58,14 @@
                   Loading...
                 } @else if (developerSearch().length === 0) {
                   Digite para pesquisar por desenvolvedores.
-                } @else if (developerOptions.hasValue() && developerOptions.value().length === 0) {
+                } @else if (
+                  developerOptions.hasValue() &&
+                  developerOptions.value().length === 0
+                ) {
                   Desenvolvedor "{{ developerSearch() }}" não existe
                 } @else if (developerOptions.hasValue()) {
-                  {{ developerOptions.value().length }} desenvolvedores encontrados
+                  {{ developerOptions.value().length }} desenvolvedores
+                  encontrados
                 }
               </hlm-autocomplete-status>
 
@@ -70,13 +84,18 @@
           </hlm-autocomplete-search>
           @if (form.get('developer')?.touched) {
             @if (form.get('developer')?.hasError('required')) {
-              <span class="text-sm text-red-500">Desenvolvedor do jogo é obrigatório.</span>
+              <span class="text-sm text-red-500"
+                >Desenvolvedor do jogo é obrigatório.</span
+              >
             }
           }
         </div>
         <div class="grid grid-cols-2 gap-gutter">
           <div class="space-y-xs">
-            <label class="font-label-sm text-label-sm uppercase tracking-widest block mb-2">Ano de lançamento</label>
+            <label
+              class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+              >Ano de lançamento</label
+            >
             <input
               class="w-full bg-transparent border border-gray-700 rounded-md py-3 px-6 hover:border-gray-400 focus:neon-border outline-none placeholder:text-gray-400"
               placeholder="2024"
@@ -86,26 +105,37 @@
             />
             @if (form.get('releaseYear')?.touched) {
               @if (form.get('releaseYear')?.hasError('required')) {
-                <span class="text-sm text-red-500">O ano de lançamento do jogo é obrigatório.</span>
+                <span class="text-sm text-red-500"
+                  >O ano de lançamento do jogo é obrigatório.</span
+                >
               }
               @if (form.get('releaseYear')?.hasError('min')) {
-                <span class="text-sm text-red-500">O ano de lançamento deve ser maior que 1954.</span>
+                <span class="text-sm text-red-500"
+                  >O ano de lançamento deve ser maior que 1954.</span
+                >
               }
               @if (form.get('releaseYear')?.hasError('max')) {
-                <span class="text-sm text-red-500">O ano de lançamento deve ser até o ano atual.</span>
+                <span class="text-sm text-red-500"
+                  >O ano de lançamento deve ser até o ano atual.</span
+                >
               }
             }
           </div>
         </div>
         <div id="genres" class="space-y-sm">
-          <label class="font-label-sm text-label-sm uppercase tracking-widest block mb-2">
+          <label
+            class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+          >
             Genre &amp; Classifications &amp; Tags
           </label>
           <div class="flex flex-wrap gap-base">
             @for (genre of genres; track $index) {
               <button
                 class="border py-1 px-2 rounded-sm text-sm border-gray-700 hover:border-gray-400 cursor-pointer"
-                [ngClass]="{ 'bg-primary/20 text-primary hover:border-primary': isGenreSelected(genre) }"
+                [ngClass]="{
+                  'bg-primary/20 text-primary hover:border-primary':
+                    isGenreSelected(genre),
+                }"
                 (click)="toggleGenre(genre)"
                 type="button"
               >
@@ -122,13 +152,18 @@
           </div>
           @if (form.get('genres')?.touched) {
             @if (form.get('genres')?.hasError('required')) {
-              <span class="text-sm text-red-500">Escolha pelo menos um gênero para o jogo.</span>
+              <span class="text-sm text-red-500"
+                >Escolha pelo menos um gênero para o jogo.</span
+              >
             }
           }
         </div>
       </div>
       <div class="lg:col-span-4 space-y-md">
-        <label class="font-label-sm text-label-sm uppercase tracking-widest block mb-2">Arte de Capa</label>
+        <label
+          class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+          >Arte de Capa</label
+        >
         <div class="relative group">
           <div
             class="aspect-3/4 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-lg group-hover:border-cyan-400 transition-all bg-cover bg-center overflow-hidden"
@@ -141,9 +176,14 @@
               <div
                 class="w-16 h-16 rounded-full bg-surface-container-high border border-zinc-700 flex items-center justify-center mb-md group-hover:scale-110 group-hover:border-cyan-400 transition-all"
               >
-                <ng-icon name="lucideImage" class="text-2xl text-zinc-700 group-hover:text-cyan-400 transition-all" />
+                <ng-icon
+                  name="lucideImage"
+                  class="text-2xl text-zinc-700 group-hover:text-cyan-400 transition-all"
+                />
               </div>
-              <p class="text-on-surface-variant text-xs">High-res vertical poster (minimum 1200x1600px)</p>
+              <p class="text-on-surface-variant text-xs">
+                High-res vertical poster (minimum 1200x1600px)
+              </p>
               <input
                 id="cover"
                 #coverInput

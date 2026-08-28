@@ -1,49 +1,32 @@
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { createActionGroup, emptyProps, props } from '@ngrx/store';
-
-export class Game {
-  id!: number;
-  name!: string;
-  cover!: string;
-  developer!: string;
-  releaseYear!: number;
-  genres!: string[];
-}
-
-export interface GameFilters {
-  name?: string;
-  developer?: string;
-  genres?: string[];
-  releaseYear?: number;
-}
-
-export interface Pagination {
-  page: number;
-  pageSize: number;
-  totalItems: number;
-  totalPages: number;
-}
-
-export interface GameState {
-  games: Game[];
-  loading: boolean;
-  error: string | null;
-  filters: GameFilters;
-  pagination: Pagination;
-}
-
-export const initialGameState: GameState = {
-  games: [],
-  loading: false,
-  error: null,
-  filters: {},
-  pagination: {
-    page: 1,
-    pageSize: 10,
-    totalItems: 0,
-    totalPages: 0,
-  },
-};
+import { StorageService } from './storage.service';
+import { map, Observable, switchMap } from 'rxjs';
+import { Game } from './game.model';
 
 @Injectable()
-export abstract class GameService {}
+export abstract class GameService {
+  abstract getGames(params: {
+    page: number;
+    pageSize: number;
+    name?: string;
+    developer?: string;
+    genres?: string;
+    releaseYear?: number;
+  }): Observable<{ games: Game[]; total: number; availableGenres?: string[] }>;
+
+  abstract getAvailableGenres(): Observable<string[]>;
+
+  abstract createGame(
+    gameData: Omit<Game, 'id'>,
+    coverFile: File,
+  ): Observable<Game>;
+
+  abstract updateGame(
+    id: number,
+    gameData: Partial<Game>,
+    coverFile?: File,
+  ): Observable<Game>;
+
+  abstract deleteGame(id: number): Observable<void>;
+}

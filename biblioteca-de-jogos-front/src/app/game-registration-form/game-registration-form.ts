@@ -1,16 +1,49 @@
 import { validateImageRatio } from '@/common/forms/validators/image-validator';
-import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, computed, effect, inject, resource, signal } from '@angular/core';
-import { FormBuilder, FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  inject,
+  resource,
+  signal,
+} from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { lucideCheck, lucideImage, lucideLoader, lucidePlusCircle, lucideText } from '@ng-icons/lucide';
+import {
+  lucideCheck,
+  lucideImage,
+  lucideLoader,
+  lucidePlusCircle,
+  lucideText,
+} from '@ng-icons/lucide';
 import { HlmFieldImports } from '@/common/ui/field/src';
+import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
 
 @Component({
   selector: 'app-game-registration-form',
-  imports: [ReactiveFormsModule, NgIconComponent, HlmAutocompleteImports, CommonModule, HlmFieldImports],
-  providers: [provideIcons({ lucideText, lucidePlusCircle, lucideImage, lucideCheck, lucideLoader })],
+  imports: [
+    ReactiveFormsModule,
+    NgIconComponent,
+    HlmAutocompleteImports,
+    CommonModule,
+    HlmFieldImports,
+  ],
+  providers: [
+    provideIcons({
+      lucideText,
+      lucidePlusCircle,
+      lucideImage,
+      lucideCheck,
+      lucideLoader,
+    }),
+  ],
   templateUrl: './game-registration-form.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
@@ -22,18 +55,31 @@ export class GameRegistrationForm {
     name: ['', [Validators.required]],
     developer: ['', [Validators.required]],
     genres: new FormControl<string[]>([], [Validators.required]),
-    releaseYear: ['', [Validators.required, Validators.min(1954), Validators.max(new Date().getFullYear())]],
+    releaseYear: [
+      '',
+      [
+        Validators.required,
+        Validators.min(1954),
+        Validators.max(new Date().getFullYear()),
+      ],
+    ],
   });
 
   cover = signal<File | null>(null);
-  coverPreview = computed(() => (this.cover() ? URL.createObjectURL(this.cover()!) : 'assets/generic-racing-game.png'));
+  coverPreview = computed(() =>
+    this.cover()
+      ? URL.createObjectURL(this.cover()!)
+      : 'assets/generic-racing-game.png',
+  );
   coverError = signal<string | null>(null);
 
   readonly developerSearch = signal('');
   readonly selectedDeveloper = signal('');
 
   constructor() {
-    effect(() => this.form.get('developer')?.setValue(this.selectedDeveloper()));
+    effect(() =>
+      this.form.get('developer')?.setValue(this.selectedDeveloper()),
+    );
   }
 
   itemToString = (item: any) => item.name;
@@ -54,7 +100,9 @@ export class GameRegistrationForm {
 
   searchDevelopers(search: string): Promise<any[]> {
     return new Promise((resolve) => {
-      resolve(this.developers.filter((d) => d.name.toLowerCase().includes(search)));
+      resolve(
+        this.developers.filter((d) => d.name.toLowerCase().includes(search)),
+      );
     });
   }
 
@@ -64,7 +112,11 @@ export class GameRegistrationForm {
     { name: 'Ubisoft Montreal', country: 'Canada', foundation: 1997 },
     { name: 'Electronic Arts (EA)', country: 'USA', foundation: 1982 },
     { name: 'Activision', country: 'USA', foundation: 1979 },
-    { name: 'Sony Interactive Entertainment', country: 'Japan/USA', foundation: 1993 },
+    {
+      name: 'Sony Interactive Entertainment',
+      country: 'Japan/USA',
+      foundation: 1993,
+    },
     { name: 'Sega', country: 'Japan', foundation: 1960 },
     { name: 'Game Freak', country: 'Japan', foundation: 1989 },
     { name: 'Infinity Ward', country: 'USA', foundation: 2002 },
@@ -144,7 +196,9 @@ export class GameRegistrationForm {
     if (!file) return;
 
     if (!(await validateImageRatio(file, ['3:4']))) {
-      this.coverError.set('Arte da capa deve ter uma proporção de 3:4 (ex. 300x400 pixels)');
+      this.coverError.set(
+        'Arte da capa deve ter uma proporção de 3:4 (ex. 300x400 pixels)',
+      );
       return;
     }
 

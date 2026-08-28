@@ -33,12 +33,10 @@ import { classes } from '@ui/utils';
       inputs: [
         'align',
         'autoFocus',
-        'closeDelay',
         'closeOnOutsidePointerEvents',
         'sideOffset',
         'state',
         'offsetX',
-        'restoreFocus',
       ],
       outputs: ['stateChanged', 'closed'],
     },
