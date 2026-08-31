@@ -1,4 +1,5 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { GameStore } from '@/core/game/game.store';
+import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideSearch } from '@ng-icons/lucide';
@@ -14,4 +15,6 @@ import { lucideSearch } from '@ng-icons/lucide';
   changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './game-catalog.html',
 })
-export class GameCatalog {}
+export class GameCatalog {
+  readonly gameStore = inject(GameStore);
+}

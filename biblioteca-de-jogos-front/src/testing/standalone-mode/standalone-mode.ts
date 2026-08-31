@@ -1,4 +1,4 @@
-import { environment } from '@/environments/environment';
+import { environment } from '@/environment';
 
 export function isStandalone() {
   return environment.env === 'standalone';

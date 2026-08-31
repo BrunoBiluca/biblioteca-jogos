@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 
-import { StandaloneAuthService } from './standalone-auth-service.js';
+import { StandaloneAuthService } from './standalone-auth.service.js';
 
 describe('StandaloneAuthServiceTs', () => {
   let service: StandaloneAuthService;
