@@ -1,7 +1,5 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
-import { map, Observable, switchMap } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Game } from './game.model';
 
 @Injectable()
@@ -11,14 +9,12 @@ export abstract class GameService {
     pageSize: number;
     name?: string;
     developer?: string;
-    genres?: string;
+    genres?: string[];
     releaseYear?: number;
   }): Observable<{ games: Game[]; total: number; availableGenres?: string[] }>;
 
-  abstract getAvailableGenres(): Observable<string[]>;
-
   abstract createGame(
-    gameData: Omit<Game, 'id'>,
+    gameData: Omit<Game, 'id' | 'cover'>,
     coverFile: File,
   ): Observable<Game>;
 

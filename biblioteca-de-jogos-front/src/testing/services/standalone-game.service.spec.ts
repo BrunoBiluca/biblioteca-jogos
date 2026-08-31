@@ -18,12 +18,6 @@ describe('StandaloneGameService', () => {
     });
   });
 
-  it('should load available genres', () => {
-    service.getAvailableGenres().subscribe((genres) => {
-      expect(genres.length).toBe(3);
-    });
-  });
-
   it('should create a game', () => {
     const gameData = {
       name: 'Test Game',

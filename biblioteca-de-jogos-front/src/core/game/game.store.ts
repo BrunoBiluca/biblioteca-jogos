@@ -1,7 +1,5 @@
 import { computed, inject } from '@angular/core';
-import { GameService } from './game.service';
-import { GameFilters } from './game-filters.model';
-import { Game } from './game.model';
+import { debounceTime, pipe, switchMap, tap } from 'rxjs';
 import {
   patchState,
   signalStore,
@@ -11,9 +9,10 @@ import {
   withHooks,
 } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { StorageService } from './storage.service';
-import { debounceTime, pipe, switchMap, tap } from 'rxjs';
 import { tapResponse } from '@ngrx/operators';
+import { GameService } from './game.service';
+import { GameFilters } from './game-filters.model';
+import { Game } from './game.model';
 import { initialGameState } from './game-state.model';
 
 export const GameStore = signalStore(
@@ -39,7 +38,6 @@ export const GameStore = signalStore(
 
   withMethods((store) => {
     const gameService = inject(GameService);
-    const storageService = inject(StorageService);
 
     function buildRequestParams(
       page: number,
@@ -53,7 +51,7 @@ export const GameStore = signalStore(
 
       if (filters.name) params.name = filters.name;
       if (filters.developer) params.developer = filters.developer;
-      if (filters.genres?.length) params.genres = filters.genres.join(',');
+      if (filters.genres?.length) params.genres = filters.genres;
       if (filters.releaseYear) params.releaseYear = filters.releaseYear;
 
       return params;
@@ -94,31 +92,10 @@ export const GameStore = signalStore(
       ),
     );
 
-    const loadAvailableGenres = rxMethod<void>(
-      pipe(
-        tap(() => patchState(store, { loading: true, error: null })),
-        switchMap(() => {
-          return gameService.getAvailableGenres().pipe(
-            tapResponse({
-              next: (genres) => {
-                patchState(store, {
-                  availableGenres: genres,
-                  loading: false,
-                });
-              },
-              error: (error: Error) => {
-                patchState(store, {
-                  loading: false,
-                  error: error.message || 'Erro ao carregar gêneros',
-                });
-              },
-            }),
-          );
-        }),
-      ),
-    );
-
-    const createGame = rxMethod<{ game: Omit<Game, 'id'>; coverFile: File }>(
+    const createGame = rxMethod<{
+      game: Omit<Game, 'id' | 'cover'>;
+      coverFile: File;
+    }>(
       pipe(
         tap(() => patchState(store, { loading: true, error: null })),
         switchMap(({ game, coverFile }) => {
@@ -155,10 +132,11 @@ export const GameStore = signalStore(
             tapResponse({
               next: (updatedGame) => {
                 const currentGames = store.games();
+                const updatedGames = currentGames.map((g) =>
+                  g.id === id ? updatedGame : g,
+                );
                 patchState(store, {
-                  games: currentGames.map((g) =>
-                    g.id === id ? updatedGame : g,
-                  ),
+                  games: updatedGames,
                   loading: false,
                 });
               },
@@ -248,30 +226,28 @@ export const GameStore = signalStore(
       loadGames({ page, pageSize });
     };
 
-    const clearError = () => {
+    const retryLoadGames = () => {
       patchState(store, { error: null });
-    };
-
-    const uploadCover = (file: File) => {
-      return storageService.uploadCover(file);
+      loadGames({
+        page: store.pagination.page(),
+        pageSize: store.pagination.pageSize(),
+      });
     };
 
     return {
       loadGames,
-      loadAvailableGenres,
       createGame,
       updateGame,
       deleteGame,
       setFilters,
       clearFilters,
       changePage,
-      clearError,
+      retryLoadGames,
     };
   }),
 
   withHooks((store) => ({
     onInit() {
-      store.loadAvailableGenres();
       store.loadGames({ page: 1, pageSize: 10 });
     },
   })),

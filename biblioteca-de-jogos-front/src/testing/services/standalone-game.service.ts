@@ -33,20 +33,15 @@ export class StandaloneGameService extends GameService {
     pageSize: number;
     name?: string;
     developer?: string;
-    genres?: string;
+    genres?: string[];
     releaseYear?: number;
   }): Observable<{ games: Game[]; total: number; availableGenres?: string[] }> {
     return new Observable((observer) => {
       observer.next({
         games: this.games,
         total: this.games.length,
+        availableGenres: this.games.map((game) => game.genres[0]).flat(),
       });
-    });
-  }
-
-  override getAvailableGenres(): Observable<string[]> {
-    return new Observable((observer) => {
-      observer.next(['action', 'adventure', 'rpg']);
     });
   }
 
