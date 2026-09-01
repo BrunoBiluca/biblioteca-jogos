@@ -37,7 +37,9 @@ describe('GameStore', () => {
     },
   ];
 
-  const mockGenres = [...mockGames.map((game) => game.genres)];
+  const mockGenres = new Set([...mockGames.map((game) => game.genres)]);
+
+  const mockDevelopers = new Set([...mockGames.map((game) => game.developer)]);
 
   const mockGamesServiceToDefault = () => {
     gameService.getGames.mockReturnValue(
@@ -86,7 +88,7 @@ describe('GameStore', () => {
       expect(store.loading()).toBe(false);
       expect(store.error()).toBe(null);
       expect(store.games()).toEqual([]);
-      expect(store.availableGenres()).toEqual([]);
+      expect(store.allGenres()).toEqual([]);
       expect(store.filters()).toEqual({});
       expect(store.pagination().page).toBe(1);
       expect(store.pagination().pageSize).toBe(10);
@@ -150,7 +152,8 @@ describe('GameStore', () => {
       expect(store.pagination().pageSize).toBe(10);
       expect(store.pagination().totalItems).toBe(2);
       expect(store.pagination().totalPages).toBe(1);
-      expect(store.availableGenres()).toEqual(mockGenres);
+      expect(store.allGenres()).toEqual([]);
+      expect(store.allDevelopers()).toEqual([]);
     });
 
     it('should load games with filters', async () => {

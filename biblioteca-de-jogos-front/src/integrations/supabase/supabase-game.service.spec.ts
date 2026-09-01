@@ -5,7 +5,7 @@ describe('SupabaseGameService', () => {
   let service: SupabaseGameService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
+    TestBed.configureTestingModule({ providers: [SupabaseGameService] });
     service = TestBed.inject(SupabaseGameService);
   });
 

@@ -8,7 +8,8 @@ export interface GameState {
   error: string | null;
   filters: GameFilters;
   pagination: Pagination;
-  availableGenres: string[] | undefined;
+  allGenres: string[] | undefined;
+  allDevelopers: string[] | undefined;
 }
 
 export const initialGameState: GameState = {
@@ -17,5 +18,6 @@ export const initialGameState: GameState = {
   error: null,
   filters: {},
   pagination: initialPagination,
-  availableGenres: [],
+  allGenres: [],
+  allDevelopers: [],
 };

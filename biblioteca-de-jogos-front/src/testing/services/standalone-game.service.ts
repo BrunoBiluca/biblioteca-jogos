@@ -1,3 +1,4 @@
+import { IndexedDB } from '@/common/indexeddb/indexeddb';
 import { Game } from '@/core/game/game.model';
 import { GameService } from '@/core/game/game.service';
 import { Injectable } from '@angular/core';
@@ -5,27 +6,24 @@ import { Observable } from 'rxjs';
 
 @Injectable()
 export class StandaloneGameService extends GameService {
-  private games: Game[] = [
-    {
-      id: 1,
-      name: 'Solo Leveling: Arise Overdrive',
-      cover: 'cover',
-      developer: 'developer',
-      releaseYear: 2024,
-      genres: ['action', 'adventure'],
-    },
-    {
-      id: 2,
-      name: 'The Wither 3',
-      cover: 'cover',
-      developer: 'developer',
-      releaseYear: 2025,
-      genres: ['action', 'rpg'],
-    },
-  ];
+  readonly indexedDB: IndexedDB;
 
   constructor() {
     super();
+
+    this.indexedDB = new IndexedDB();
+  }
+
+  getAllGameKeys() {
+    const allGames = [];
+
+    for (const key in localStorage) {
+      if (key.startsWith('games.')) {
+        allGames.push(JSON.parse(localStorage.getItem(key) as string));
+      }
+    }
+
+    return allGames as Game[];
   }
 
   override getGames(params: {
@@ -35,13 +33,53 @@ export class StandaloneGameService extends GameService {
     developer?: string;
     genres?: string[];
     releaseYear?: number;
-  }): Observable<{ games: Game[]; total: number; availableGenres?: string[] }> {
+  }): Observable<{
+    games: Game[];
+    total: number;
+    allGenres?: string[];
+    allDevelopers?: string[];
+  }> {
     return new Observable((observer) => {
-      observer.next({
-        games: this.games,
-        total: this.games.length,
-        availableGenres: this.games.map((game) => game.genres[0]).flat(),
+      const allGames = this.getAllGameKeys();
+      const allGenres = allGames.flatMap((game) => game.genres);
+      const uniqueGenres = Array.from(new Set(allGenres));
+      const allDevelopers = allGames.map((game) => game.developer);
+      const uniqueDevelopers = Array.from(new Set(allDevelopers));
+
+      const filteredGames = allGames.filter((game) => {
+        return (
+          (!params.name || game.name.toLowerCase().includes(params.name)) &&
+          (!params.developer ||
+            game.developer.toLowerCase().includes(params.developer)) &&
+          (!params.genres ||
+            game.genres.some((genre) => params.genres?.includes(genre))) &&
+          (!params.releaseYear || game.releaseYear === params.releaseYear)
+        );
       });
+
+      const gamePromises = filteredGames.map(async (game) => {
+        const file = await this.indexedDB.getFile(game.cover);
+        game.cover = URL.createObjectURL(file);
+        return game;
+      });
+
+      Promise.all(gamePromises)
+        .then((gamesWithFiles) => {
+          const startIndex = (params.page - 1) * params.pageSize;
+          const endIndex = startIndex + params.pageSize;
+          const paginatedGames = gamesWithFiles.slice(startIndex, endIndex);
+
+          observer.next({
+            games: paginatedGames,
+            total: allGames.length,
+            allGenres: uniqueGenres,
+            allDevelopers: uniqueDevelopers,
+          });
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
     });
   }
 
@@ -50,14 +88,24 @@ export class StandaloneGameService extends GameService {
     coverFile: File,
   ): Observable<Game> {
     return new Observable((observer) => {
+      const allGames = this.getAllGameKeys();
       const newGame = {
         ...gameData,
-        id: this.games.length + 1,
-        cover: coverFile.name,
+        id: allGames.length + 1,
+        cover: '',
       };
-      this.games.push(newGame);
 
-      observer.next(newGame);
+      this.indexedDB
+        .saveFile(coverFile)
+        .then((coverId) => {
+          newGame.cover = coverId;
+          localStorage.setItem(`games.${newGame.id}`, JSON.stringify(newGame));
+          return this.indexedDB.getFile(coverId);
+        })
+        .then((file) => {
+          newGame.cover = URL.createObjectURL(file);
+          observer.next(newGame);
+        });
     });
   }
 
@@ -67,22 +115,23 @@ export class StandaloneGameService extends GameService {
     coverFile?: File,
   ): Observable<Game> {
     return new Observable((observer) => {
-      this.games = this.games.map((game) => {
-        if (game.id === id) {
-          return {
-            ...game,
-            ...gameData,
-          };
-        }
-        return game;
-      });
-      observer.next(this.games.find((game) => game.id === id)!);
+      const game = JSON.parse(
+        localStorage.getItem(`games.${id}`) as string,
+      ) as Game;
+
+      const updatedGame = {
+        ...game,
+        ...gameData,
+      };
+
+      localStorage.setItem(`games.${game.id}`, JSON.stringify(updatedGame));
+      observer.next(game);
     });
   }
 
   override deleteGame(id: number): Observable<void> {
     return new Observable((observer) => {
-      this.games = this.games.filter((game) => game.id !== id);
+      localStorage.removeItem(`games.${id}`);
       observer.next();
     });
   }

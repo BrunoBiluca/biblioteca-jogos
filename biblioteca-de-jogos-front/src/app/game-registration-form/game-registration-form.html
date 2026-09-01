@@ -99,6 +99,8 @@
             <input
               class="w-full bg-transparent border border-gray-700 rounded-md py-3 px-6 hover:border-gray-400 focus:neon-border outline-none placeholder:text-gray-400"
               placeholder="2024"
+              min="1954"
+              max="2026"
               id="releaseYear"
               formControlName="releaseYear"
               type="number"
@@ -129,7 +131,7 @@
             Genre &amp; Classifications &amp; Tags
           </label>
           <div class="flex flex-wrap gap-base">
-            @for (genre of genres; track $index) {
+            @for (genre of gameStore.allGenres(); track $index) {
               <button
                 class="border py-1 px-2 rounded-sm text-sm border-gray-700 hover:border-gray-400 cursor-pointer"
                 [ngClass]="{
@@ -166,8 +168,7 @@
         >
         <div class="relative group">
           <div
-            class="aspect-3/4 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-lg group-hover:border-cyan-400 transition-all bg-cover bg-center overflow-hidden"
-            data-alt="vibrant neon cinematic game cover art featuring a futuristic racing car speeding through a rainy cyberpunk city at night with blue and magenta trails"
+            class="aspect-3/4 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl border-zinc-700 flex flex-col items-center justify-center p-lg group-hover:border-cyan-400 transition-all bg-cover bg-center overflow-hidden"
             [style]="{
               backgroundImage: `linear-gradient(rgba(19, 19, 22, 0.8), rgba(19, 19, 22, 0.8)), url(${coverPreview()})`,
             }"
@@ -181,8 +182,10 @@
                   class="text-2xl text-zinc-700 group-hover:text-cyan-400 transition-all"
                 />
               </div>
-              <p class="text-on-surface-variant text-xs">
-                High-res vertical poster (minimum 1200x1600px)
+              <p
+                class="text-on-surface-variant text-xs text-zinc-700 group-hover:text-cyan-400 transition-all"
+              >
+                High-res vertical poster (e.g. 1200x1600px)
               </p>
               <input
                 id="cover"
@@ -193,7 +196,10 @@
                 (change)="onCoverChange($event)"
               />
               <button
-                class="mt-md px-6 py-2 bg-zinc-800 hover:bg-zinc-700 text-on-background rounded-full font-stats-md text-stats-md transition-all"
+                class="mt-md px-6 py-2 bg-zinc-700 hover:bg-zinc-800 text-on-background rounded-full font-stats-md text-stats-md transition-all"
+                [ngClass]="{
+                  'opacity-50 group-hover:opacity-100': cover() !== null,
+                }"
                 type="button"
                 (click)="coverInput.click()"
               >

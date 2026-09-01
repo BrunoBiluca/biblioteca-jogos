@@ -67,7 +67,7 @@ export const GameStore = signalStore(
 
           return gameService.getGames(params).pipe(
             tapResponse({
-              next: ({ games, total, availableGenres }) => {
+              next: ({ games, total, allGenres, allDevelopers }) => {
                 patchState(store, {
                   games,
                   loading: false,
@@ -77,10 +77,12 @@ export const GameStore = signalStore(
                     totalItems: total,
                     totalPages: Math.ceil(total / pageSize),
                   },
-                  availableGenres: availableGenres || store.availableGenres(),
+                  allGenres: allGenres || store.allGenres(),
+                  allDevelopers: allDevelopers || store.allDevelopers(),
                 });
               },
               error: (error: Error) => {
+                console.error(error);
                 patchState(store, {
                   loading: false,
                   error: error.message || 'Erro ao carregar jogos',
@@ -227,7 +229,6 @@ export const GameStore = signalStore(
     };
 
     const retryLoadGames = () => {
-      patchState(store, { error: null });
       loadGames({
         page: store.pagination.page(),
         pageSize: store.pagination.pageSize(),

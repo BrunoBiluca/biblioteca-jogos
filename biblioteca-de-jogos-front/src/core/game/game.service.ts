@@ -11,7 +11,12 @@ export abstract class GameService {
     developer?: string;
     genres?: string[];
     releaseYear?: number;
-  }): Observable<{ games: Game[]; total: number; availableGenres?: string[] }>;
+  }): Observable<{
+    games: Game[];
+    total: number;
+    allGenres?: string[];
+    allDevelopers?: string[];
+  }>;
 
   abstract createGame(
     gameData: Omit<Game, 'id' | 'cover'>,

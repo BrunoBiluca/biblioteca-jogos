@@ -25,6 +25,8 @@ import {
 } from '@ng-icons/lucide';
 import { HlmFieldImports } from '@/common/ui/field/src';
 import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
+import { GameStore } from '@/core/game/game.store';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-game-registration-form',
@@ -49,6 +51,8 @@ import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
   standalone: true,
 })
 export class GameRegistrationForm {
+  gameStore = inject(GameStore);
+  private router = inject(Router);
   private readonly _fb = inject(FormBuilder);
 
   form = this._fb.group({
@@ -56,7 +60,7 @@ export class GameRegistrationForm {
     developer: ['', [Validators.required]],
     genres: new FormControl<string[]>([], [Validators.required]),
     releaseYear: [
-      '',
+      2025,
       [
         Validators.required,
         Validators.min(1954),
@@ -160,21 +164,6 @@ export class GameRegistrationForm {
     { name: 'Polyphony Digital', country: 'Japan', foundation: 1994 },
   ];
 
-  genres = [
-    'Action',
-    'Adventure',
-    'Casual',
-    'Free to Play',
-    'Indie',
-    'Massively Multiplayer',
-    'Platformer',
-    'RPG',
-    'Racing',
-    'Simulation',
-    'Sports',
-    'Strategy',
-  ];
-
   selectedGenres = signal<string[]>([]);
 
   isGenreSelected(genre: string) {
@@ -195,9 +184,9 @@ export class GameRegistrationForm {
 
     if (!file) return;
 
-    if (!(await validateImageRatio(file, ['3:4']))) {
+    if (!(await validateImageRatio(file, ['2:3', '3:4', '3:5'], 0.1))) {
       this.coverError.set(
-        'Arte da capa deve ter uma proporção de 3:4 (ex. 300x400 pixels)',
+        `Arte da capa deve ter uma proporção de 3:4 ou 3:5 (ex. 300x400 pixels).`,
       );
       return;
     }
@@ -220,12 +209,18 @@ export class GameRegistrationForm {
       return;
     }
 
-    const name = this.form.get('name')!.value;
-    const developer = this.form.get('developer')!.value;
-    const genres = this.form.get('genres')!.value;
-    const releaseYear = this.form.get('releaseYear')!.value;
+    const name = this.form.get('name')!.value!;
+    const developer = this.form.get('developer')!.value!;
+    const genres = this.form.get('genres')!.value!;
+    const releaseYear = this.form.get('releaseYear')!.value!;
     const cover = this.cover()!;
 
-    console.log(name, developer, genres, releaseYear, cover);
+    this.gameStore.createGame({
+      game: { name, developer, genres, releaseYear },
+      coverFile: cover,
+    });
+
+    this.form.reset();
+    this.router.navigate(['/player/catalog']);
   }
 }

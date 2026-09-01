@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameRegistrationForm } from './game-registration-form';
+import { provideGameServiceMock } from '@/testing/mocks/game.service.mock';
 
 describe('GameRegistrationForm', () => {
   let component: GameRegistrationForm;
@@ -9,6 +10,7 @@ describe('GameRegistrationForm', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GameRegistrationForm],
+      providers: [provideGameServiceMock()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GameRegistrationForm);
@@ -21,9 +23,13 @@ describe('GameRegistrationForm', () => {
 
     const nameInput = compiled.querySelector('input#name') as HTMLInputElement;
     const devInput = compiled.querySelector('#developer') as HTMLInputElement;
-    const yearInput = compiled.querySelector('input#releaseYear') as HTMLInputElement;
+    const yearInput = compiled.querySelector(
+      'input#releaseYear',
+    ) as HTMLInputElement;
     const genreInput = compiled.querySelector('#genres') as HTMLInputElement;
-    const coverInput = compiled.querySelector('input#cover') as HTMLInputElement;
+    const coverInput = compiled.querySelector(
+      'input#cover',
+    ) as HTMLInputElement;
 
     expect(nameInput).toBeTruthy();
     expect(devInput).toBeTruthy();

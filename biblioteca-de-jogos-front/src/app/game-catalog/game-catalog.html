@@ -1,17 +1,18 @@
-<div class="flex items-center justify-between mb-8">
+<div class="flex items-center justify-between gap-4 mb-8">
   <h2 class="font-headline-lg flex items-center gap-4">
     <span class="w-2 h-8 bg-primary"></span>
     Catálogos de jogos
   </h2>
+  <div>
+    <a
+      class="w-full py-3 bg-primary text-black font-black uppercase text-xs tracking-tighter active:scale-95 duration-200 flex items-center justify-center gap-2 cursor-pointer px-4"
+      routerLink="./new"
+    >
+      Adicionar jogo
+    </a>
+  </div>
 </div>
-<div>
-  <a
-    class="w-full py-3 bg-primary text-black font-black uppercase text-xs tracking-tighter mb-8 active:scale-95 duration-200 flex items-center justify-center gap-2 cursor-pointer"
-    routerLink="./new"
-  >
-    Adicionar jogo
-  </a>
-</div>
+
 <div class="max-w-4xl mx-auto mb-16">
   <div>
     <label for="search-games" class="sr-only">Buscar jogos</label>
@@ -32,11 +33,15 @@
 <div class="mx-auto grid grid-cols-3 sm:grid-cols-1 lg:grid-cols-4 gap-6 mb-16">
   @if (gameStore.loading()) {
     <p class="col-span-4 text-center text-slate-400">Carregando...</p>
+  } @else if (gameStore.error()) {
+    <p class="col-span-4 text-center text-red-500">
+      Ocorreu um erro ao carregar os jogos.
+    </p>
   } @else if (gameStore.games().length == 0) {
     <p class="col-span-4 text-center text-slate-400">Nenhum jogo cadastrado</p>
   } @else {
     @for (game of gameStore.games(); track game) {
-      <a routerLink="/player/games/1">
+      <a [routerLink]="`/player/games/${game.id}`">
         <div
           class="bg-zinc-900 overflow-hidden border border-zinc-800 transition-all duration-300 hover:shadow-(--shadow-primary-hover) cursor-pointer"
         >
@@ -46,17 +51,15 @@
             ></div>
 
             <img
-              alt="Game Cover"
-              src="https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg"
+              [alt]="game.name + ' cover'"
+              src="{{ game.cover }}"
               class="w-full h-50 object-cover"
+              (error)="updateToFallback($event)"
             />
             <div
               class="p-4 flex flex-row flex-wrap gap-2 absolute bottom-0 left-0"
             >
-              @for (
-                genre of ['Fantasia', 'Ação', 'Aventura', 'RPG'];
-                track genre
-              ) {
+              @for (genre of game.genres; track genre) {
                 <span
                   class="border py-1 px-2 rounded-sm text-xs bg-primary/20 border-none text-primary"
                   >{{ genre }}</span
@@ -66,11 +69,8 @@
           </div>
           <div class="p-4">
             <h3 class="font-headline-md text-amber-50 mb-2">
-              The Witcher 3: Wild Hunt
+              {{ game.name }}
             </h3>
-            <p class="text-sm text-slate-400">
-              Adquirido em: 15 de março de 2024
-            </p>
           </div>
         </div>
       </a>
