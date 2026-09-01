@@ -1,5 +1,5 @@
 import { computed, inject } from '@angular/core';
-import { debounceTime, pipe, switchMap, tap } from 'rxjs';
+import { debounceTime, of, pipe, switchMap, tap } from 'rxjs';
 import {
   patchState,
   signalStore,
@@ -80,6 +80,39 @@ export const GameStore = signalStore(
                   allGenres: allGenres || store.allGenres(),
                   allDevelopers: allDevelopers || store.allDevelopers(),
                 });
+              },
+              error: (error: Error) => {
+                console.error(error);
+                patchState(store, {
+                  loading: false,
+                  error: error.message || 'Erro ao carregar jogos',
+                });
+              },
+            }),
+          );
+        }),
+      ),
+    );
+
+    const getGameById = rxMethod<{ gameId: number }>(
+      pipe(
+        tap(() => patchState(store, { loading: true, error: null })),
+        switchMap(({ gameId }) => {
+          const cachedGame = store.games().find((g) => g.id === gameId);
+          if (cachedGame) {
+            patchState(store, {
+              loading: false,
+            });
+            return of(cachedGame);
+          }
+
+          return gameService.getGameById(gameId).pipe(
+            tapResponse({
+              next: (game) => {
+                patchState(store, {
+                  loading: false,
+                });
+                return game;
               },
               error: (error: Error) => {
                 console.error(error);
@@ -237,6 +270,7 @@ export const GameStore = signalStore(
 
     return {
       loadGames,
+      getGameById,
       createGame,
       updateGame,
       deleteGame,

@@ -18,6 +18,8 @@ export abstract class GameService {
     allDevelopers?: string[];
   }>;
 
+  abstract getGameById(gameId: number): Observable<Game>;
+
   abstract createGame(
     gameData: Omit<Game, 'id' | 'cover'>,
     coverFile: File,

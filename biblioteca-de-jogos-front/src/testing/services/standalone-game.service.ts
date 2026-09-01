@@ -83,6 +83,28 @@ export class StandaloneGameService extends GameService {
     });
   }
 
+  override getGameById(gameId: number): Observable<Game> {
+    return new Observable((observer) => {
+      const storedGame = localStorage.getItem(`games.${gameId}`);
+      if (storedGame) {
+        const game = JSON.parse(storedGame) as Game;
+
+        new Promise<Game>(async (resolve, reject) => {
+          const file = await this.indexedDB.getFile(game.cover);
+          game.cover = URL.createObjectURL(file);
+          resolve(game);
+        })
+          .then((game) => {
+            observer.next(game);
+            observer.complete();
+          })
+          .catch((error) => {
+            observer.error(new Error('Game not found'));
+          });
+      }
+    });
+  }
+
   override createGame(
     gameData: Omit<Game, 'id' | 'cover'>,
     coverFile: File,

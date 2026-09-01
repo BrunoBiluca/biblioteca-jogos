@@ -16,6 +16,10 @@ export class SupabaseGameService extends GameService {
     throw new Error('Method not implemented.');
   }
 
+  override getGameById(gameId: number): Observable<Game> {
+    throw new Error('Method not implemented.');
+  }
+
   override createGame(
     gameData: Omit<Game, 'id' | 'cover'>,
     coverFile: File,
