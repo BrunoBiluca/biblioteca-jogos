@@ -5,4 +5,6 @@ export class Game {
   developer!: string;
   releaseYear!: number;
   genres!: string[];
+  description?: string;
+  synopsis?: string;
 }

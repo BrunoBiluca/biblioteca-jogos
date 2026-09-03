@@ -102,6 +102,7 @@ export const GameStore = signalStore(
           if (cachedGame) {
             patchState(store, {
               loading: false,
+              currentGame: cachedGame,
             });
             return of(cachedGame);
           }
@@ -111,6 +112,7 @@ export const GameStore = signalStore(
               next: (game) => {
                 patchState(store, {
                   loading: false,
+                  currentGame: game,
                 });
                 return game;
               },

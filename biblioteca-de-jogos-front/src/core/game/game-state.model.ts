@@ -10,6 +10,7 @@ export interface GameState {
   pagination: Pagination;
   allGenres: string[] | undefined;
   allDevelopers: string[] | undefined;
+  currentGame: Game | null;
 }
 
 export const initialGameState: GameState = {
@@ -20,4 +21,5 @@ export const initialGameState: GameState = {
   pagination: initialPagination,
   allGenres: [],
   allDevelopers: [],
+  currentGame: null,
 };
