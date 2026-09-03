@@ -55,6 +55,8 @@ Para alterar qualquer informação dentro do ambiente da biblioteca de games é 
 - [[RF 01.02 - Esqueceu a senha]]
 - [[RF 01.03 - Autenticação por email e senha]]
 - [[RF 01.03.01 - Persistência da sessão do usuário]]
+- [[RF 01.03.02 - Autenticação por email google]]
+- [[RF 01.04 - Avatar]]
 
 # Especificação de arquitetura
 

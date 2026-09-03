@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, linkedSignal, output } from '@angular/core';
+import { Component, input, linkedSignal, output, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent } from '@ng-icons/core';
 
 export interface SelectorOption {
@@ -12,6 +12,7 @@ export interface SelectorOption {
 @Component({
   selector: 'app-selector-grid',
   imports: [NgIconComponent, CommonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './selector-grid.html',
 })
 export class SelectorGrid {

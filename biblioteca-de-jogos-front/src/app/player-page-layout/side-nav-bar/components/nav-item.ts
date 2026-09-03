@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, input, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgIconComponent } from '@ng-icons/core';
 
@@ -15,6 +15,7 @@ import { NgIconComponent } from '@ng-icons/core';
       {{ label() }}
     </a>
   `,
+  changeDetection: ChangeDetectionStrategy.Eager,
   styles: [
     `
       .active {

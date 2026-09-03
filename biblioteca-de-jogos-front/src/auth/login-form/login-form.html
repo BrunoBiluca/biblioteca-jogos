@@ -1,4 +1,14 @@
-<form [formGroup]="form" (ngSubmit)="login()">
+<form [formGroup]="form" (ngSubmit)="login()" class="relative">
+  @if (didResetPassword()) {
+    <div class="absolute -top-1/3 text-center p-8 bg-green-800 rounded-2xl">
+      <ng-icon
+        name="lucideX"
+        class="text-xl absolute top-2 right-2 cursor-pointer"
+        (click)="closeNotification()"
+      />
+      <span>Email para alteração da senha enviado.</span>
+    </div>
+  }
   <hlm-field-group>
     <div class="flex flex-col items-center gap-1 text-center">
       <h1 class="text-2xl font-bold">Login to your account</h1>
@@ -15,13 +25,20 @@
     <hlm-field>
       <div class="flex items-center">
         <label hlmFieldLabel for="password">Password</label>
-        <a
-          hlmFieldDescription
-          class="ml-auto text-sm underline-offset-4 hover:underline"
-          [routerLink]="authRoutes.forgotPassword"
-        >
-          Forgot password?
-        </a>
+        @if (didResetPassword()) {
+          <span hlmFieldDescription class="ml-auto text-sm underline-offset-4 hover:underline">
+            <ng-icon name="lucideSend" />
+            Email enviado!
+          </span>
+        } @else {
+          <span
+            hlmFieldDescription
+            class="ml-auto text-sm underline-offset-4 hover:underline cursor-pointer"
+            (click)="forgotPassword()"
+          >
+            Forgot password?
+          </span>
+        }
       </div>
       <input hlmInput type="password" id="password" formControlName="password" />
       <hlm-field-error validator="required">Password is required.</hlm-field-error>

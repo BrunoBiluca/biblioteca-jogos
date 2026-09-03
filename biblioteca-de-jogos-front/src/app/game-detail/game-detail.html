@@ -1,26 +1,28 @@
 <section class="grid grid-cols-12 gap-gutter mb-lg items-start">
-  <div class="col-span-12 lg:col-span-7 relative group">
-    <div class="h-160 overflow-hidden rounded-xl border border-white/10 shadow-2xl">
+  <div class="col-span-12 lg:col-span-5 relative group">
+    <div
+      class="aspect-3/5 overflow-hidden rounded-xl border border-white/10 shadow-2xl"
+    >
       <img
         alt="Cyber Rebellion cinematic art"
         class="w-full h-full object-cover"
         data-alt="cinematic widescreen shot of a futuristic neon city street at night with rain reflecting cyan and magenta lights"
-        src="https://upload.wikimedia.org/wikipedia/en/0/0c/Witcher_3_cover_art.jpg"
+        [src]="game()?.cover"
       />
     </div>
   </div>
   <div
     class="absolute inset-0 bg-linear-to-b from-primary/10 via-transparent to-transparent h-200"
   ></div>
-  <div class="col-span-12 lg:col-span-5 flex flex-col gap-md">
-    <div class="flex items-center justify-between">
+  <div class="col-span-12 lg:col-span-7 flex flex-col gap-md">
+    <div class="flex items-start justify-between">
       <h2
         class="font-display-xl text-5xl text-foreground bg-transparent leading-none tracking-tighter italic font-bold uppercase"
       >
-        CYBER REBELLION
+        {{ game()?.name }}
       </h2>
       <button
-        class="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center hover:bg-primary hover:text-on-primary transition-all"
+        class="ml-4 w-16 aspect-square rounded-full border border-white/10 flex items-center justify-center hover:text-primary transition-all cursor-pointer z-9"
         type="button"
         title="Edição"
       >
@@ -29,75 +31,86 @@
     </div>
     <div class="space-y-sm">
       <div class="flex items-center gap-4">
-        <span class="text-neutral-500 font-label-sm text-label-sm uppercase">Release Date:</span>
-        <span class="text-on-background font-stats-md text-stats-md">OCT 24, 2024</span>
+        <span class="text-neutral-500 font-label-sm text-label-sm uppercase"
+          >Release Date:</span
+        >
+        <span class="text-on-background font-stats-md text-stats-md">{{
+          game()?.releaseYear
+        }}</span>
       </div>
       <div class="flex items-center gap-4">
-        <span class="text-neutral-500 font-label-sm text-label-sm uppercase">Developer:</span>
-        <span class="text-on-background font-stats-md text-stats-md">NEON SYNDICATE</span>
+        <span class="text-neutral-500 font-label-sm text-label-sm uppercase"
+          >Developer:</span
+        >
+        <span class="text-on-background font-stats-md text-stats-md">{{
+          game()?.developer
+        }}</span>
       </div>
     </div>
     <div class="flex flex-wrap gap-sm pt-4">
-      <span
-        class="px-3 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-sm rounded uppercase tracking-widest"
-        >Action</span
-      >
-      <span
-        class="px-3 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-sm rounded uppercase tracking-widest"
-        >Adventure</span
-      >
-      <span
-        class="px-3 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-sm rounded uppercase tracking-widest"
-        >RPG</span
-      >
-      <span
-        class="px-3 py-1 bg-secondary/10 border border-secondary/30 text-secondary font-label-sm text-sm rounded uppercase tracking-widest"
-        >2D</span
-      >
+      @for (genre of game()?.genres; track genre) {
+        <span
+          class="px-3 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-sm rounded uppercase tracking-widest"
+          [ngClass]="{
+            'bg-secondary/10 border-secondary/30 text-secondary':
+              $index % 2 === 0,
+          }"
+          >{{ genre }}</span
+        >
+      }
     </div>
     <p class="text-neutral-400 font-body-lg text-lg mt-md">
-      Rise from the digital underworld. Lead a squad of elite hackers to dismantle the corporate
-      monolith in this high-octane tactical RPG.
+      {{ game()?.description }}
     </p>
   </div>
 </section>
-<section class="mt-lg grid grid-cols-4 gap-gutter mb-lg">
+<!-- <section class="mt-lg grid grid-cols-4 gap-gutter mb-lg">
   <div class="glass-panel p-md rounded-lg flex flex-col gap-2">
-    <span class="text-neutral-500 font-label-sm text-sm uppercase">Conteúdo base</span>
+    <span class="text-neutral-500 font-label-sm text-sm uppercase"
+      >Conteúdo base</span
+    >
     <div class="flex items-end gap-2">
       <span class="font-display-xl text-3xl text-primary">24</span>
       <span class="font-stats-md text-stats-md text-neutral-400">Horas</span>
     </div>
   </div>
   <div class="glass-panel p-md rounded-lg flex flex-col gap-2">
-    <span class="text-neutral-500 font-label-sm text-sm uppercase">Base + secundário</span>
+    <span class="text-neutral-500 font-label-sm text-sm uppercase"
+      >Base + secundário</span
+    >
     <div class="flex items-end gap-2">
       <span class="font-display-xl text-3xl text-primary">24</span>
       <span class="font-stats-md text-stats-md text-neutral-400">Horas</span>
     </div>
   </div>
   <div class="glass-panel p-md rounded-lg flex flex-col gap-2">
-    <span class="text-neutral-500 font-label-sm text-sm uppercase">Complecionista</span>
+    <span class="text-neutral-500 font-label-sm text-sm uppercase"
+      >Complecionista</span
+    >
     <div class="flex items-end gap-2">
       <span class="font-display-xl text-3xl text-primary">24</span>
       <span class="font-stats-md text-stats-md text-neutral-400">Horas</span>
     </div>
   </div>
   <div class="glass-panel p-md rounded-lg flex flex-col gap-2">
-    <span class="text-neutral-500 font-label-sm text-label-sm uppercase">Rating</span>
+    <span class="text-neutral-500 font-label-sm text-label-sm uppercase"
+      >Rating</span
+    >
     <div class="flex items-end gap-2">
       <span class="font-display-xl text-3xl text-primary">98%</span>
       <span class="font-stats-md text-stats-md text-neutral-400">Positive</span>
     </div>
   </div>
-</section>
-<section>
-  <div class="flex items-center justify-between mb-md border-l-4 border-primary pl-4">
-    <h3 class="font-headline-lg uppercase italic tracking-tighter">ADDITIONAL CONTENT</h3>
+</section> -->
+<!-- <section>
+  <div
+    class="flex items-center justify-between mb-md border-l-4 border-primary pl-4"
+  >
+    <h3 class="font-headline-lg uppercase italic tracking-tighter">
+      ADDITIONAL CONTENT
+    </h3>
   </div>
-  <!-- Content Grid -->
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-gutter">
-    <!-- DLC Card 1 -->
     <div
       class="group relative bg-surface-container-low rounded-lg overflow-hidden border border-white/5 transition-all hover:border-primary/50 hover:translate-y-[-4px] shadow-lg"
     >
@@ -115,13 +128,14 @@
         >
           DLC: NEON CITY
         </h3>
-        <p class="text-neutral-500 font-label-sm text-label-sm mb-4">RELEASED DEC 2024</p>
+        <p class="text-neutral-500 font-label-sm text-label-sm mb-4">
+          RELEASED DEC 2024
+        </p>
       </div>
       <div
         class="absolute bottom-0 left-0 h-1 bg-primary w-0 group-hover:w-full transition-all duration-300"
       ></div>
     </div>
-    <!-- DLC Card 2 -->
     <div
       class="group relative bg-surface-container-low rounded-lg overflow-hidden border border-white/5 transition-all hover:border-primary/50 hover:translate-y-[-4px] shadow-lg"
     >
@@ -139,13 +153,14 @@
         >
           EXPANSION: THE VOID
         </h3>
-        <p class="text-neutral-500 font-label-sm text-label-sm mb-4">COMING FEB 2025</p>
+        <p class="text-neutral-500 font-label-sm text-label-sm mb-4">
+          COMING FEB 2025
+        </p>
       </div>
       <div
         class="absolute bottom-0 left-0 h-1 bg-primary w-0 group-hover:w-full transition-all duration-300"
       ></div>
     </div>
-    <!-- DLC Card 3 (Placeholder for add) -->
     <div
       class="group flex flex-col items-center justify-center border-2 border-dashed border-white/10 rounded-lg aspect-video lg:aspect-auto hover:border-primary/40 transition-colors cursor-pointer bg-white/5"
     >
@@ -159,4 +174,4 @@
       >
     </div>
   </div>
-</section>
+</section> -->

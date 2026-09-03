@@ -1,11 +1,12 @@
 import { PROJECT_CONFIG_TOKEN } from '@/project.config';
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   imports: [RouterLink, CommonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './app-header.html',
 })
 export class AppHeader {

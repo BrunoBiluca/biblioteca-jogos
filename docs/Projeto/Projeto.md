@@ -3,18 +3,11 @@
 - [[Produto]]
 - [[Sistema]]
 
-# Linha do tempo
+### Etapas
 
-- **Outubro**
-	- Avaliar o Svelte
+[[Linha do tempo]] descreve de forma resumida as principais contribuições do projeto ao longo do tempo.
 
-- **Setembro**
-	- Estudamos alternativas sobre arquitetura, modelagem e tecnologias
-	- Começamos a trabalhar nos esboços das telas das funcionalidades do MVP
+**Fases:**
 
-- **Agosto**
-	- Levantar as funcionalidades do MVP
-	- Começa: Arquitetura, modelagem e tecnologias
-	- Práticas iniciais de desenvolvimento
-
-
+- [[Fase 0 - Levantamento da Stack]]
+- [[Fase 1 - MVP]]
