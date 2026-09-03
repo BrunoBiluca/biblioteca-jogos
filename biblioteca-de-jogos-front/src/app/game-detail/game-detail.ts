@@ -31,7 +31,6 @@ export class GameDetail implements OnInit {
 
   ngOnInit(): void {
     this.activeRoute.params.subscribe((params) => {
-      console.log('GameDetail params:', params);
       const gameId = params['gameId'];
       this.gameStore.getGameById({ gameId });
     });

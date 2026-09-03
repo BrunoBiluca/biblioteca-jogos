@@ -3,10 +3,14 @@
   <header class="mb-8">
     <h2 class="font-headline-lg flex items-center gap-4">
       <span class="w-2 h-8 bg-primary"></span>
-      Adicionar jogo
+      {{ formTitle() }}
     </h2>
   </header>
-  <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-gutter">
+  <form
+    [formGroup]="form()"
+    (ngSubmit)="onSubmit.emit()"
+    class="space-y-gutter"
+  >
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
       <div class="lg:col-span-8 space-y-md">
         <div class="space-y-xs">
@@ -28,8 +32,8 @@
               class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 text-zinc-600 group-focus-within:text-cyan-400"
             />
           </div>
-          @if (form.get('name')?.touched) {
-            @if (form.get('name')?.hasError('required')) {
+          @if (form().get('name')?.touched) {
+            @if (form().get('name')?.hasError('required')) {
               <span class="text-sm text-red-500"
                 >Nome do jogo é obrigatório.</span
               >
@@ -82,8 +86,8 @@
               </div>
             </hlm-autocomplete-content>
           </hlm-autocomplete-search>
-          @if (form.get('developer')?.touched) {
-            @if (form.get('developer')?.hasError('required')) {
+          @if (form().get('developer')?.touched) {
+            @if (form().get('developer')?.hasError('required')) {
               <span class="text-sm text-red-500"
                 >Desenvolvedor do jogo é obrigatório.</span
               >
@@ -105,18 +109,18 @@
               formControlName="releaseYear"
               type="number"
             />
-            @if (form.get('releaseYear')?.touched) {
-              @if (form.get('releaseYear')?.hasError('required')) {
+            @if (form().get('releaseYear')?.touched) {
+              @if (form().get('releaseYear')?.hasError('required')) {
                 <span class="text-sm text-red-500"
                   >O ano de lançamento do jogo é obrigatório.</span
                 >
               }
-              @if (form.get('releaseYear')?.hasError('min')) {
+              @if (form().get('releaseYear')?.hasError('min')) {
                 <span class="text-sm text-red-500"
                   >O ano de lançamento deve ser maior que 1954.</span
                 >
               }
-              @if (form.get('releaseYear')?.hasError('max')) {
+              @if (form().get('releaseYear')?.hasError('max')) {
                 <span class="text-sm text-red-500"
                   >O ano de lançamento deve ser até o ano atual.</span
                 >
@@ -131,7 +135,7 @@
             Genre &amp; Classifications &amp; Tags
           </label>
           <div class="flex flex-wrap gap-base">
-            @for (genre of gameStore.allGenres(); track $index) {
+            @for (genre of allGenres(); track $index) {
               <button
                 class="border py-1 px-2 rounded-sm text-sm border-gray-700 hover:border-gray-400 cursor-pointer"
                 [ngClass]="{
@@ -152,8 +156,8 @@
               <span class="font-stats-md text-stats-md">Add Tag</span>
             </button>
           </div>
-          @if (form.get('genres')?.touched) {
-            @if (form.get('genres')?.hasError('required')) {
+          @if (form().get('genres')?.touched) {
+            @if (form().get('genres')?.hasError('required')) {
               <span class="text-sm text-red-500"
                 >Escolha pelo menos um gênero para o jogo.</span
               >
@@ -168,23 +172,25 @@
         >
         <div class="relative group">
           <div
-            class="aspect-3/4 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl border-zinc-700 flex flex-col items-center justify-center p-lg group-hover:border-cyan-400 transition-all bg-cover bg-center overflow-hidden"
+            class="aspect-3/4 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl text-zinc-500 border-zinc-500 flex flex-col items-center justify-center p-lg group-hover:border-primary transition-all bg-cover bg-center overflow-hidden"
             [style]="{
               backgroundImage: `linear-gradient(rgba(19, 19, 22, 0.8), rgba(19, 19, 22, 0.8)), url(${coverPreview()})`,
             }"
           >
             <div class="z-10 flex flex-col items-center text-center">
               <div
-                class="w-16 h-16 rounded-full bg-surface-container-high border border-zinc-700 flex items-center justify-center mb-md group-hover:scale-110 group-hover:border-cyan-400 transition-all"
+                class="w-16 h-16 rounded-full bg-surface-container-high border border-zinc-700 flex items-center justify-center mb-md group-hover:scale-110 group-hover:border-primary transition-all"
+                [ngClass]="{
+                  'opacity-50 group-hover:opacity-100':
+                    form().get('cover')?.value !== null,
+                }"
               >
                 <ng-icon
                   name="lucideImage"
-                  class="text-2xl text-zinc-700 group-hover:text-cyan-400 transition-all"
+                  class="text-2xl group-hover:text-primary transition-all"
                 />
               </div>
-              <p
-                class="text-on-surface-variant text-xs text-zinc-700 group-hover:text-cyan-400 transition-all"
-              >
+              <p class="text-xs group-hover:text-primary transition-all">
                 High-res vertical poster (e.g. 1200x1600px)
               </p>
               <input
@@ -196,7 +202,7 @@
                 (change)="onCoverChange($event)"
               />
               <button
-                class="mt-md px-6 py-2 bg-zinc-700 hover:bg-zinc-800 text-on-background rounded-full font-stats-md text-stats-md transition-all"
+                class="mt-md px-6 py-2 bg-transparent hover:bg-primary hover:text-black text-on-background rounded-full font-stats-md text-stats-md transition-all cursor-pointer group-hover:text-primary"
                 [ngClass]="{
                   'opacity-50 group-hover:opacity-100': cover() !== null,
                 }"
@@ -208,7 +214,15 @@
             </div>
           </div>
           @if (coverError()) {
-            <p class="text-sm text-red-500 mt-2">{{ coverError() }}</p>
+            <p class="text-sm text-red-500 mt-2">
+              {{ coverError() }}
+            </p>
+          }
+          @if (
+            form().get('cover')?.touched &&
+            form().get('cover')?.hasError('required')
+          ) {
+            <p class="text-sm text-red-500 mt-2">Arte da capa é obrigatória.</p>
           }
         </div>
       </div>
@@ -223,7 +237,7 @@
         class="py-3 px-6 bg-primary text-black font-black uppercase text-xs tracking-tighter mb-8 active:scale-95 duration-200 flex items-center justify-center gap-2 cursor-pointer hover:neon-border"
         type="submit"
       >
-        <span class="">Concluir</span>
+        <span class="">{{ submitButtonLabel() }}</span>
         <ng-icon name="lucideCheck" class="text-xl" />
       </button>
     </div>

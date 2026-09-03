@@ -1,9 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GameRegistrationForm } from './game-registration-form';
+import { GameRegistrationForm } from './registration';
 import { provideGameServiceMock } from '@/testing/mocks/game.service.mock';
 
-describe('GameRegistrationForm', () => {
+describe('Registration', () => {
   let component: GameRegistrationForm;
   let fixture: ComponentFixture<GameRegistrationForm>;
 

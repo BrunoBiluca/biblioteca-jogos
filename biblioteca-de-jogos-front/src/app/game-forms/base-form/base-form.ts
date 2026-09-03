@@ -1,20 +1,19 @@
 import { validateImageRatio } from '@/common/forms/validators/image-validator';
+import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
+import { HlmFieldImports } from '@/common/ui/field/src';
+import { GameStore } from '@/core/game/game.store';
 import { CommonModule } from '@angular/common';
 import {
-  ChangeDetectionStrategy,
   Component,
   computed,
   effect,
   inject,
+  input,
+  output,
   resource,
   signal,
 } from '@angular/core';
-import {
-  FormBuilder,
-  FormControl,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -23,13 +22,8 @@ import {
   lucidePlusCircle,
   lucideText,
 } from '@ng-icons/lucide';
-import { HlmFieldImports } from '@/common/ui/field/src';
-import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
-import { GameStore } from '@/core/game/game.store';
-import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-game-registration-form',
   imports: [
     ReactiveFormsModule,
     NgIconComponent,
@@ -46,44 +40,36 @@ import { Router } from '@angular/router';
       lucideLoader,
     }),
   ],
-  templateUrl: './game-registration-form.html',
-  changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
+  selector: 'app-base-form',
+  templateUrl: './base-form.html',
 })
-export class GameRegistrationForm {
-  gameStore = inject(GameStore);
-  private router = inject(Router);
-  private readonly _fb = inject(FormBuilder);
+export class BaseForm {
+  form = input.required<FormGroup>();
+  submitButtonLabel = input.required<string>();
+  formTitle = input.required<string>();
+  onSubmit = output<void>();
 
-  form = this._fb.group({
-    name: ['', [Validators.required]],
-    developer: ['', [Validators.required]],
-    genres: new FormControl<string[]>([], [Validators.required]),
-    releaseYear: [
-      2025,
-      [
-        Validators.required,
-        Validators.min(1954),
-        Validators.max(new Date().getFullYear()),
-      ],
-    ],
-  });
+  gameStore = inject(GameStore);
 
   cover = signal<File | null>(null);
+  coverError = signal<string | null>(null);
   coverPreview = computed(() =>
     this.cover()
       ? URL.createObjectURL(this.cover()!)
       : 'assets/generic-racing-game.png',
   );
-  coverError = signal<string | null>(null);
 
   readonly developerSearch = signal('');
   readonly selectedDeveloper = signal('');
 
   constructor() {
     effect(() =>
-      this.form.get('developer')?.setValue(this.selectedDeveloper()),
+      this.form().get('developer')?.setValue(this.selectedDeveloper()),
     );
+
+    effect(() => {
+      this.form().get('cover')?.setValue(this.cover());
+    });
   }
 
   itemToString = (item: any) => item.name;
@@ -164,6 +150,7 @@ export class GameRegistrationForm {
     { name: 'Polyphony Digital', country: 'Japan', foundation: 1994 },
   ];
 
+  allGenres = computed(() => this.gameStore.allGenres() || []);
   selectedGenres = signal<string[]>([]);
 
   isGenreSelected(genre: string) {
@@ -176,51 +163,21 @@ export class GameRegistrationForm {
     } else {
       this.selectedGenres.update((genres) => [...genres, genre]);
     }
-    this.form.get('genres')!.setValue(this.selectedGenres());
+    this.form().get('genres')!.setValue(this.selectedGenres());
   }
 
   async onCoverChange($event: Event) {
     const file = ($event.target as HTMLInputElement).files?.[0];
-
     if (!file) return;
 
     if (!(await validateImageRatio(file, ['2:3', '3:4', '3:5'], 0.1))) {
       this.coverError.set(
-        `Arte da capa deve ter uma proporção de 3:4 ou 3:5 (ex. 300x400 pixels).`,
+        'Arte da capa deve ter uma proporção de 3:4 ou 3:5 (ex. 300x400 pixels).',
       );
       return;
     }
 
     this.coverError.set(null);
     this.cover.set(file);
-  }
-
-  submit() {
-    if (this.form.invalid) {
-      this.form.markAllAsTouched();
-      return;
-    }
-
-    if (this.cover() === null) {
-      this.coverError.set('Arte da capa é obrigatória');
-    }
-
-    if (this.coverError()) {
-      return;
-    }
-
-    const name = this.form.get('name')!.value!;
-    const developer = this.form.get('developer')!.value!;
-    const genres = this.form.get('genres')!.value!;
-    const releaseYear = this.form.get('releaseYear')!.value!;
-    const cover = this.cover()!;
-
-    this.gameStore.createGame({
-      game: { name, developer, genres, releaseYear },
-      coverFile: cover,
-    });
-
-    this.form.reset();
-    this.router.navigate(['/player/catalog']);
   }
 }

@@ -7,9 +7,12 @@ import { PlayerSummary } from './player-summary/player-summary';
 import { PlayerLibrary } from './player-library/player-library';
 import { ChallengueRegistrationForm } from './challengue-registration-form/challengue-registration-form';
 import { GameDetail } from './game-detail/game-detail';
-import { GameRegistrationForm } from './game-registration-form/game-registration-form';
+import { GameRegistrationForm } from './game-forms/registration/registration';
 import { GameCatalog } from './game-catalog/game-catalog';
-import { bypassAuth, protectedRoute as protectedRoute } from '@/core/auth/auth.guard';
+import {
+  bypassAuth,
+  protectedRoute as protectedRoute,
+} from '@/core/auth/auth.guard';
 import { ForgotPasswordForm } from '@/auth/forgot-password-form/forgot-password-form';
 
 export const routes: Routes = [
