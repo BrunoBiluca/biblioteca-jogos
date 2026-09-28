@@ -4,7 +4,7 @@ export class Game {
   cover!: string;
   coverFile!: File;
   developer!: string;
-  releaseYear!: number;
+  releaseDate!: Date;
   genres!: string[];
   description?: string;
   synopsis?: string;

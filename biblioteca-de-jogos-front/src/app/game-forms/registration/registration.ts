@@ -43,14 +43,7 @@ export class GameRegistrationForm {
     name: ['', [Validators.required]],
     developer: ['', [Validators.required]],
     genres: new FormControl<string[]>([], [Validators.required]),
-    releaseYear: [
-      null,
-      [
-        Validators.required,
-        Validators.min(1954),
-        Validators.max(new Date().getFullYear()),
-      ],
-    ],
+    releaseDate: new FormControl<Date>(new Date(), [Validators.required]),
     cover: [null, [Validators.required]],
   });
 
@@ -63,11 +56,11 @@ export class GameRegistrationForm {
     const name = this.form.get('name')!.value!;
     const developer = this.form.get('developer')!.value!;
     const genres = this.form.get('genres')!.value!;
-    const releaseYear = this.form.get('releaseYear')!.value!;
+    const releaseDate = this.form.get('releaseDate')!.value!;
     const cover = this.form.get('cover')!.value!;
 
     this.gameStore.createGame({
-      game: { name, developer, genres, releaseYear },
+      game: { name, developer, genres, releaseDate: releaseDate },
       coverFile: cover,
     });
 

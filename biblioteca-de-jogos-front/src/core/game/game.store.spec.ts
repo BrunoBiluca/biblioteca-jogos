@@ -23,7 +23,7 @@ describe('GameStore', () => {
       name: 'Game 1',
       developer: 'Dev 1',
       genres: ['Action'],
-      releaseYear: 2020,
+      releaseDate: new Date('2020-12-17'),
       cover: 'cover',
       coverFile: new File([''], 'cover.jpg'),
     },
@@ -32,7 +32,7 @@ describe('GameStore', () => {
       name: 'Game 2',
       developer: 'Dev 2',
       genres: ['Adventure'],
-      releaseYear: 2021,
+      releaseDate: new Date('2021-12-17'),
       cover: 'cover',
       coverFile: new File([''], 'cover.jpg'),
     },
@@ -260,7 +260,7 @@ describe('GameStore', () => {
         name: 'New Game',
         developer: 'New Dev',
         genres: ['Action'],
-        releaseYear: 2022,
+        releaseDate: new Date('2022-01-01'),
       };
       const coverFile = new File([''], 'cover.jpg');
       store.createGame({ game: newGame, coverFile });
@@ -281,7 +281,7 @@ describe('GameStore', () => {
         name: 'New Game',
         developer: 'New Dev',
         genres: ['Action'],
-        releaseYear: 2022,
+        releaseDate: new Date('2022-01-01'),
       };
       const coverFile = new File([''], 'cover.jpg');
       const error = new Error('Failed to create game');

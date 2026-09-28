@@ -11,7 +11,7 @@ export class SupabaseGameService extends GameService {
     name?: string;
     developer?: string;
     genres?: string[];
-    releaseYear?: number;
+    releaseDate?: Date;
   }): Observable<{ games: Game[]; total: number; availableGenres?: string[] }> {
     throw new Error('Method not implemented.');
   }

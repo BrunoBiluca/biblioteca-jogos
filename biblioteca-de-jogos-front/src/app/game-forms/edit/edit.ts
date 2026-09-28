@@ -15,6 +15,7 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { formatDate } from '@angular/common';
 
 @Component({
   imports: [BaseForm],
@@ -46,18 +47,15 @@ export class Edit implements OnInit {
 
   buildForm() {
     let game = this.game()!;
+    console.log(game);
     this.form.set(
       this._fb.group({
         name: [game.name, [Validators.required]],
         developer: [game.developer, [Validators.required]],
         genres: new FormControl<string[]>(game.genres, [Validators.required]),
-        releaseYear: [
-          game.releaseYear,
-          [
-            Validators.required,
-            Validators.min(1954),
-            Validators.max(new Date().getFullYear()),
-          ],
+        releaseDate: [
+          formatDate(game.releaseDate, 'yyyy-MM-dd', 'en'),
+          [Validators.required],
         ],
         cover: [game.coverFile, [Validators.required]],
       }),
@@ -74,12 +72,12 @@ export class Edit implements OnInit {
     const name = form.get('name')!.value!;
     const developer = form.get('developer')!.value!;
     const genres = form.get('genres')!.value!;
-    const releaseYear = form.get('releaseYear')!.value!;
+    const releaseDate = form.get('releaseDate')!.value!;
     const cover = form.get('cover')!.value!;
 
     this.gameStore.updateGame({
       id: this.game()!.id,
-      changes: { name, developer, genres, releaseYear },
+      changes: { name, developer, genres, releaseDate: releaseDate },
       coverFile: cover,
     });
 

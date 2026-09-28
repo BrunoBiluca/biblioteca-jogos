@@ -37,7 +37,7 @@ export class StandaloneGameService extends GameService {
     name?: string;
     developer?: string;
     genres?: string[];
-    releaseYear?: number;
+    releaseDate?: Date;
   }): Observable<{
     games: Game[];
     total: number;
@@ -58,7 +58,7 @@ export class StandaloneGameService extends GameService {
             game.developer.toLowerCase().includes(params.developer)) &&
           (!params.genres ||
             game.genres.some((genre) => params.genres?.includes(genre))) &&
-          (!params.releaseYear || game.releaseYear === params.releaseYear)
+          (!params.releaseDate || game.releaseDate === params.releaseDate)
         );
       });
 

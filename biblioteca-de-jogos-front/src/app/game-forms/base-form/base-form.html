@@ -101,25 +101,23 @@
             >
             <input
               class="w-full bg-transparent border border-gray-700 rounded-md py-3 px-6 hover:border-gray-400 focus:neon-border outline-none placeholder:text-gray-400"
-              placeholder="2024"
-              min="1954"
-              max="2026"
+              placeholder="01/01/2024"
               id="releaseYear"
-              formControlName="releaseYear"
-              type="number"
+              formControlName="releaseDate"
+              type="date"
             />
-            @if (form().get('releaseYear')?.touched) {
-              @if (form().get('releaseYear')?.hasError('required')) {
+            @if (form().get('releaseDate')?.touched) {
+              @if (form().get('releaseDate')?.hasError('required')) {
                 <span class="text-sm text-red-500"
                   >O ano de lançamento do jogo é obrigatório.</span
                 >
               }
-              @if (form().get('releaseYear')?.hasError('min')) {
+              @if (form().get('releaseDate')?.hasError('min')) {
                 <span class="text-sm text-red-500"
                   >O ano de lançamento deve ser maior que 1954.</span
                 >
               }
-              @if (form().get('releaseYear')?.hasError('max')) {
+              @if (form().get('releaseDate')?.hasError('max')) {
                 <span class="text-sm text-red-500"
                   >O ano de lançamento deve ser até o ano atual.</span
                 >

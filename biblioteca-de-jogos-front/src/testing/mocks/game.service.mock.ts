@@ -14,7 +14,7 @@ class MockGameService implements GameService {
       id: 1,
       name: 'Game 1',
       developer: 'Developer 1',
-      releaseYear: 2020,
+      releaseDate: new Date('2020-12-17'),
       genres: ['Action', 'Adventure'],
       cover: 'cover1.jpg',
       description: 'Description 1',

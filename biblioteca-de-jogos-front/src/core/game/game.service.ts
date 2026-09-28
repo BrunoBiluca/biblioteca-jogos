@@ -10,7 +10,7 @@ export abstract class GameService {
     name?: string;
     developer?: string;
     genres?: string[];
-    releaseYear?: number;
+    releaseYear?: Date;
   }): Observable<{
     games: Game[];
     total: number;
