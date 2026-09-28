@@ -11,6 +11,7 @@ describe('GameCoverInput', () => {
     }).compileComponents();
 
     fixture = TestBed.createComponent(GameCoverInput);
+    fixture.componentRef.setInput('initialCover', null);
     component = fixture.componentInstance;
     await fixture.whenStable();
   });
