@@ -26,6 +26,11 @@ export class StandaloneGameService extends GameService {
     return allGames as Game[];
   }
 
+  getLastId() {
+    const allGames = this.getAllGameKeys();
+    return allGames.reduce((acc, game) => Math.max(acc, game.id), 0);
+  }
+
   override getGames(params: {
     page: number;
     pageSize: number;
@@ -111,10 +116,9 @@ export class StandaloneGameService extends GameService {
     coverFile: File,
   ): Observable<Game> {
     return new Observable((observer) => {
-      const allGames = this.getAllGameKeys();
       const newGame = {
         ...gameData,
-        id: allGames.length + 1,
+        id: this.getLastId() + 1,
         cover: '',
       };
 

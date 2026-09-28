@@ -25,6 +25,7 @@ import {
   lucidePlusCircle,
   lucideText,
 } from '@ng-icons/lucide';
+import { GameTagsInput } from './components/game-tags-input/game-tags-input';
 
 @Component({
   imports: [
@@ -34,6 +35,7 @@ import {
     CommonModule,
     HlmFieldImports,
     RouterLink,
+    GameTagsInput,
   ],
   providers: [
     provideIcons({
@@ -103,17 +105,8 @@ export class BaseForm implements OnInit {
     },
   });
 
-  isGenreSelected(genre: string) {
-    return this.selectedGenres().includes(genre);
-  }
-
-  toggleGenre(genre: string) {
-    if (this.isGenreSelected(genre)) {
-      this.selectedGenres.update((genres) => genres.filter((g) => g !== genre));
-    } else {
-      this.selectedGenres.update((genres) => [...genres, genre]);
-    }
-    this.form().get('genres')!.setValue(this.selectedGenres());
+  toggleGenres(genres: string[]) {
+    this.form().get('genres')!.setValue(genres);
   }
 
   async onCoverChange($event: Event) {

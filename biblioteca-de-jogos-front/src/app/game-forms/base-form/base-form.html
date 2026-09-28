@@ -128,33 +128,7 @@
           </div>
         </div>
         <div id="genres" class="space-y-sm">
-          <label
-            class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
-          >
-            Genre &amp; Classifications &amp; Tags
-          </label>
-          <div class="flex flex-wrap gap-base">
-            @for (genre of allGenres(); track $index) {
-              <button
-                class="border py-1 px-2 rounded-sm text-sm border-gray-700 hover:border-gray-400 cursor-pointer"
-                [ngClass]="{
-                  'bg-primary/20 text-primary hover:border-primary':
-                    isGenreSelected(genre),
-                }"
-                (click)="toggleGenre(genre)"
-                type="button"
-              >
-                {{ genre }}
-              </button>
-            }
-            <button
-              class="px-4 py-1 rounded-full border border-outline-variant border-dashed flex items-center gap-2 text-zinc-500 hover:text-cyan-400 hover:border-cyan-400 transition-all text-sm"
-              type="button"
-            >
-              <ng-icon name="lucidePlusCircle" />
-              <span class="font-stats-md text-stats-md">Add Tag</span>
-            </button>
-          </div>
+          <app-game-tags-input (onToggleGenres)="toggleGenres($event)" />
           @if (form().get('genres')?.touched) {
             @if (form().get('genres')?.hasError('required')) {
               <span class="text-sm text-red-500"
