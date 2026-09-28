@@ -6,14 +6,17 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   computed,
+  debounced,
   effect,
   inject,
   input,
+  OnInit,
   output,
   resource,
   signal,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -30,6 +33,7 @@ import {
     HlmAutocompleteImports,
     CommonModule,
     HlmFieldImports,
+    RouterLink,
   ],
   providers: [
     provideIcons({
@@ -43,7 +47,7 @@ import {
   selector: 'app-base-form',
   templateUrl: './base-form.html',
 })
-export class BaseForm {
+export class BaseForm implements OnInit {
   form = input.required<FormGroup>();
   submitButtonLabel = input.required<string>();
   formTitle = input.required<string>();
@@ -62,21 +66,30 @@ export class BaseForm {
   readonly developerSearch = signal('');
   readonly selectedDeveloper = signal('');
 
+  allGenres = computed(() => this.gameStore.allGenres() || []);
+  selectedGenres = signal<string[]>([]);
+
   constructor() {
-    effect(() =>
-      this.form().get('developer')?.setValue(this.selectedDeveloper()),
-    );
+    effect(() => {
+      this.form().get('developer')?.setValue(this.selectedDeveloper());
+    });
 
     effect(() => {
       this.form().get('cover')?.setValue(this.cover());
     });
   }
 
-  itemToString = (item: any) => item.name;
+  ngOnInit(): void {
+    this.developerSearch.set(this.form().get('developer')?.value ?? '');
+    this.selectedDeveloper.set(this.form().get('developer')?.value ?? '');
+    this.selectedGenres.set(this.form().get('genres')?.value ?? []);
+    this.cover.set(this.form().get('cover')?.value ?? null);
+  }
 
+  debouncedSearch = debounced(this.developerSearch, 300);
   developerOptions = resource({
     defaultValue: [],
-    params: () => ({ search: this.developerSearch() }),
+    params: () => ({ search: this.debouncedSearch.value() }),
     loader: async ({ params }) => {
       const search = params.search;
 
@@ -84,74 +97,11 @@ export class BaseForm {
         return [];
       }
 
-      return await this.searchDevelopers(search.toLowerCase());
+      return this.gameStore
+        .allDevelopers()!
+        .filter((d) => d.toLowerCase().includes(search.toLowerCase()));
     },
   });
-
-  searchDevelopers(search: string): Promise<any[]> {
-    return new Promise((resolve) => {
-      resolve(
-        this.developers.filter((d) => d.name.toLowerCase().includes(search)),
-      );
-    });
-  }
-
-  developers = [
-    { name: 'Nintendo EAD', country: 'Japan', foundation: 1889 },
-    { name: 'Blizzard Entertainment', country: 'USA', foundation: 1991 },
-    { name: 'Ubisoft Montreal', country: 'Canada', foundation: 1997 },
-    { name: 'Electronic Arts (EA)', country: 'USA', foundation: 1982 },
-    { name: 'Activision', country: 'USA', foundation: 1979 },
-    {
-      name: 'Sony Interactive Entertainment',
-      country: 'Japan/USA',
-      foundation: 1993,
-    },
-    { name: 'Sega', country: 'Japan', foundation: 1960 },
-    { name: 'Game Freak', country: 'Japan', foundation: 1989 },
-    { name: 'Infinity Ward', country: 'USA', foundation: 2002 },
-    { name: 'Harmonix', country: 'USA', foundation: 1995 },
-    { name: 'Maxis', country: 'USA', foundation: 1987 },
-    { name: 'Westwood Studios', country: 'USA', foundation: 1985 },
-    { name: 'Black Isle Studios', country: 'USA', foundation: 1996 },
-    { name: 'HAL Laboratory', country: 'Japan', foundation: 1980 },
-    { name: 'Retro Studios', country: 'USA', foundation: 1998 },
-    { name: 'Tango Gameworks', country: 'Japan', foundation: 2010 },
-    { name: 'Square Enix', country: 'Japan', foundation: 2003 },
-    { name: 'Valve Corporation', country: 'USA', foundation: 1996 },
-    { name: 'Rockstar Games', country: 'USA', foundation: 1998 },
-    { name: 'Capcom', country: 'Japan', foundation: 1979 },
-    { name: 'Konami', country: 'Japan', foundation: 1969 },
-    { name: 'Bandai Namco', country: 'Japan', foundation: 2005 },
-    { name: 'Thatgamecompany', country: 'USA', foundation: 2006 },
-    { name: 'Insomniac Games', country: 'USA', foundation: 1994 },
-    { name: 'CD Projekt Red', country: 'Poland', foundation: 2002 },
-    { name: 'Atari', country: 'USA', foundation: 1972 },
-    { name: 'MicroProse', country: 'USA', foundation: 1982 },
-    { name: 'Irrational Games', country: 'USA', foundation: 1997 },
-    { name: 'Looking Glass Studios', country: 'USA', foundation: 1990 },
-    { name: 'Origin Systems', country: 'USA', foundation: 1983 },
-    { name: 'Intelligent Systems', country: 'Japan', foundation: 1986 },
-    { name: 'Relic Entertainment', country: 'Canada', foundation: 1997 },
-    { name: 'The Creative Assembly', country: 'UK', foundation: 1987 },
-    { name: 'Bungie', country: 'USA', foundation: 1991 },
-    { name: 'Naughty Dog', country: 'USA', foundation: 1984 },
-    { name: 'Bethesda Game Studios', country: 'USA', foundation: 2001 },
-    { name: 'BioWare', country: 'Canada', foundation: 1995 },
-    { name: 'Epic Games', country: 'USA', foundation: 1991 },
-    { name: 'id Software', country: 'USA', foundation: 1991 },
-    { name: 'Level-5', country: 'Japan', foundation: 1998 },
-    { name: 'Rare', country: 'UK', foundation: 1985 },
-    { name: 'Neversoft', country: 'USA', foundation: 1994 },
-    { name: 'LucasArts', country: 'USA', foundation: 1982 },
-    { name: 'PopCap Games', country: 'USA', foundation: 2000 },
-    { name: 'Sierra Entertainment', country: 'USA', foundation: 1979 },
-    { name: 'Treasure', country: 'Japan', foundation: 1992 },
-    { name: 'Polyphony Digital', country: 'Japan', foundation: 1994 },
-  ];
-
-  allGenres = computed(() => this.gameStore.allGenres() || []);
-  selectedGenres = signal<string[]>([]);
 
   isGenreSelected(genre: string) {
     return this.selectedGenres().includes(genre);

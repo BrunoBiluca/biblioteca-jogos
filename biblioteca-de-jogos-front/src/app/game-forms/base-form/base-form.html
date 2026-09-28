@@ -47,7 +47,6 @@
           <hlm-autocomplete-search
             id="developer"
             [(search)]="developerSearch"
-            [itemToString]="itemToString"
             [(value)]="selectedDeveloper"
           >
             <hlm-autocomplete-input placeholder="Pesquise desenvolvedores" />
@@ -78,7 +77,7 @@
                   @for (option of developerOptions.value(); track $index) {
                     <hlm-autocomplete-item [value]="option">
                       <div class="flex flex-col gap-1">
-                        <p>{{ option.name }}</p>
+                        <p>{{ option }}</p>
                       </div>
                     </hlm-autocomplete-item>
                   }
@@ -230,6 +229,8 @@
     <div class="grid grid-cols-2 gap-4 mt-8">
       <button
         class="py-3 px-6 bg-background text-black font-black uppercase text-xs tracking-tighter mb-8 active:scale-95 duration-200 flex items-center justify-center gap-2 cursor-pointer border border-gray-700 hover:border-gray-400"
+        type="button"
+        [routerLink]="['/player/catalog']"
       >
         <span class="text-gray-700 hover:text-gray-400">Cancelar</span>
       </button>

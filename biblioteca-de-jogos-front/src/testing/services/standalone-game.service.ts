@@ -91,6 +91,7 @@ export class StandaloneGameService extends GameService {
 
         new Promise<Game>(async (resolve, reject) => {
           const file = await this.indexedDB.getFile(game.cover);
+          game.coverFile = file;
           game.cover = URL.createObjectURL(file);
           resolve(game);
         })

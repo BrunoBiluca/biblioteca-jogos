@@ -1,5 +1,4 @@
-import { fakeAsync, TestBed, tick } from '@angular/core/testing';
-import { signal } from '@angular/core';
+import { TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { GameStore } from './game.store';
 import { GameService } from './game.service';
@@ -26,6 +25,7 @@ describe('GameStore', () => {
       genres: ['Action'],
       releaseYear: 2020,
       cover: 'cover',
+      coverFile: new File([''], 'cover.jpg'),
     },
     {
       id: 2,
@@ -34,6 +34,7 @@ describe('GameStore', () => {
       genres: ['Adventure'],
       releaseYear: 2021,
       cover: 'cover',
+      coverFile: new File([''], 'cover.jpg'),
     },
   ];
 

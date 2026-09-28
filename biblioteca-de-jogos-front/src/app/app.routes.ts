@@ -14,6 +14,7 @@ import {
   protectedRoute as protectedRoute,
 } from '@/core/auth/auth.guard';
 import { ForgotPasswordForm } from '@/auth/forgot-password-form/forgot-password-form';
+import { GameEditForm } from './game-forms/edit/edit';
 
 export const routes: Routes = [
   {
@@ -72,6 +73,10 @@ export const routes: Routes = [
       {
         path: 'catalog/new',
         component: GameRegistrationForm,
+      },
+      {
+        path: 'catalog/edit/:gameId',
+        component: GameEditForm,
       },
     ], // Assuming PlayerSummary is the component for the child route
   },

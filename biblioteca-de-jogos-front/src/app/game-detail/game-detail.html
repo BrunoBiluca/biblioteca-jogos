@@ -3,12 +3,7 @@
     <div
       class="aspect-3/5 overflow-hidden rounded-xl border border-white/10 shadow-2xl"
     >
-      <img
-        alt="Cyber Rebellion cinematic art"
-        class="w-full h-full object-cover"
-        data-alt="cinematic widescreen shot of a futuristic neon city street at night with rain reflecting cyan and magenta lights"
-        [src]="game()?.cover"
-      />
+      <img class="w-full h-full object-cover" [src]="game()?.cover" />
     </div>
   </div>
   <div
@@ -25,6 +20,7 @@
         class="ml-4 w-16 aspect-square rounded-full border border-white/10 flex items-center justify-center hover:text-primary transition-all cursor-pointer z-9"
         type="button"
         title="Edição"
+        [routerLink]="['/player/catalog/edit', game()?.id]"
       >
         <ng-icon name="lucideEdit"></ng-icon>
       </button>

@@ -21,7 +21,7 @@ export abstract class GameService {
   abstract getGameById(gameId: number): Observable<Game>;
 
   abstract createGame(
-    gameData: Omit<Game, 'id' | 'cover'>,
+    gameData: Omit<Game, 'id' | 'cover' | 'coverFile'>,
     coverFile: File,
   ): Observable<Game>;
 

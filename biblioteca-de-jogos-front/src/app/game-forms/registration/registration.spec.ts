@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { GameRegistrationForm } from './registration';
 import { provideGameServiceMock } from '@/testing/mocks/game.service.mock';
+import { provideRouter } from '@angular/router';
 
 describe('Registration', () => {
   let component: GameRegistrationForm;
@@ -10,7 +11,7 @@ describe('Registration', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [GameRegistrationForm],
-      providers: [provideGameServiceMock()],
+      providers: [provideRouter([]), provideGameServiceMock()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(GameRegistrationForm);

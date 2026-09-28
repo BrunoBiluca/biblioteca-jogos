@@ -130,7 +130,7 @@ export const GameStore = signalStore(
     );
 
     const createGame = rxMethod<{
-      game: Omit<Game, 'id' | 'cover'>;
+      game: Omit<Game, 'id' | 'cover' | 'coverFile'>;
       coverFile: File;
     }>(
       pipe(

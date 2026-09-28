@@ -7,13 +7,13 @@ import {
   OnInit,
   computed,
 } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideCirclePlus, lucideEdit } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-game-detail',
-  imports: [NgIconComponent, CommonModule],
+  imports: [NgIconComponent, CommonModule, RouterLink],
   providers: [
     provideIcons({
       lucideEdit,
