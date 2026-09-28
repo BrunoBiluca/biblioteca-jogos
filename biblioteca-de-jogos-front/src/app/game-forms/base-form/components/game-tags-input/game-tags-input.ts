@@ -1,6 +1,14 @@
 import { GameStore } from '@/core/game/game.store';
 import { CommonModule } from '@angular/common';
-import { Component, computed, inject, output, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  input,
+  OnInit,
+  output,
+  signal,
+} from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideCheck, lucidePlusCircle, lucideX } from '@ng-icons/lucide';
 
@@ -16,18 +24,27 @@ import { lucideCheck, lucidePlusCircle, lucideX } from '@ng-icons/lucide';
   selector: 'app-game-tags-input',
   templateUrl: './game-tags-input.html',
 })
-export class GameTagsInput {
+export class GameTagsInput implements OnInit {
+  initialGenres = input.required<string[]>();
   onToggleGenres = output<string[]>();
 
   gameStore = inject(GameStore);
   initGenres = computed(() => this.gameStore.allGenres() || []);
-  allGenres = computed(() => [...this.initGenres(), ...this.newGenrs()]);
+  allGenres = computed(() =>
+    [...this.initGenres(), ...this.newGenrs()].sort((a, b) =>
+      a.localeCompare(b),
+    ),
+  );
   newGenrs = signal<string[]>([]);
   selectedGenres = signal<string[]>([]);
 
   isAddingTag = signal(false);
   newTag = signal('');
   newTagError = signal<boolean>(false);
+
+  ngOnInit(): void {
+    this.selectedGenres.set(this.initialGenres());
+  }
 
   isGenreSelected(genre: string) {
     return this.selectedGenres().includes(genre);

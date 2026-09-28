@@ -1,4 +1,3 @@
-import { validateImageRatio } from '@/common/forms/validators/image-validator';
 import { HlmAutocompleteImports } from '@/common/ui/autocomplete/src';
 import { HlmFieldImports } from '@/common/ui/field/src';
 import { GameStore } from '@/core/game/game.store';
@@ -16,7 +15,6 @@ import {
   signal,
 } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideCheck,
@@ -26,6 +24,8 @@ import {
   lucideText,
 } from '@ng-icons/lucide';
 import { GameTagsInput } from './components/game-tags-input/game-tags-input';
+import { GameCoverInput } from './components/game-cover-input/game-cover-input';
+import { RouterLink } from '@angular/router';
 
 @Component({
   imports: [
@@ -34,8 +34,9 @@ import { GameTagsInput } from './components/game-tags-input/game-tags-input';
     HlmAutocompleteImports,
     CommonModule,
     HlmFieldImports,
-    RouterLink,
     GameTagsInput,
+    GameCoverInput,
+    RouterLink,
   ],
   providers: [
     provideIcons({
@@ -58,17 +59,10 @@ export class BaseForm implements OnInit {
   gameStore = inject(GameStore);
 
   cover = signal<File | null>(null);
-  coverError = signal<string | null>(null);
-  coverPreview = computed(() =>
-    this.cover()
-      ? URL.createObjectURL(this.cover()!)
-      : 'assets/generic-racing-game.png',
-  );
 
   readonly developerSearch = signal('');
   readonly selectedDeveloper = signal('');
 
-  allGenres = computed(() => this.gameStore.allGenres() || []);
   selectedGenres = signal<string[]>([]);
 
   constructor() {
@@ -109,18 +103,7 @@ export class BaseForm implements OnInit {
     this.form().get('genres')!.setValue(genres);
   }
 
-  async onCoverChange($event: Event) {
-    const file = ($event.target as HTMLInputElement).files?.[0];
-    if (!file) return;
-
-    if (!(await validateImageRatio(file, ['2:3', '3:4', '3:5'], 0.1))) {
-      this.coverError.set(
-        'Arte da capa deve ter uma proporção de 3:4 ou 3:5 (ex. 300x400 pixels).',
-      );
-      return;
-    }
-
-    this.coverError.set(null);
-    this.cover.set(file);
+  selectCover(cover: File) {
+    this.cover.set(cover);
   }
 }
