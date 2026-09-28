@@ -45,6 +45,8 @@ export class GameRegistrationForm {
     genres: new FormControl<string[]>([], [Validators.required]),
     releaseDate: new FormControl<Date>(new Date(), [Validators.required]),
     cover: [null, [Validators.required]],
+    description: [''],
+    synopsis: [''],
   });
 
   submit() {

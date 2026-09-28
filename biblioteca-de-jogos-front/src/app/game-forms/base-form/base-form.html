@@ -138,6 +138,30 @@
             }
           }
         </div>
+        <div class="space-y-sm">
+          <label
+            class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+            >Descrição do jogo</label
+          >
+          <textarea
+            class="w-full bg-transparent border border-gray-700 rounded-md py-3 px-6 hover:border-gray-400 focus:neon-border outline-none placeholder:text-gray-400"
+            placeholder="Breve descrição do jogo, como mecânicas, personagens, etc."
+            formControlName="description"
+            type="text"
+          ></textarea>
+        </div>
+        <div class="space-y-sm">
+          <label
+            class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+            >Synopsis da história</label
+          >
+          <textarea
+            class="w-full bg-transparent border border-gray-700 rounded-md py-3 px-6 hover:border-gray-400 focus:neon-border outline-none placeholder:text-gray-400"
+            placeholder="Breve história do jogo"
+            formControlName="synopsis"
+            type="text"
+          ></textarea>
+        </div>
       </div>
       <div class="lg:col-span-4 space-y-md">
         <app-game-cover-input

@@ -43,21 +43,40 @@
         }}</span>
       </div>
     </div>
-    <div class="flex flex-wrap gap-sm pt-4">
-      @for (genre of game()?.genres; track genre) {
-        <span
-          class="px-3 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-sm rounded uppercase tracking-widest"
-          [ngClass]="{
-            'bg-secondary/10 border-secondary/30 text-secondary':
-              $index % 2 === 0,
-          }"
-          >{{ genre }}</span
-        >
-      }
+
+    <div class="flex flex-col items-start gap-4">
+      <p class="text-neutral-500 font-label-sm text-label-sm uppercase">
+        Descrição do jogo:
+      </p>
+      <p class="text-on-background font-stats-md text-stats-md">
+        {{ game()?.description ?? 'N/A' }}
+      </p>
     </div>
-    <p class="text-neutral-400 font-body-lg text-lg mt-md">
-      {{ game()?.description }}
-    </p>
+    <div class="flex flex-col items-start gap-4">
+      <p class="text-neutral-500 font-label-sm text-label-sm uppercase">
+        Sinopse da história:
+      </p>
+      <p class="text-on-background font-stats-md text-stats-md">
+        {{ game()?.synopsis ?? 'N/A' }}
+      </p>
+    </div>
+    <div>
+      <p class="text-neutral-500 font-label-sm text-label-sm uppercase mb-4">
+        Tags:
+      </p>
+      <div class="flex flex-wrap gap-2">
+        @for (genre of game()?.genres; track genre) {
+          <span
+            class="px-3 py-1 bg-primary/10 border border-primary/30 text-primary font-label-sm text-sm rounded uppercase tracking-widest"
+            [ngClass]="{
+              'bg-secondary/10 border-secondary/30 text-secondary':
+                $index % 2 === 0,
+            }"
+            >{{ genre }}</span
+          >
+        }
+      </div>
+    </div>
   </div>
 </section>
 <!-- <section class="mt-lg grid grid-cols-4 gap-gutter mb-lg">

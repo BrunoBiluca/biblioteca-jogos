@@ -58,6 +58,8 @@ export class Edit implements OnInit {
           [Validators.required],
         ],
         cover: [game.coverFile, [Validators.required]],
+        description: [game.description],
+        synopsis: [game.synopsis],
       }),
     );
   }
@@ -74,10 +76,12 @@ export class Edit implements OnInit {
     const genres = form.get('genres')!.value!;
     const releaseDate = form.get('releaseDate')!.value!;
     const cover = form.get('cover')!.value!;
+    const description = form.get('description')!.value!;
+    const synopsis = form.get('synopsis')!.value!;
 
     this.gameStore.updateGame({
       id: this.game()!.id,
-      changes: { name, developer, genres, releaseDate: releaseDate },
+      changes: { name, developer, genres, releaseDate, description, synopsis },
       coverFile: cover,
     });
 
