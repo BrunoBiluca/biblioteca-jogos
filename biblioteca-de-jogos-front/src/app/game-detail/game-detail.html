@@ -12,12 +12,12 @@
   <div class="col-span-12 lg:col-span-7 flex flex-col gap-md">
     <div class="flex items-start justify-between">
       <h2
-        class="font-display-xl text-5xl text-foreground bg-transparent leading-none tracking-tighter italic font-bold uppercase"
+        class="flex-1 font-display-xl text-5xl text-foreground bg-transparent leading-none tracking-tighter italic font-bold uppercase"
       >
         {{ game()?.name }}
       </h2>
       <button
-        class="ml-4 w-16 aspect-square rounded-full border border-white/10 flex items-center justify-center hover:text-primary transition-all cursor-pointer z-9"
+        class="ml-4 w-12 aspect-square rounded-full border border-white/10 flex items-center justify-center hover:text-primary hover:border-primary transition-all cursor-pointer z-9"
         type="button"
         title="Edição"
         [routerLink]="['/player/catalog/edit', game()?.id]"
