@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucidePlusCircle } from '@ng-icons/lucide';
 
@@ -10,6 +10,7 @@ import { lucidePlusCircle } from '@ng-icons/lucide';
       lucidePlusCircle,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './playing-next-section.html',
 })
 export class PlayingNextSection {}

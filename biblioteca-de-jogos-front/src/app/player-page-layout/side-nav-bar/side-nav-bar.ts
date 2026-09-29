@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import {
   lucideHouse,
@@ -28,6 +28,7 @@ import { AuthRoutes } from '@/core/auth/auth-routes';
       lucideHelpCircle,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './side-nav-bar.html',
 })
 export class SideNavBar {

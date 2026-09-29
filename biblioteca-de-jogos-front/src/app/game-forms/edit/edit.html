@@ -1,0 +1,36 @@
+@if (form() === undefined) {
+  <p>Carregando jogo...</p>
+} @else {
+  <app-base-form
+    [form]="form()!"
+    submitButtonLabel="concluir"
+    formTitle="Editar jogo"
+    (onSubmit)="submit()"
+  />
+  <details class="group border border-red-600 rounded-lg p-4 bg-transparent">
+    <summary
+      class="flex justify-between items-center font-medium cursor-pointer list-none"
+    >
+      <span>Zona da morte</span>
+      <span class="transition group-open:rotate-180">
+        <svg
+          fill="none"
+          height="20"
+          stroke="currentColor"
+          stroke-width="2"
+          viewBox="0 0 24 24"
+          width="20"
+        >
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </span>
+    </summary>
+    <button
+      class="bg-zinc-800 text-red-700 font-bold border border-gray-700 rounded-lg py-2 px-4 mt-2 cursor-pointer hover:border-zinc-600 hover:bg-zinc-700 transition-all"
+      type="button"
+      (click)="deleteGame()"
+    >
+      Deletar jogo
+    </button>
+  </details>
+}

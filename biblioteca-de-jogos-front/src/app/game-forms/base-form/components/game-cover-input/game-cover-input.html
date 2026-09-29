@@ -1,0 +1,51 @@
+<label class="font-label-sm text-label-sm uppercase tracking-widest block mb-2"
+  >Arte de Capa</label
+>
+<div class="relative group">
+  <div
+    class="aspect-3/4 w-full bg-surface-container border-2 border-dashed border-outline-variant rounded-xl text-zinc-500 border-zinc-500 flex flex-col items-center justify-center p-lg group-hover:border-primary transition-all bg-cover bg-center overflow-hidden"
+    [style]="{
+      backgroundImage: `linear-gradient(rgba(19, 19, 22, 0.8), rgba(19, 19, 22, 0.8)), url(${coverPreview()})`,
+    }"
+  >
+    <div class="z-10 flex flex-col items-center text-center">
+      <div
+        class="w-16 h-16 rounded-full bg-surface-container-high border border-zinc-700 flex items-center justify-center mb-md group-hover:scale-110 group-hover:border-primary transition-all"
+        [ngClass]="{
+          'opacity-50 group-hover:opacity-100': cover() !== null,
+        }"
+      >
+        <ng-icon
+          name="lucideImage"
+          class="text-2xl group-hover:text-primary transition-all"
+        />
+      </div>
+      <p class="text-xs group-hover:text-primary transition-all">
+        High-res vertical poster (e.g. 1200x1600px)
+      </p>
+      <input
+        id="cover"
+        #coverInput
+        style="display: none"
+        type="file"
+        accept="image/*"
+        (change)="onCoverChange($event)"
+      />
+      <button
+        class="mt-md px-6 py-2 bg-transparent hover:bg-primary hover:text-black text-on-background rounded-full font-stats-md text-stats-md transition-all cursor-pointer group-hover:text-primary"
+        [ngClass]="{
+          'opacity-50 group-hover:opacity-100': cover() !== null,
+        }"
+        type="button"
+        (click)="coverInput.click()"
+      >
+        Select File
+      </button>
+    </div>
+  </div>
+  @if (coverError()) {
+    <p class="text-sm text-red-500 mt-2">
+      {{ coverError() }}
+    </p>
+  }
+</div>

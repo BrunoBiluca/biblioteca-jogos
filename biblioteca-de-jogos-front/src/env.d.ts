@@ -2,6 +2,7 @@
 declare interface Env {
   readonly NODE_ENV: string;
   // Replace the following with your own environment variables.
+  readonly NG_APP_ENV: string;
   readonly NG_APP_SUPABASE_URL: string;
   readonly NG_APP_SUPABASE_PUBLISHABLE_KEY: string;
 

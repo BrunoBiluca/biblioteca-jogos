@@ -1,12 +1,6 @@
-import { Component, resource, signal } from '@angular/core';
+import { Component, resource, signal, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import {
-  lucideBookOpen,
-  lucideGamepad2,
-  lucideLoader,
-  lucideRocket,
-  lucideSwords,
-} from '@ng-icons/lucide';
+import { lucideBookOpen, lucideGamepad2, lucideLoader, lucideRocket, lucideSwords } from '@ng-icons/lucide';
 import { SelectorGrid } from './components/selector-grid/selector-grid';
 import { SelectorGridSimple } from './components/selector-grid-simple/selector-grid-simple';
 
@@ -24,6 +18,7 @@ import { HlmAutocompleteImports } from '@ui/autocomplete';
       lucideLoader,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './challengue-registration-form.html',
 })
 export class ChallengueRegistrationForm {

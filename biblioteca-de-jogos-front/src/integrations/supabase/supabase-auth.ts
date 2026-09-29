@@ -1,17 +1,22 @@
 import { createClient, SupabaseClient } from '@supabase/supabase-js';
 import { AuthService } from '@/core/auth/auth.service';
 import { LoggedUser } from '@/core/auth/logged-user.model';
-import { environment } from '@/environments/environment';
-import { Injectable } from '@angular/core';
+import { environment } from '@/environment';
+import { inject, Injectable } from '@angular/core';
+import { AuthRoutes } from '@/core/auth/auth-routes';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SupabaseAuth implements AuthService {
   private supabase: SupabaseClient;
+  authRoutes = inject(AuthRoutes);
 
   constructor() {
-    this.supabase = createClient(environment.supabaseUrl, environment.supabasePublishableKey);
+    this.supabase = createClient(
+      environment.supabaseUrl,
+      environment.supabasePublishableKey,
+    );
   }
 
   async signup(email: string, password: string, name: string): Promise<void> {
@@ -53,6 +58,30 @@ export class SupabaseAuth implements AuthService {
       return null;
     }
 
-    return new LoggedUser(data.user.id, data.user.email!, data.user!.user_metadata['username']);
+    return new LoggedUser(
+      data.user.id,
+      data.user.email!,
+      data.user!.user_metadata['username'],
+    );
+  }
+
+  async resetPassword(email: string): Promise<void> {
+    const { error } = await this.supabase.auth.resetPasswordForEmail(email, {
+      redirectTo: window.location.origin + this.authRoutes.forgotPassword,
+    });
+
+    if (error) {
+      throw error;
+    }
+  }
+
+  async changePassword(newPassword: string): Promise<void> {
+    const { error } = await this.supabase.auth.updateUser({
+      password: newPassword,
+    });
+
+    if (error) {
+      throw error;
+    }
   }
 }

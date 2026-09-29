@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, input, linkedSignal, output } from '@angular/core';
+import { Component, input, linkedSignal, output, ChangeDetectionStrategy } from '@angular/core';
 
 export interface SelectorOption {
   label: string;
@@ -9,6 +9,7 @@ export interface SelectorOption {
 @Component({
   selector: 'app-selector-grid-simple',
   imports: [CommonModule],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './selector-grid-simple.html',
 })
 export class SelectorGridSimple {

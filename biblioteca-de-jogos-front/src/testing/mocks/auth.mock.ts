@@ -9,6 +9,8 @@ export function provideAuthMock(): EnvironmentProviders {
     logout: vi.fn(),
     login: vi.fn(),
     getLoggedUser: vi.fn(),
+    resetPassword: vi.fn(),
+    changePassword: vi.fn(),
   };
 
   let authRoutes = new AuthRoutes(

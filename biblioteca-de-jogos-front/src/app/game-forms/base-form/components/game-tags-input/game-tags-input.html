@@ -1,0 +1,55 @@
+<label class="font-label-sm text-label-sm uppercase tracking-widest block mb-2">
+  Genre &amp; Classifications &amp; Tags
+</label>
+<div class="flex flex-wrap gap-base">
+  @for (genre of allGenres(); track $index) {
+    <button
+      class="border py-1 px-2 rounded-sm text-sm border-gray-700 hover:border-gray-400 cursor-pointer"
+      [ngClass]="{
+        'bg-primary/20 text-primary hover:border-primary':
+          isGenreSelected(genre),
+      }"
+      (click)="toggleGenre(genre)"
+      type="button"
+    >
+      {{ genre }}
+    </button>
+  }
+  @if (isAddingTag()) {
+    <input
+      class="border py-1 px-2 rounded-sm text-sm border-gray-700 hover:border-gray-400 cursor-pointer"
+      type="text"
+      placeholder="New Tag"
+      [value]="newTag()"
+      (input)="newTag.set($any($event.target).value)"
+    />
+    <button
+      class="px-4 py-1 rounded-full border border-outline-variant border-dashed flex items-center gap-2 text-zinc-500 hover:text-cyan-400 hover:border-cyan-400 transition-all text-sm"
+      type="button"
+      (click)="addTag()"
+    >
+      <ng-icon name="lucideCheck" />
+      <span class="font-stats-md text-stats-md">Adicionar</span>
+    </button>
+    <button
+      class="px-4 py-1 rounded-full border border-outline-variant border-dashed flex items-center gap-2 text-zinc-500 hover:text-cyan-400 hover:border-cyan-400 transition-all text-sm"
+      type="button"
+      (click)="cancelAddingTag()"
+    >
+      <ng-icon name="lucideX" />
+      <span class="font-stats-md text-stats-md">Cancelar</span>
+    </button>
+  } @else {
+    <button
+      class="px-4 py-1 rounded-full border border-outline-variant border-dashed flex items-center gap-2 text-zinc-500 hover:text-cyan-400 hover:border-cyan-400 transition-all text-sm"
+      type="button"
+      (click)="isAddingTag.set(true)"
+    >
+      <ng-icon name="lucidePlusCircle" />
+      <span class="font-stats-md text-stats-md">Nova Tag</span>
+    </button>
+  }
+</div>
+@if (newTagError()) {
+  <p class="text-sm text-red-500 mt-2">Tag não pode ser vazia.</p>
+}

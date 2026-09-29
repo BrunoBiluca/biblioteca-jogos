@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucideTrash, lucidePause, lucidePlay } from '@ng-icons/lucide';
 
@@ -12,6 +12,7 @@ import { lucideTrash, lucidePause, lucidePlay } from '@ng-icons/lucide';
       lucidePlay,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './currently-playing-section.html',
 })
 export class CurrentlyPlayingSection {}

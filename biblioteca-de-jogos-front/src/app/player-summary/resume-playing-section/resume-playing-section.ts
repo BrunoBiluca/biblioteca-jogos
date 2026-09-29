@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { lucidePlay } from '@ng-icons/lucide';
 
@@ -10,6 +10,7 @@ import { lucidePlay } from '@ng-icons/lucide';
       lucidePlay,
     }),
   ],
+  changeDetection: ChangeDetectionStrategy.Eager,
   templateUrl: './resume-playing-section.html',
 })
 export class ResumePlayingSection {}
