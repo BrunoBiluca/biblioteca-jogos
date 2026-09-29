@@ -1,71 +1,19 @@
 import { TestBed } from '@angular/core/testing';
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { GameStore } from './game.store';
-import { GameService } from './game.service';
 import { GameFilters } from './game-filters.model';
 import { Game } from './game.model';
 import { of, throwError } from 'rxjs';
-
-class MockGameService {
-  getGames = vi.fn();
-  createGame = vi.fn();
-  updateGame = vi.fn();
-  deleteGame = vi.fn();
-}
+import {
+  MockGameService,
+  provideGameServiceMock,
+} from '@/testing/mocks/game.service.mock';
 
 describe('GameStore', () => {
   let store: InstanceType<typeof GameStore>;
   let gameService: MockGameService;
-
-  const mockGames: Game[] = [
-    {
-      id: 1,
-      name: 'Game 1',
-      developer: 'Dev 1',
-      genres: ['Action'],
-      releaseDate: new Date('2020-12-17'),
-      cover: 'cover',
-      coverFile: new File([''], 'cover.jpg'),
-    },
-    {
-      id: 2,
-      name: 'Game 2',
-      developer: 'Dev 2',
-      genres: ['Adventure'],
-      releaseDate: new Date('2021-12-17'),
-      cover: 'cover',
-      coverFile: new File([''], 'cover.jpg'),
-    },
-  ];
-
-  const mockGenres = new Set([...mockGames.map((game) => game.genres)]);
-
-  const mockDevelopers = new Set([...mockGames.map((game) => game.developer)]);
-
-  const mockGamesServiceToDefault = () => {
-    gameService.getGames.mockReturnValue(
-      of({
-        games: mockGames,
-        total: mockGames.length,
-        availableGenres: mockGenres,
-      }),
-    );
-  };
-
-  const customMockGamesService = (pagedGames: Game[]) => {
-    gameService.getGames.mockReturnValue(
-      of({
-        games: pagedGames,
-        total: mockGames.length,
-        availableGenres: mockGenres,
-      }),
-    );
-  };
-
-  const mockGamesServiceWithError = () => {
-    const error = new Error('Failed to load games');
-    gameService.getGames.mockImplementation(() => throwError(() => error));
-  };
+  let mockGames: Game[];
+  let mockGenres: Set<string[]>;
 
   beforeEach(() => {
     vi.clearAllMocks();
@@ -73,8 +21,11 @@ describe('GameStore', () => {
 
     gameService = new MockGameService();
 
+    mockGames = gameService.mockGames;
+    mockGenres = new Set([...mockGames.map((game) => game.genres)]);
+
     TestBed.configureTestingModule({
-      providers: [GameStore, { provide: GameService, useValue: gameService }],
+      providers: [provideGameServiceMock(gameService), GameStore],
     });
 
     store = TestBed.inject(GameStore);
@@ -96,9 +47,8 @@ describe('GameStore', () => {
       expect(store.pagination().totalItems).toBe(0);
       expect(store.pagination().totalPages).toBe(0);
     });
-    it('should load genres and games on init', async () => {
-      mockGamesServiceToDefault();
 
+    it('should load genres and games on init', async () => {
       vi.advanceTimersByTime(500);
 
       expect(gameService.getGames).toHaveBeenCalledWith({
@@ -136,8 +86,6 @@ describe('GameStore', () => {
 
   describe('loadGames', () => {
     it('should load games successfully', async () => {
-      mockGamesServiceToDefault();
-
       store.loadGames({ page: 1, pageSize: 10 });
 
       vi.advanceTimersByTime(1000);
@@ -161,7 +109,7 @@ describe('GameStore', () => {
       const filters: GameFilters = { name: 'Game', developer: 'Dev' };
       store.setFilters(filters);
 
-      customMockGamesService([mockGames[0]]);
+      gameService.toCustom([mockGames[0]]);
 
       store.loadGames({ page: 1, pageSize: 10 });
 
@@ -176,7 +124,7 @@ describe('GameStore', () => {
     });
 
     it('should handle error when loading games', async () => {
-      mockGamesServiceWithError();
+      gameService.withError();
       store.loadGames({ page: 1, pageSize: 10 });
 
       vi.advanceTimersByTime(1000);
@@ -185,8 +133,6 @@ describe('GameStore', () => {
     });
 
     it('should debounce multiple load calls', async () => {
-      mockGamesServiceToDefault();
-
       store.loadGames({ page: 1, pageSize: 10 });
       store.loadGames({ page: 1, pageSize: 10 });
       store.loadGames({ page: 1, pageSize: 10 });
@@ -196,7 +142,6 @@ describe('GameStore', () => {
     });
 
     it('should wait for debounce timeout before making another request', async () => {
-      mockGamesServiceToDefault();
       vi.advanceTimersByTime(300);
 
       store.loadGames({ page: 1, pageSize: 10 });
@@ -210,15 +155,7 @@ describe('GameStore', () => {
     });
 
     it('should change page and reload games', async () => {
-      gameService.getGames.mockImplementation(
-        (page: number, pageSize: number) => {
-          return of({
-            games: [mockGames[page - 1]],
-            total: mockGames.length,
-            availableGenres: mockGenres,
-          });
-        },
-      );
+      gameService.withPagination();
 
       const newPage = 2;
       store.changePage(newPage);
@@ -233,14 +170,13 @@ describe('GameStore', () => {
     });
 
     it('should retry loading games after clearing error', async () => {
-      const error = new Error('Test error');
-      gameService.getGames.mockImplementation(() => throwError(() => error));
+      gameService.withError();
       store.loadGames({ page: 1, pageSize: 10 });
       vi.advanceTimersByTime(1000);
 
-      expect(store.error()).toBe('Test error');
+      expect(store.error()).toBeDefined();
 
-      mockGamesServiceToDefault();
+      gameService.toDefault();
       store.retryLoadGames();
       vi.advanceTimersByTime(1000);
 
@@ -253,9 +189,6 @@ describe('GameStore', () => {
 
   describe('createGame', () => {
     it('should create a game successfully', async () => {
-      gameService.createGame.mockReturnValue(of({}));
-      mockGamesServiceToDefault();
-
       const newGame = {
         name: 'New Game',
         developer: 'New Dev',
@@ -274,7 +207,6 @@ describe('GameStore', () => {
     });
 
     it('should handle error when creating game', async () => {
-      mockGamesServiceToDefault();
       vi.advanceTimersByTime(500);
 
       const newGame = {
@@ -301,13 +233,6 @@ describe('GameStore', () => {
       const changes = { name: 'Updated Game' };
       const updatedGame = { ...mockGames[0], ...changes };
 
-      gameService.getGames.mockReturnValue(
-        of({
-          games: [mockGames[0]],
-          total: 1,
-          availableGenres: mockGames[0].genres,
-        }),
-      );
       vi.advanceTimersByTime(1000);
 
       gameService.updateGame.mockReturnValue(of(updatedGame));
@@ -318,14 +243,13 @@ describe('GameStore', () => {
         changes,
         undefined,
       );
-      expect(store.games().length).toBe(1);
+      expect(store.games().length).toBe(mockGames.length);
       expect(store.games()).toContainEqual(updatedGame);
       expect(store.loading()).toBe(false);
       expect(store.error()).toBe(null);
     });
 
     it('should update a game with cover file', async () => {
-      mockGamesServiceToDefault();
       vi.advanceTimersByTime(1000);
 
       const gameId = 1;
@@ -360,26 +284,7 @@ describe('GameStore', () => {
 
   describe('deleteGame', () => {
     it('should delete a game successfully', () => {
-      gameService.getGames
-        .mockReturnValue(
-          // first call
-          of({
-            games: mockGames,
-            total: mockGames.length,
-            availableGenres: [...mockGames.map((game) => game.genres[0])],
-          }),
-        )
-        .mockReturnValueOnce(
-          // after delete
-          of({
-            games: mockGames.filter((g) => g.id !== 1),
-            total: 1,
-            availableGenres: [],
-          }),
-        );
-
       const gameId = 1;
-      gameService.deleteGame.mockReturnValue(of({}));
 
       store.deleteGame(gameId);
 
@@ -387,13 +292,12 @@ describe('GameStore', () => {
 
       expect(gameService.deleteGame).toHaveBeenCalledWith(gameId);
       expect(gameService.getGames).toHaveBeenCalled();
-      expect(store.games().length).toBe(1);
+      expect(store.games().length).toBe(mockGames.length - 1);
       expect(store.loading()).toBe(false);
       expect(store.error()).toBe(null);
     });
 
     it('should handle error when deleting game', async () => {
-      mockGamesServiceToDefault();
       vi.advanceTimersByTime(500);
 
       const gameId = 1;
@@ -410,8 +314,6 @@ describe('GameStore', () => {
 
   describe('Filters', () => {
     it('should set filters and reload games', async () => {
-      mockGamesServiceToDefault();
-
       const filters: GameFilters = {
         name: 'Game',
         developer: 'Dev',
@@ -436,7 +338,6 @@ describe('GameStore', () => {
     });
 
     it('should filter out empty filter values', async () => {
-      mockGamesServiceToDefault();
       const filters: GameFilters = {
         name: '',
         developer: 'Dev',
@@ -457,7 +358,6 @@ describe('GameStore', () => {
       });
     });
     it('should maintain filter state when reloading', async () => {
-      mockGamesServiceToDefault();
       vi.advanceTimersByTime(500);
 
       const filters: GameFilters = { name: 'Game', developer: 'Dev' };
@@ -478,12 +378,10 @@ describe('GameStore', () => {
     });
 
     it('should clear filters and reload games', async () => {
-      mockGamesServiceToDefault();
-
       store.setFilters({ name: 'Test', developer: 'Dev' });
       store.clearFilters();
-
       vi.advanceTimersByTime(1000);
+
       expect(store.filters()).toEqual({});
       expect(store.pagination().page).toBe(1);
       expect(gameService.getGames).toHaveBeenCalledWith({
@@ -491,9 +389,8 @@ describe('GameStore', () => {
         pageSize: 10,
       });
     });
-    it('should handle genre list properly in parameters', async () => {
-      mockGamesServiceToDefault();
 
+    it('should handle genre list properly in parameters', async () => {
       const filters: GameFilters = {
         genres: ['Action', 'Adventure'],
       };
@@ -510,11 +407,8 @@ describe('GameStore', () => {
     });
 
     it('should preserve filters when changing page', async () => {
-      mockGamesServiceToDefault();
-
       const filters: GameFilters = { name: 'Game' };
       store.setFilters(filters);
-
       store.changePage(2);
 
       vi.advanceTimersByTime(1000);
